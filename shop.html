@@ -42,6 +42,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 .card .frame:hover .more{opacity:1}
 .card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.3rem}
 .card .meta{display:flex;justify-content:space-between;font-size:.8rem;opacity:.7}
+.showcase-notice{background:var(--walnut-soft);border:1px solid var(--line);padding:16px 22px;margin-bottom:28px;display:flex;flex-direction:column;gap:6px}
 .sold-badge{position:absolute;top:12px;left:12px;background:rgba(43,33,27,.88);color:var(--bone);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:5px 10px;pointer-events:none;border:1px solid var(--rule)}
 .wood{text-transform:uppercase;letter-spacing:.22em;font-size:.66rem;color:var(--amber)}
 .cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
@@ -203,13 +204,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <h2><span data-nl>Collectie</span><span data-en>Collection</span></h2>
   </div>
   <p style="font-size:.85rem;opacity:.6;margin-bottom:20px"><span data-nl>Klik op een stuk voor meer foto's, afmetingen en details. Geef interesse aan via de knop.</span><span data-en>Click any piece for more photos, dimensions and details. Express interest via the button.</span></p>
-    <div style="background:var(--walnut-soft);border:1px solid var(--line);padding:16px 22px;margin-bottom:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-    <span style="font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)">
-      <span data-nl>Showcase</span><span data-en>Showcase</span>
-    </span>
-    <p style="font-size:.85rem;opacity:.82;flex:1;min-width:200px">
-      <span data-nl>Deze stukken zijn momenteel niet direct te koop — maar laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.</span>
-      <span data-en>These pieces are not currently for direct sale — but express your interest and I'll be in touch about availability and pricing.</span>
+    <div class="showcase-notice">
+    <span class="eyebrow" style="color:var(--amber)">Showcase</span>
+    <p id="showcase-txt" style="font-size:.85rem;opacity:.82;flex:1;min-width:200px;margin-top:4px">
+      Deze stukken zijn momenteel niet direct te koop — laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.
     </p>
   </div>
   <div class="cat-tabs">
@@ -228,7 +226,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <div class="thumbs" id="m-thumbs"></div>
     </div>
     <div class="detail">
-      <span class="one-of">Uniek stuk · 1 van 1</span>
+      <span class="one-of" id="m-one-of">Uniek stuk · 1 van 1</span>
       <h3 id="m-title"></h3>
       <span class="price" id="m-price"></span>
       <p id="m-desc"></p>
@@ -243,13 +241,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <!-- Interesse knop -->
       <div id="m-interest" style="margin-top:4px;display:none">
         <a id="m-interest-link" href="#" target="_blank" rel="noopener"
-          class="btn btn-ghost" style="display:block;text-align:center;font-size:.75rem">
-          <span data-nl>✉ Ik heb interesse in dit stuk</span>
-          <span data-en>✉ I'm interested in this piece</span>
+          class="btn btn-ghost" style="display:block;text-align:center;font-size:.75rem" id="m-interest-btn">
+          ✉ <span id="m-interest-txt">Ik heb interesse in dit stuk</span>
         </a>
-        <p style="font-size:.75rem;opacity:.6;margin-top:8px;text-align:center">
-          <span data-nl>Stuur me een bericht — ik laat je weten wat mogelijk is qua beschikbaarheid.</span>
-          <span data-en>Send me a message — I'll let you know what's possible regarding availability.</span>
+        <p id="m-interest-sub" style="font-size:.75rem;opacity:.6;margin-top:8px;text-align:center">
+          Stuur me een bericht — ik laat je weten wat mogelijk is qua beschikbaarheid.
         </p>
       </div>
 
@@ -267,7 +263,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
           style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 12px;transition:.2s;cursor:pointer;background:none;color:var(--bone)"
           onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'"
           id="m-copy-btn">
-          <span data-nl>Kopieer link</span><span data-en>Copy link</span>
+          <span id="m-copy-lbl">Kopieer link</span>
         </button>
       </div>
     </div>
@@ -476,7 +472,7 @@ function renderGrid(){
     <div class="card">
       <div class="frame" onclick="openModal(${i})">
         <img src="${p.img}" alt="${p[lang].title}">
-        <span class="more">Bekijk details</span>
+        <span class="more" id="more-${i}">${lang==='nl'?'Bekijk details':'View details'}</span>
       </div>
       <span class="wood">${p[lang].wood}</span>
       <h3>${p[lang].title}</h3>
@@ -488,7 +484,7 @@ renderGrid();
 function copyProductLink(){
   const btn = document.getElementById('m-copy-btn');
   navigator.clipboard.writeText(window._currentShareUrl||window.location.href).then(function(){
-    btn.textContent = lang==='nl' ? '✓ Gekopieerd!' : '✓ Copied!';
+    btn.querySelector('#m-copy-lbl') ? btn.querySelector('#m-copy-lbl').textContent = lang==='nl' ? '✓ Gekopieerd!' : '✓ Copied!' : btn.textContent = lang==='nl' ? '✓ Gekopieerd!' : '✓ Copied!';
     setTimeout(function(){ btn.textContent = lang==='nl' ? 'Kopieer link' : 'Copy link'; }, 2000);
   }).catch(function(){
     btn.textContent = window._currentShareUrl||window.location.href;
@@ -519,6 +515,22 @@ function copyProductLink(){
     document.querySelectorAll('[data-en]').forEach(function(el){
       el.style.display = l==='en' ? '' : 'none';
     });
+    const it=document.getElementById('m-interest-txt');
+    if(it) it.textContent = l==='nl' ? 'Ik heb interesse in dit stuk' : "I'm interested in this piece";
+    const is=document.getElementById('m-interest-sub');
+    if(is) is.textContent = l==='nl'
+      ? 'Stuur me een bericht — ik laat je weten wat mogelijk is qua beschikbaarheid.'
+      : "Send me a message — I'll be in touch about availability.";
+    const oo=document.getElementById('m-one-of');
+    if(oo) oo.textContent = l==='nl' ? 'Uniek stuk · 1 van 1' : 'Unique piece · 1 of 1';
+    const cl=document.getElementById('m-copy-lbl');
+    if(cl) cl.textContent = l==='nl' ? 'Kopieer link' : 'Copy link';
+    const sl=document.getElementById('m-share-lbl');
+    if(sl) sl.textContent = l==='nl' ? 'Delen:' : 'Share:';
+    const sn=document.getElementById('showcase-txt');
+    if(sn) sn.textContent = l==='nl'
+      ? 'Deze stukken zijn momenteel niet direct te koop — laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.'
+      : 'These pieces are not currently for direct sale — express your interest and I\'ll be in touch about availability and pricing.';
     document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
       b.classList.toggle('active', b.id === 'btn-'+l);
     });
