@@ -170,6 +170,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   .grid{grid-template-columns:1fr!important}
 }
 
+.lang-toggle{display:flex;border:1px solid var(--rule);overflow:hidden;font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+[data-nl],[data-en]{transition:opacity .15s}
+
 </style>
 </head><body>
 <nav>
@@ -178,12 +183,16 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul id="navlist">
-    <li><a href="index.html" >Home</a></li>
-    <li><a href="shop.html" >Winkel</a></li>
-    <li><a href="about.html" class='active'>Over</a></li>
-    <li><a href="contact.html" >Contact</a></li>
+    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
+    <li><a href="shop.html" ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="about.html" class='active'><span data-nl>Over</span><span data-en>About</span></a></li>
+    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Taal">
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
@@ -191,10 +200,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <section class="about-hero">
   <div class="img-side"><img src="images/lucas-maker.jpg" alt="Lucas Aäron Oomen, houtdraaier"></div>
   <div class="text-side">
-    <span class="eyebrow">Over de maker</span>
+    <span class="eyebrow"><span data-nl>Over de maker</span><span data-en>About the maker</span></span>
     <h2>Lucas Aäron Oomen</h2>
-    <p>Lucas Aäron Oomen (1998) is een houtdraaier uit Heiloo. Met een achtergrond in werktuigbouwkunde ontdekte hij vijf jaar geleden, tijdens de coronaperiode, zijn passie voor houtdraaien.</p>
-    <p>Lucas maakt kunst van hout uit de regio Heiloo. Zo komt veel van het hout van Landgoed Ter Coulster, het Maalwater en een gedeelte van Landgoed Willibrordus.</p>
+    <p><span data-nl>Lucas Aäron Oomen (1998) is een houtdraaier uit Heiloo. Met een achtergrond in werktuigbouwkunde ontdekte hij vijf jaar geleden, tijdens de coronaperiode, zijn passie voor houtdraaien.</span><span data-en>Lucas Aäron Oomen (1998) is a woodturner from Heiloo. With a background in mechanical engineering, he discovered his passion for woodturning five years ago during the COVID period.</span></p>
+    <p><span data-nl>Lucas maakt kunst van hout uit de regio Heiloo. Zo komt veel van het hout van Landgoed Ter Coulster, het Maalwater en een gedeelte van Landgoed Willibrordus.</span><span data-en>Lucas creates art from wood in the Heiloo region. Much of the timber comes from Landgoed Ter Coulster, het Maalwater and Landgoed Willibrordus.</span></p>
   </div>
 </section>
 <svg class="grain" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
@@ -202,18 +211,18 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </svg>
 <section style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)">
   <div style="padding:8vh 6vw;border-right:1px solid var(--rule)">
-    <span class="eyebrow">Het hout</span>
-    <h2 style="margin:12px 0">Lokaal en duurzaam</h2>
-    <p style="opacity:.82;max-width:50ch">Dit zijn voornamelijk Essen, Eiken, Kersen, Berken, Taxus, Elzen en Kastanje bomen. Dit hout wordt langdurig gedroogd voordat het bewerkt wordt tot zijn uiteindelijke vorm.</p>
+    <span class="eyebrow"><span data-nl>Het hout</span><span data-en>The wood</span></span>
+    <h2 style="margin:12px 0"><span data-nl>Lokaal en duurzaam</span><span data-en>Local and sustainable</span></h2>
+    <p style="opacity:.82;max-width:50ch"><span data-nl>Dit zijn voornamelijk Essen, Eiken, Kersen, Berken, Taxus, Elzen en Kastanje bomen. Dit hout wordt langdurig gedroogd voordat het bewerkt wordt tot zijn uiteindelijke vorm.</span><span data-en>Mainly Ash, Oak, Cherry, Birch, Yew, Alder and Chestnut trees. The wood is dried for an extended period before being worked into its final form.</span></p>
   </div>
   <div style="padding:8vh 6vw">
-    <span class="eyebrow">De afwerking</span>
-    <h2 style="margin:12px 0">Zo natuurlijk mogelijk</h2>
-    <p style="opacity:.82;max-width:50ch">De afwerkingen van de vormen wordt uitsluitend gedaan met verschillende type oliën en wassen om het zo natuurlijk mogelijk te houden. De natuurlijke vorm van het hout bepaalt vaak de uiteindelijke vorm van het kunstobject.</p>
+    <span class="eyebrow"><span data-nl>De afwerking</span><span data-en>The finish</span></span>
+    <h2 style="margin:12px 0"><span data-nl>Zo natuurlijk mogelijk</span><span data-en>As natural as possible</span></h2>
+    <p style="opacity:.82;max-width:50ch"><span data-nl>De afwerkingen van de vormen wordt uitsluitend gedaan met verschillende type oliën en wassen om het zo natuurlijk mogelijk te houden. De natuurlijke vorm van het hout bepaalt vaak de uiteindelijke vorm van het kunstobject.</span><span data-en>All finishes are done exclusively with various oils and waxes to keep them as natural as possible. The natural shape of the wood often determines the final form of the art object.</span></p>
   </div>
 </section>
 <div class="insta-bar">
-  <p style="opacity:.75">Volg het proces op Instagram — van vers gezaagd stamblok tot afgewerkt stuk.</p>
+  <p style="opacity:.75"><span data-nl>Volg het proces op Instagram — van vers gezaagd stamblok tot afgewerkt stuk.</span><span data-en>Follow the process on Instagram — from freshly sawn log to finished piece.</span></p>
   <a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">
     <span class="insta-icon">📷</span>
     <span style="font-size:.78rem;letter-spacing:.2em;text-transform:uppercase">@aaronartanddesign</span>
@@ -222,13 +231,36 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <p>© 2026 Aäron Art &amp; Design</p>
 </footer>
+
+<script>
+(function(){
+  var lang = localStorage.getItem('lang') || 'nl';
+  function applyLang(l){
+    lang = l;
+    localStorage.setItem('lang', l);
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-nl]').forEach(function(el){
+      el.style.display = l==='nl' ? '' : 'none';
+    });
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.style.display = l==='en' ? '' : 'none';
+    });
+    document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
+      b.classList.toggle('active', b.id === 'btn-'+l);
+    });
+  }
+  window.setLang = applyLang;
+  document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
+})();
+</script>
+
 </body></html>

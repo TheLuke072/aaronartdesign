@@ -170,6 +170,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   .grid{grid-template-columns:1fr!important}
 }
 
+.lang-toggle{display:flex;border:1px solid var(--rule);overflow:hidden;font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+[data-nl],[data-en]{transition:opacity .15s}
+
 </style>
 </head><body>
 <nav>
@@ -178,29 +183,33 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul id="navlist">
-    <li><a href="index.html" class='active'>Home</a></li>
-    <li><a href="shop.html" >Winkel</a></li>
-    <li><a href="about.html" >Over</a></li>
-    <li><a href="contact.html" >Contact</a></li>
+    <li><a href="index.html" class='active'><span data-nl>Home</span><span data-en>Home</span></a></li>
+    <li><a href="shop.html" ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="about.html" ><span data-nl>Over</span><span data-en>About</span></a></li>
+    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Taal">
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
 </nav>
 <section style="display:grid;grid-template-columns:1.05fr .95fr;min-height:74vh;border-bottom:1px solid var(--rule)">
   <div style="padding:8vh 6vw;display:flex;flex-direction:column;justify-content:center;gap:24px;position:relative">
-    <span class="eyebrow">Houtdraaien · Handgemaakt in Heiloo</span>
-    <h1>Elke schaal bewaart het <em>verhaal</em> van zijn boom</h1>
-    <p style="max-width:46ch;opacity:.82;font-size:1.02rem">Unieke schalen, kommen en doosjes met deksel, met de hand gedraaid uit lokaal Nederlands hout. Elk stuk volgt de nerf waarmee het groeide — geen twee zijn ooit hetzelfde.</p>
+    <span class="eyebrow"><span data-nl>Houtdraaien · Handgemaakt in Heiloo</span><span data-en>Woodturning · Handmade in Heiloo</span></span>
+    <h1><span data-nl>Elke schaal bewaart het <em>verhaal</em> van zijn boom</span><span data-en>Every bowl keeps the <em>story</em> of its tree</span></h1>
+    <p style="max-width:46ch;opacity:.82;font-size:1.02rem"><span data-nl>Unieke schalen, kommen en doosjes met deksel, met de hand gedraaid uit lokaal Nederlands hout. Elk stuk volgt de nerf waarmee het groeide — geen twee zijn ooit hetzelfde.</span><span data-en>One-of-a-kind bowls, vessels and lidded boxes, hand-turned from locally salvaged Dutch timber. Each piece follows the grain it grew with — no two are ever alike.</span></p>
     <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px">
-      <a class="btn btn-solid" href="shop.html">Bekijk de collectie</a>
-      <a class="btn btn-ghost" href="contact.html">Vraag een opdracht aan</a>
+      <a class="btn btn-solid" href="shop.html"><span data-nl>Bekijk de collectie</span><span data-en>Shop the collection</span></a>
+      <a class="btn btn-ghost" href="contact.html"><span data-nl>Vraag een opdracht aan</span><span data-en>Commission a piece</span></a>
     </div>
   </div>
   <figure style="position:relative;overflow:hidden;border-left:1px solid var(--rule)">
     <img src="images/hero-bowls.jpg" alt="Handgedraaide eiken schalen" style="width:100%;height:100%;object-fit:cover">
-    <figcaption style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(transparent,rgba(43,33,27,.85))">Eiken schalen · Handgedraaid · Uniek</figcaption>
+    <figcaption style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(transparent,rgba(43,33,27,.85))"><span data-nl>Eiken schalen · Handgedraaid · Uniek</span><span data-en>Oak bowls · Hand-turned · One of one</span></figcaption>
   </figure>
 </section>
 <svg class="grain" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
@@ -209,26 +218,26 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </svg>
 <section style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:9vh 6vw;border-bottom:1px solid var(--rule)">
   <a href="shop.html" style="border:1px solid var(--line);padding:36px 28px;display:flex;flex-direction:column;gap:12px;transition:.2s" onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'">
-    <span class="eyebrow">Collectie</span>
-    <h2 style="font-size:1.5rem">Bekijk alle stukken</h2>
-    <p style="opacity:.75;font-size:.92rem">Schalen, potten en sets — elk handgedraaid en uniek.</p>
+    <span class="eyebrow"><span data-nl>Collectie</span><span data-en>Collection</span></span>
+    <h2 style="font-size:1.5rem"><span data-nl>Bekijk alle stukken</span><span data-en>Shop all pieces</span></h2>
+    <p style="opacity:.75;font-size:.92rem"><span data-nl>Schalen, potten en sets — elk handgedraaid en uniek.</span><span data-en>Bowls, pots and sets — each hand-turned and unique.</span></p>
   </a>
   <a href="about.html" style="border:1px solid var(--line);padding:36px 28px;display:flex;flex-direction:column;gap:12px;transition:.2s" onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'">
-    <span class="eyebrow">Over</span>
-    <h2 style="font-size:1.5rem">Het verhaal achter het hout</h2>
-    <p style="opacity:.75;font-size:.92rem">Wie is Lucas, waar komt het hout vandaan, en hoe worden de stukken gemaakt?</p>
+    <span class="eyebrow"><span data-nl><span data-nl>Over</span><span data-en>About</span></span><span data-en>About</span></span>
+    <h2 style="font-size:1.5rem"><span data-nl>Het verhaal achter het hout</span><span data-en>The story behind the wood</span></h2>
+    <p style="opacity:.75;font-size:.92rem"><span data-nl>Wie is Lucas, waar komt het hout vandaan, en hoe worden de stukken gemaakt?</span><span data-en>Who is Lucas, where does the wood come from, and how are the pieces made?</span></p>
   </a>
   <a href="contact.html" style="border:1px solid var(--line);padding:36px 28px;display:flex;flex-direction:column;gap:12px;transition:.2s" onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'">
-    <span class="eyebrow">Opdrachten</span>
-    <h2 style="font-size:1.5rem">Heb je een eigen boom?</h2>
-    <p style="opacity:.75;font-size:.92rem">Een schaal van oma's appelboom — ik draai regelmatig stukken van hout dat klanten zelf meebrengen.</p>
+    <span class="eyebrow"><span data-nl>Opdrachten</span><span data-en>Commissions</span></span>
+    <h2 style="font-size:1.5rem"><span data-nl>Heb je een eigen boom?</span><span data-en>Have a tree of your own?</span></h2>
+    <p style="opacity:.75;font-size:.92rem"><span data-nl>Een schaal van oma's appelboom — ik draai regelmatig stukken van hout dat klanten zelf meebrengen.</span><span data-en>A bowl from grandma's apple tree — I regularly turn pieces from wood customers bring me.</span></p>
   </a>
 </section>
 <section style="padding:10vh 6vw;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center">
   <div>
-    <span class="eyebrow">Blijf op de hoogte</span>
-    <h2 style="margin:14px 0">Eerste weten als er nieuwe stukken zijn?</h2>
-    <p style="opacity:.82;max-width:50ch">Ik werk aan een nieuwe collectie. Laat je e-mailadres achter en je bent de eerste die het hoort als er stukken beschikbaar komen — geen spam, alleen nieuws als het écht ergens van is.</p>
+    <span class="eyebrow"><span data-nl>Blijf op de hoogte</span><span data-en>Stay informed</span></span>
+    <h2 style="margin:14px 0"><span data-nl>Eerste weten als er nieuwe stukken zijn?</span><span data-en>First to know when new pieces arrive?</span></h2>
+    <p style="opacity:.82;max-width:50ch"><span data-nl>Ik werk aan een nieuwe collectie. Laat je e-mailadres achter en je bent de eerste die het hoort als er stukken beschikbaar komen — geen spam, alleen nieuws als het écht ergens van is.</span><span data-en>I'm working on a new collection. Leave your email and you'll be the first to hear when pieces become available — no spam, only news when it truly matters.</span></p>
   </div>
   <div>
     <form id="interest-form" onsubmit="submitInterest(event)" style="display:flex;flex-direction:column;gap:14px">
@@ -244,7 +253,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
           style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
           onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
       </div>
-      <button type="submit" class="btn btn-solid" style="align-self:flex-start;cursor:pointer" id="interest-btn">Houd mij op de hoogte</button>
+      <button type="submit" class="btn btn-solid" style="align-self:flex-start;cursor:pointer" id="interest-btn"><span data-nl>Houd mij op de hoogte</span><span data-en>Keep me updated</span></button>
       <p id="interest-msg" style="font-size:.85rem;opacity:.75;display:none"></p>
     </form>
   </div>
@@ -304,13 +313,36 @@ async function submitInterest(e){
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <p>© 2026 Aäron Art &amp; Design</p>
 </footer>
+
+<script>
+(function(){
+  var lang = localStorage.getItem('lang') || 'nl';
+  function applyLang(l){
+    lang = l;
+    localStorage.setItem('lang', l);
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-nl]').forEach(function(el){
+      el.style.display = l==='nl' ? '' : 'none';
+    });
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.style.display = l==='en' ? '' : 'none';
+    });
+    document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
+      b.classList.toggle('active', b.id === 'btn-'+l);
+    });
+  }
+  window.setLang = applyLang;
+  document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
+})();
+</script>
+
 </body></html>

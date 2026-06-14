@@ -170,6 +170,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   .grid{grid-template-columns:1fr!important}
 }
 
+.lang-toggle{display:flex;border:1px solid var(--rule);overflow:hidden;font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+[data-nl],[data-en]{transition:opacity .15s}
+
 </style>
 </head><body>
 <nav>
@@ -178,12 +183,16 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul id="navlist">
-    <li><a href="index.html" >Home</a></li>
-    <li><a href="shop.html" >Winkel</a></li>
-    <li><a href="about.html" >Over</a></li>
-    <li><a href="contact.html" class='active'>Contact</a></li>
+    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
+    <li><a href="shop.html" ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="about.html" ><span data-nl>Over</span><span data-en>About</span></a></li>
+    <li><a href="contact.html" class='active'><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Taal">
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
@@ -191,7 +200,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
   <span class="eyebrow">Opdracht aanvragen</span>
   <h2 style="margin:14px 0 10px">Vertel me over jouw hout</h2>
-  <p style="opacity:.82;max-width:54ch;margin-bottom:36px">Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</p>
+  <p style="opacity:.82;max-width:54ch;margin-bottom:36px"><span data-nl>Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</span><span data-en>Have a tree with a story, or a specific piece in mind? Fill in the form and I'll be in touch within two days.</span></p>
 
   <div data-fs-success style="display:none;padding:28px;border:1px solid var(--rule);max-width:620px">
     <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:10px">Bedankt! Je bericht is verstuurd. 🌿</p>
@@ -204,7 +213,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- naam -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name">Naam *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name"><span data-nl>Naam</span><span data-en>Name</span> *</label>
       <input id="cf-name" name="naam" data-fs-field type="text" placeholder="Je naam" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -212,7 +221,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- email -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email">E-mailadres *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email"><span data-nl>E-mailadres</span><span data-en>Email address</span> *</label>
       <input id="cf-email" name="email" data-fs-field type="email" placeholder="jouw@email.nl" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -220,7 +229,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- telefoon -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone">Telefoonnummer <span style="opacity:.5">(optioneel)</span></label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone"><span data-nl>Telefoonnummer</span><span data-en>Phone number</span> <span style="opacity:.5"><span data-nl>(optioneel)</span><span data-en>(optional)</span></span></label>
       <input id="cf-phone" name="telefoon" data-fs-field type="tel" placeholder="+31 6 ..."
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -228,11 +237,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- onderwerp -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject">Onderwerp *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject"><span data-nl>Onderwerp</span><span data-en>Subject</span> *</label>
       <select id="cf-subject" name="onderwerp" data-fs-field required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
-        <option value="" disabled selected>Kies een onderwerp</option>
+        <option value="" disabled selected><span data-nl>Kies een onderwerp</span><span data-en>Choose a subject</span></option>
         <option value="Opdracht — eigen hout">Opdracht met eigen hout</option>
         <option value="Opdracht — specifiek stuk">Specifiek stuk bestellen</option>
         <option value="Vraag over een product">Vraag over een product</option>
@@ -243,14 +252,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- omschrijving -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message">Omschrijving *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message"><span data-nl>Omschrijving</span><span data-en>Description</span> *</label>
       <textarea id="cf-message" name="omschrijving" data-fs-field rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;resize:vertical;line-height:1.6"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'"></textarea>
     </div>
 
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <button type="submit" data-fs-submit-btn class="btn btn-solid" style="cursor:pointer">Verstuur opdracht</button>
+      <button type="submit" data-fs-submit-btn class="btn btn-solid" style="cursor:pointer"><span data-nl>Verstuur opdracht</span><span data-en>Send message</span></button>
       <span data-fs-error style="font-size:.85rem;color:#e07070;display:none"></span>
     </div>
   </form>
@@ -264,28 +273,51 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
 <div class="contact-grid">
   <div class="contact-block">
-    <span class="eyebrow">Direct mailen</span>
-    <h2 style="font-size:1.6rem">Stuur een bericht</h2>
-    <p>Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.</p>
+    <span class="eyebrow"><span data-nl>Direct mailen</span><span data-en>Send an email</span></span>
+    <h2 style="font-size:1.6rem"><span data-nl>Stuur een bericht</span><span data-en>Send a message</span></h2>
+    <p><span data-nl>Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.</span><span data-en>For questions about existing pieces, commissions, or just to share about the wood you have lying around.</span></p>
     <a class="mail" href="mailto:aaronartdesigns@gmail.com">aaronartdesigns@gmail.com</a>
   </div>
   <div class="contact-block">
     <span class="eyebrow">Instagram</span>
-    <h2 style="font-size:1.6rem">Volg het werk</h2>
-    <p>Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.</p>
+    <h2 style="font-size:1.6rem"><span data-nl>Volg het werk</span><span data-en>Follow the work</span></h2>
+    <p><span data-nl>Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.</span><span data-en>See the whole process from fresh wood to finished piece. DM's welcome too — I usually reply within a day.</span></p>
     <a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;margin-top:6px">@aaronartanddesign</a>
   </div>
 </div>
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <p>© 2026 Aäron Art &amp; Design</p>
 </footer>
+
+<script>
+(function(){
+  var lang = localStorage.getItem('lang') || 'nl';
+  function applyLang(l){
+    lang = l;
+    localStorage.setItem('lang', l);
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-nl]').forEach(function(el){
+      el.style.display = l==='nl' ? '' : 'none';
+    });
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.style.display = l==='en' ? '' : 'none';
+    });
+    document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
+      b.classList.toggle('active', b.id === 'btn-'+l);
+    });
+  }
+  window.setLang = applyLang;
+  document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
+})();
+</script>
+
 </body></html>
