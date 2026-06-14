@@ -182,7 +182,6 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 .lang-toggle{display:flex;border:1px solid var(--rule);font-size:.74rem;letter-spacing:.14em}
 .lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
 .lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
-.showcase-bar{background:var(--walnut-soft);border:1px solid var(--line);padding:14px 20px;margin-bottom:26px;border-radius:0}
 </style>
 </head>
 <body>
@@ -211,16 +210,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
   <h2 style="margin-bottom:10px" id="page-title">Collectie</h2>
   <p style="font-size:.85rem;opacity:.6;margin-bottom:20px" id="page-hint">Klik op een stuk voor meer foto's en details. Geef interesse aan via de knop.</p>
-
-  <div class="showcase-bar">
-    <span class="eyebrow" style="color:var(--amber)">Showcase</span>
-    <p style="font-size:.85rem;opacity:.82;margin-top:4px" id="showcase-txt">Deze stukken zijn momenteel niet direct te koop — laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.</p>
-  </div>
-
-  <div class="cat-tabs">
+<div class="cat-tabs">
     <button class="active" onclick="filterCat('alles',this)" id="cat-alles">Alles</button>
     <button onclick="filterCat('schalen',this)" id="cat-schalen">Schalen</button>
-    <button onclick="filterCat('potten',this)" id="cat-potten">Potten &amp; dozen</button>
+    <button onclick="filterCat('potten',this)" id="cat-potten">Potten & dozen</button>
     <button onclick="filterCat('sets',this)" id="cat-sets">Sets</button>
   </div>
 
@@ -317,8 +310,7 @@ var currentIdx = 0;
 var TX = {
   nl:{
     title:'Collectie', hint:'Klik op een stuk voor meer foto's en details. Geef interesse aan via de knop.',
-    showcase:'Deze stukken zijn momenteel niet direct te koop — laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.',
-    cat_all:'Alles', cat_schalen:'Schalen', cat_potten:'Potten & dozen', cat_sets:'Sets',
+    cat_all:'Alles', cat_schalen:'Schalen', cat_potten:'Potten en dozen', cat_sets:'Sets',
     detail:'Bekijk details', one_of:'Uniek stuk · 1 van 1',
     lbl_wood:'Houtsoort', lbl_dim:'Afmetingen', lbl_finish:'Afwerking',
     interest:'Ik heb interesse in dit stuk',
@@ -356,7 +348,7 @@ function setLang(l){
   document.getElementById('showcase-txt').textContent = tx('showcase');
   document.getElementById('cat-alles').textContent = tx('cat_all');
   document.getElementById('cat-schalen').textContent = tx('cat_schalen');
-  document.getElementById('cat-potten').innerHTML = tx('cat_potten');
+  document.getElementById('cat-potten').textContent = tx('cat_potten');
   document.getElementById('cat-sets').textContent = tx('cat_sets');
   document.querySelector('.basket').textContent = tx('basket');
   // herteken grid
