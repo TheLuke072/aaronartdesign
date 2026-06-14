@@ -186,23 +186,23 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <body>
 <nav>
   <a class="brand" href="index.html">
-    <img src="images/logo-nav.png" alt="AÄD monogram">
+    <img src="images/logo-nav.png" alt="AÄD">
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
-  <ul id="navlist">
-    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
-    <li><a href="shop.html" class='active' ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
-    <li><a href="about.html" ><span data-nl>Over</span><span data-en>About</span></a></li>
-    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html" class="active">Winkel</a></li>
+    <li><a href="about.html">Over</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <div class="lang-toggle" role="group" aria-label="Taal">
+    <div class="lang-toggle">
       <button id="btn-nl" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
-  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
+  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
   <h2 style="margin-bottom:10px">Collectie</h2>
