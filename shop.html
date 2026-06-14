@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-
 :root{--walnut:#2b211b;--walnut-soft:#3a2d24;--bone:#efe6d8;--amber:#c98a3d;--bark:#8a7460;--line:rgba(239,230,216,.22);--rule:rgba(239,230,216,.45)}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:var(--walnut);color:var(--bone);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.65}
@@ -185,267 +184,213 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </style>
 </head>
 <body>
-
 <nav>
   <a class="brand" href="index.html">
-    <img src="images/logo-nav.png" alt="AÄD">
+    <img src="images/logo-nav.png" alt="AÄD monogram">
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html" class="active">Winkel / Shop</a></li>
-    <li><a href="about.html">Over / About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+  <ul id="navlist">
+    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
+    <li><a href="shop.html" class='active' ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="about.html" ><span data-nl>Over</span><span data-en>About</span></a></li>
+    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <div class="nav-right">
-    <div class="lang-toggle">
-      <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
+    <div class="lang-toggle" role="group" aria-label="Taal">
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
-  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
 </nav>
-
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
-  <h2 style="margin-bottom:10px" id="page-title">Collectie</h2>
-  <p style="font-size:.85rem;opacity:.6;margin-bottom:20px" id="page-hint">Klik op een stuk voor meer foto's en details. Geef interesse aan via de knop.</p>
-<div class="cat-tabs">
-    <button class="active" onclick="filterCat('alles',this)" id="cat-alles">Alles</button>
-    <button onclick="filterCat('schalen',this)" id="cat-schalen">Schalen</button>
-    <button onclick="filterCat('potten',this)" id="cat-potten">Potten & dozen</button>
-    <button onclick="filterCat('sets',this)" id="cat-sets">Sets</button>
+  <h2 style="margin-bottom:10px">Collectie</h2>
+  <p style="font-size:.85rem;opacity:.6;margin-bottom:26px">Klik op een stuk voor meer foto's en details.</p>
+  <div class="cat-tabs" style="margin-bottom:34px">
+    <button id="cat-alles" class="active" onclick="filterCat('alles',this)">Alles</button>
+    <button id="cat-schalen" onclick="filterCat('schalen',this)">Schalen</button>
+    <button id="cat-potten" onclick="filterCat('potten',this)">Potten &amp; dozen</button>
+    <button id="cat-sets" onclick="filterCat('sets',this)">Sets</button>
   </div>
-
-  <div class="grid" id="grid"></div>
+  <div class="grid"><div class="card" id="card-0" data-cat="potten">
+      <div class="frame" onclick="openModal(0)">
+        <img src="images/oak-walnut-pot.jpg" alt="Dekselpot in eiken en walnoot" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-0">Eiken · Walnoot · Padoek</span>
+      <h3 id="title-0">Dekselpot in eiken en walnoot</h3>
+      <div class="meta"><span></span><span>€ 40</span></div>
+    </div>
+<div class="card" id="card-1" data-cat="potten">
+      <div class="frame" onclick="openModal(1)">
+        <img src="images/lidded-yew.jpg" alt="Essen potje met taxus deksel" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-1">Essen · Taxus</span>
+      <h3 id="title-1">Essen potje met taxus deksel</h3>
+      <div class="meta"><span></span><span>€ 40</span></div>
+    </div>
+<div class="card" id="card-2" data-cat="schalen">
+      <div class="frame" onclick="openModal(2)">
+        <img src="images/olive-bowl.jpg" alt="Olijfhouten schaal met bast" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-2">Olijf</span>
+      <h3 id="title-2">Olijfhouten schaal met bast</h3>
+      <div class="meta"><span>Ø 18 cm</span><span>€ 50</span></div>
+    </div>
+<div class="card" id="card-3" data-cat="schalen">
+      <div class="frame" onclick="openModal(3)">
+        <img src="images/elm-platter.jpg" alt="Kersenhouten schaal" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-3">Kersen</span>
+      <h3 id="title-3">Kersenhouten schaal</h3>
+      <div class="meta"><span>Ø 24 cm</span><span>€ 40</span></div>
+    </div>
+<div class="card" id="card-4" data-cat="potten">
+      <div class="frame" onclick="openModal(4)">
+        <img src="images/walnut-box.jpg" alt="Essen potje met notenhouten deksel" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-4">Essen · Walnoot</span>
+      <h3 id="title-4">Essen potje met notenhouten deksel</h3>
+      <div class="meta"><span>Ø 9 cm</span><span>€ 34</span></div>
+    </div>
+<div class="card" id="card-5" data-cat="schalen">
+      <div class="frame" onclick="openModal(5)">
+        <img src="images/birch-winged.jpg" alt="Berkenschaal met schors" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-5">Berk</span>
+      <h3 id="title-5">Berkenschaal met schors</h3>
+      <div class="meta"><span>Ø 16 cm</span><span>€ 40</span></div>
+    </div>
+<div class="card" id="card-6" data-cat="sets">
+      <div class="frame" onclick="openModal(6)">
+        <img src="images/ash-trio.jpg" alt="Drie essen schalen" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-6">Es</span>
+      <h3 id="title-6">Drie essen schalen</h3>
+      <div class="meta"><span>Ø 14–20 cm</span><span>€ 120</span></div>
+    </div></div>
 </section>
-
-<!-- MODAL -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal" role="dialog" aria-modal="true">
+  <div class="modal" role="dialog">
     <div class="gallery">
       <button class="close" onclick="closeModal()">×</button>
       <div class="main"><img id="m-main" src="" alt=""></div>
       <div class="thumbs" id="m-thumbs"></div>
     </div>
     <div class="detail">
-      <span class="one-of" id="m-one-of">Uniek stuk · 1 van 1</span>
+      <span class="one-of">Uniek stuk · 1 van 1</span>
       <h3 id="m-title"></h3>
       <span class="price" id="m-price"></span>
       <p id="m-desc"></p>
       <dl class="specs">
-        <dt id="lbl-wood">Houtsoort</dt><dd id="m-wood"></dd>
-        <dt id="lbl-dim">Afmetingen</dt><dd id="m-dim"></dd>
-        <dt id="lbl-finish">Afwerking</dt><dd id="m-finish"></dd>
+        <dt>Houtsoort</dt><dd id="m-wood"></dd>
+        <dt>Afmetingen</dt><dd id="m-dim"></dd>
+        <dt>Afwerking</dt><dd id="m-finish"></dd>
       </dl>
-
-      <!-- Interesse -->
       <div style="margin-top:14px">
-        <a id="m-interest" href="#" target="_blank" class="btn btn-ghost"
-           style="display:block;text-align:center;font-size:.75rem">
-          ✉ <span id="m-interest-txt">Ik heb interesse in dit stuk</span>
-        </a>
-        <p id="m-interest-sub" style="font-size:.75rem;opacity:.6;margin-top:8px;text-align:center">
-          Stuur me een bericht — ik laat je weten wat mogelijk is.
-        </p>
+        <a id="m-interest" href="#" target="_blank" class="btn btn-solid"
+           style="display:block;text-align:center">✉ Ik heb interesse in dit stuk</a>
       </div>
-
-      <!-- Delen -->
-      <div style="display:flex;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);align-items:center;flex-wrap:wrap">
-        <span style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55" id="lbl-share">Delen:</span>
+      <div style="display:flex;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);align-items:center">
         <a id="m-wa" href="#" target="_blank"
            style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 12px">WhatsApp</a>
-        <button id="m-copy" onclick="doCopy()"
+        <button onclick="doCopy()" id="m-copy"
            style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 12px;cursor:pointer;background:none;color:var(--bone)">
-          Kopieer link
-        </button>
+           Kopieer link</button>
       </div>
     </div>
   </div>
 </div>
-
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
-    <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank">Instagram</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
   </ul>
   <p>© 2026 Aäron Art &amp; Design</p>
 </footer>
+<script>var P = [{"img": "images/oak-walnut-pot.jpg", "cat": "potten", "price": "€ 40", "dim": "", "wnl": "Eiken · Walnoot · Padoek", "tnl": "Dekselpot in eiken en walnoot", "dnl": "Royale pot gedraaid uit eikenhout met een passend deksel van donker walnoot, bekroond met een knop van padoek.", "fnl": "Voedselveilige olie", "wen": "Oak · Walnut · Padauk", "ten": "Lidded pot in oak and walnut", "den": "Generous pot turned from oak with a fitted dark walnut lid, crowned with a padauk knob.", "fen": "Food-safe oil"}, {"img": "images/lidded-yew.jpg", "cat": "potten", "price": "€ 40", "dim": "", "wnl": "Essen · Taxus", "tnl": "Essen potje met taxus deksel", "dnl": "Klein potje van essenhout met een deksel van taxus, met het kenmerkende contrast tussen licht spinthout en warm kernhout.", "fnl": "Voedselveilige olie", "wen": "Ash · Yew", "ten": "Ash pot with yew lid", "den": "Small ash pot with a yew lid showing its signature contrast of pale sapwood and warm heartwood.", "fen": "Food-safe oil"}, {"img": "images/olive-bowl.jpg", "cat": "schalen", "price": "€ 50", "dim": "Ø 18 cm", "wnl": "Olijf", "tnl": "Olijfhouten schaal met bast", "dnl": "Gedraaid uit olijfhout met behoud van de natuurlijke bastrand. De wervelende nerf van olijf maakt elk stuk volstrekt uniek.", "fnl": "Voedselveilige olie", "wen": "Olive", "ten": "Olive wood bowl with bark", "den": "Turned from olive wood keeping its natural bark edge.", "fen": "Food-safe oil"}, {"img": "images/elm-platter.jpg", "cat": "schalen", "price": "€ 40", "dim": "Ø 24 cm", "wnl": "Kersen", "tnl": "Kersenhouten schaal", "dnl": "Brede, ondiepe schaal van kersenhout met prachtig gevlamde nerftekening.", "fnl": "Voedselveilige olie", "wen": "Cherry", "ten": "Cherry wood platter", "den": "Wide shallow cherry platter with beautifully figured grain.", "fen": "Food-safe oil"}, {"img": "images/walnut-box.jpg", "cat": "potten", "price": "€ 34", "dim": "Ø 9 cm", "wnl": "Essen · Walnoot", "tnl": "Essen potje met notenhouten deksel", "dnl": "Potje in twee houtsoorten: licht essenhout met een donker deksel van walnoot.", "fnl": "Wax", "wen": "Ash · Walnut", "ten": "Ash pot with walnut lid", "den": "Small pot in two woods: pale ash with a dark walnut lid.", "fen": "Wax"}, {"img": "images/birch-winged.jpg", "cat": "schalen", "price": "€ 40", "dim": "Ø 16 cm", "wnl": "Berk", "tnl": "Berkenschaal met schors", "dnl": "Sculpturale schaal waarvan de vorm de natuurlijke kromming van de tak volgt, met intacte bast op beide vleugels.", "fnl": "Voedselveilige olie", "wen": "Birch", "ten": "Birch bowl with bark", "den": "Sculptural bowl following the natural curve of the branch, with bark intact.", "fen": "Food-safe oil"}, {"img": "images/ash-trio.jpg", "cat": "sets", "price": "€ 120", "dim": "Ø 14–20 cm", "wnl": "Es", "tnl": "Drie essen schalen", "dnl": "Drie bij elkaar passende schalen in licht essenhout, gedraaid uit dezelfde stam.", "fnl": "Voedselveilige olie", "wen": "Ash", "ten": "Three ash bowls", "den": "Three matching bowls in pale ash, turned from the same log.", "fen": "Food-safe oil"}];
+var lang = "nl";
 
-<script>
-var PRODUCTS = [
- {cat:"potten", img:"images/oak-walnut-pot.jpg", imgs:["images/oak-walnut-pot.jpg"], price:"€ 40", dim:"",
-  nl:{wood:"Eiken · Walnoot · Padoek",title:"Dekselpot in eiken en walnoot",desc:"Royale pot gedraaid uit eikenhout met een passend deksel van donker walnoot, bekroond met een knop van padoek.",finish:"Voedselveilige olie"},
-  en:{wood:"Oak · Walnut · Padauk",title:"Lidded pot in oak and walnut",desc:"Generous pot turned from oak with a fitted dark walnut lid, crowned with a padauk knob.",finish:"Food-safe oil"}},
- {cat:"potten", img:"images/lidded-yew.jpg", imgs:["images/lidded-yew.jpg"], price:"€ 40", dim:"",
-  nl:{wood:"Essen · Taxus",title:"Essen potje met taxus deksel",desc:"Klein potje van essenhout met een deksel van taxus, met het kenmerkende contrast tussen licht spinthout en warm kernhout.",finish:"Voedselveilige olie"},
-  en:{wood:"Ash · Yew",title:"Ash pot with yew lid",desc:"Small ash pot with a yew lid showing its signature contrast of pale sapwood and warm heartwood.",finish:"Food-safe oil"}},
- {cat:"schalen", img:"images/olive-bowl.jpg", imgs:["images/olive-bowl.jpg"], price:"€ 50", dim:"Ø 18 cm × 9 cm",
-  nl:{wood:"Olijf",title:"Olijfhouten schaal met bast",desc:"Gedraaid uit olijfhout met behoud van de natuurlijke bastrand. De wervelende nerf van olijf maakt elk stuk volstrekt uniek.",finish:"Voedselveilige olie"},
-  en:{wood:"Olive",title:"Olive wood bowl with bark",desc:"Turned from olive wood keeping its natural bark edge.",finish:"Food-safe oil"}},
- {cat:"schalen", img:"images/elm-platter.jpg", imgs:["images/elm-platter.jpg"], price:"€ 40", dim:"Ø 24 cm × 4 cm",
-  nl:{wood:"Kersen",title:"Kersenhouten schaal",desc:"Brede, ondiepe schaal van kersenhout met prachtig gevlamde nerftekening.",finish:"Voedselveilige olie"},
-  en:{wood:"Cherry",title:"Cherry wood platter",desc:"Wide shallow cherry platter with beautifully figured grain.",finish:"Food-safe oil"}},
- {cat:"potten", img:"images/walnut-box.jpg", imgs:["images/walnut-box.jpg"], price:"€ 34", dim:"Ø 9 cm × 7 cm",
-  nl:{wood:"Essen · Walnoot",title:"Essen potje met notenhouten deksel",desc:"Potje in twee houtsoorten: licht essenhout met een donker deksel van walnoot.",finish:"Wax"},
-  en:{wood:"Ash · Walnut",title:"Ash pot with walnut lid",desc:"Small pot in two woods: pale ash with a dark walnut lid.",finish:"Wax"}},
- {cat:"schalen", img:"images/birch-winged.jpg", imgs:["images/birch-winged.jpg"], price:"€ 40", dim:"Ø 16 cm × 12 cm",
-  nl:{wood:"Berk",title:"Berkenschaal met schors",desc:"Sculpturale schaal waarvan de vorm de natuurlijke kromming van de tak volgt, met intacte bast op beide vleugels.",finish:"Voedselveilige olie"},
-  en:{wood:"Birch",title:"Birch bowl with bark",desc:"Sculptural bowl following the natural curve of the branch, with bark intact.",finish:"Food-safe oil"}},
- {cat:"sets", img:"images/ash-trio.jpg", imgs:["images/ash-trio.jpg"], price:"€ 120", dim:"Ø 14–20 cm",
-  nl:{wood:"Es",title:"Drie essen schalen",desc:"Drie bij elkaar passende schalen in licht essenhout, gedraaid uit dezelfde stam.",finish:"Voedselveilige olie"},
-  en:{wood:"Ash",title:"Three ash bowls",desc:"Three matching bowls in pale ash, turned from the same log.",finish:"Food-safe oil"}},
-];
-
-var lang = localStorage.getItem('lang') || 'nl';
-var currentCat = 'alles';
-var currentIdx = 0;
-
-// Alle vertalingen op één plek
-var TX = {
-  nl:{
-    title:'Collectie', hint:'Klik op een stuk voor meer foto's en details. Geef interesse aan via de knop.',
-    cat_all:'Alles', cat_schalen:'Schalen', cat_potten:'Potten en dozen', cat_sets:'Sets',
-    detail:'Bekijk details', one_of:'Uniek stuk · 1 van 1',
-    lbl_wood:'Houtsoort', lbl_dim:'Afmetingen', lbl_finish:'Afwerking',
-    interest:'Ik heb interesse in dit stuk',
-    interest_sub:'Stuur me een bericht — ik laat je weten wat mogelijk is.',
-    interest_subj:'Interesse: ',
-    interest_body:'Hallo Lucas,\n\nIk heb interesse in: ',
-    interest_body2:'\n\nKan je me meer informatie geven?\n\nMet vriendelijke groet,',
-    share:'Delen:', copy:'Kopieer link', copied:'✓ Gekopieerd!', basket:'Mandje',
-  },
-  en:{
-    title:'Collection', hint:'Click any piece for more photos and details. Express interest via the button.',
-    showcase:'These pieces are not currently for direct sale — express your interest and I'll be in touch about availability.',
-    cat_all:'All', cat_schalen:'Bowls', cat_potten:'Lidded pieces', cat_sets:'Sets',
-    detail:'View details', one_of:'Unique piece · 1 of 1',
-    lbl_wood:'Wood', lbl_dim:'Dimensions', lbl_finish:'Finish',
-    interest:'I'm interested in this piece',
-    interest_sub:'Send me a message — I'll be in touch about availability.',
-    interest_subj:'Interest: ',
-    interest_body:'Hello Lucas,\n\nI am interested in: ',
-    interest_body2:'\n\nCould you give me more information?\n\nKind regards,',
-    share:'Share:', copy:'Copy link', copied:'✓ Copied!', basket:'Basket',
-  }
-};
-
-function tx(k){ return TX[lang][k] || ''; }
-
-function setLang(l){
+function setLang(l) {
   lang = l;
-  localStorage.setItem('lang', l);
-  document.getElementById('btn-nl').classList.toggle('active', l==='nl');
-  document.getElementById('btn-en').classList.toggle('active', l==='en');
-  // update statische teksten
-  document.getElementById('page-title').textContent = tx('title');
-  document.getElementById('page-hint').textContent = tx('hint');
-  document.getElementById('cat-alles').textContent = tx('cat_all');
-  document.getElementById('cat-schalen').textContent = tx('cat_schalen');
-  document.getElementById('cat-potten').textContent = tx('cat_potten');
-  document.getElementById('cat-sets').textContent = tx('cat_sets');
-  document.querySelector('.basket').textContent = tx('basket');
-  // herteken grid
-  renderGrid();
+  localStorage.setItem("lang", l);
+  document.getElementById("btn-nl").classList.toggle("active", l==="nl");
+  document.getElementById("btn-en").classList.toggle("active", l==="en");
+  // update kaart teksten
+  P.forEach(function(p, i) {
+    var w = document.getElementById("wood-"+i);
+    var t = document.getElementById("title-"+i);
+    if(w) w.textContent = l==="nl" ? p.wnl : p.wen;
+    if(t) t.textContent = l==="nl" ? p.tnl : p.ten;
+  });
+  // update cat knoppen
+  document.getElementById("cat-alles").textContent = l==="nl" ? "Alles" : "All";
+  document.getElementById("cat-schalen").textContent = l==="nl" ? "Schalen" : "Bowls";
+  document.getElementById("cat-potten").textContent = l==="nl" ? "Potten & dozen" : "Lidded pieces";
+  document.getElementById("cat-sets").textContent = "Sets";
 }
 
-function filterCat(cat, btn){
-  currentCat = cat;
-  document.querySelectorAll('.cat-tabs button').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderGrid();
-}
-
-function renderGrid(){
-  var g = document.getElementById('grid');
-  var list = PRODUCTS.reduce(function(acc, p, i){ if(currentCat==='alles'||p.cat===currentCat) acc.push([p,i]); return acc; }, []);
-  g.innerHTML = list.map(function(pair){
-    var p = pair[0]; var i = pair[1];
-    var dim = p.dim ? p.dim.split('×')[0].trim() : '';
-    return '<div class="card">' +
-      '<div class="frame" onclick="openModal('+i+')">' +
-        '<img src="'+p.img+'" alt="'+p[lang].title+'" loading="lazy">' +
-        '<span class="more">'+tx('detail')+'</span>' +
-      '</div>' +
-      '<span class="wood">'+p[lang].wood+'</span>' +
-      '<h3>'+p[lang].title+'</h3>' +
-      '<div class="meta"><span>'+dim+'</span><span>'+p.price+'</span></div>' +
-    '</div>';
-  }).join('');
-}
-
-function openModal(i){
-  currentIdx = i;
-  var p = PRODUCTS[i];
-  document.getElementById('m-title').textContent = p[lang].title;
-  document.getElementById('m-price').textContent = p.price;
-  document.getElementById('m-desc').textContent = p[lang].desc;
-  document.getElementById('m-wood').textContent = p[lang].wood;
-  document.getElementById('m-dim').textContent = p.dim || '—';
-  document.getElementById('m-finish').textContent = p[lang].finish;
-  document.getElementById('m-one-of').textContent = tx('one_of');
-  document.getElementById('lbl-wood').textContent = tx('lbl_wood');
-  document.getElementById('lbl-dim').textContent = tx('lbl_dim');
-  document.getElementById('lbl-finish').textContent = tx('lbl_finish');
-  document.getElementById('m-interest-txt').textContent = tx('interest');
-  document.getElementById('m-interest-sub').textContent = tx('interest_sub');
-  document.getElementById('lbl-share').textContent = tx('share');
-  document.getElementById('m-copy').textContent = tx('copy');
-
-  // Afbeeldingen
-  document.getElementById('m-main').src = p.imgs[0];
-  document.getElementById('m-thumbs').innerHTML = p.imgs.map(function(im, j){
-    return '<button class="'+(j===0?'sel':'')+'" onclick="setThumb(''+im+'',this)"><img src="'+im+'" alt=""></button>';
-  }).join('');
-
-  // Interesse mail
-  var subj = encodeURIComponent(tx('interest_subj') + p[lang].title);
-  var body = encodeURIComponent(tx('interest_body') + p[lang].title + ' (' + p[lang].wood + ').' + tx('interest_body2'));
-  document.getElementById('m-interest').href = 'mailto:aaronartdesigns@gmail.com?subject='+subj+'&body='+body;
-
-  // WhatsApp deel
-  var url = window.location.origin + window.location.pathname + '?p=' + i;
-  window._shareUrl = url;
-  document.getElementById('m-wa').href = 'https://wa.me/?text=' + encodeURIComponent(p[lang].title + ' — Aäron Art & Design\n' + url);
-
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function setThumb(src, btn){
-  document.getElementById('m-main').src = src;
-  document.querySelectorAll('#m-thumbs button').forEach(function(b){ b.classList.remove('sel'); });
-  btn.classList.add('sel');
-}
-
-function closeModal(){
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function doCopy(){
-  var btn = document.getElementById('m-copy');
-  navigator.clipboard.writeText(window._shareUrl || window.location.href).then(function(){
-    btn.textContent = tx('copied');
-    setTimeout(function(){ btn.textContent = tx('copy'); }, 2000);
+function filterCat(cat, btn) {
+  document.querySelectorAll(".cat-tabs button").forEach(function(b){ b.classList.remove("active"); });
+  btn.classList.add("active");
+  document.querySelectorAll(".card").forEach(function(c){
+    c.style.display = (cat === "alles" || c.dataset.cat === cat) ? "" : "none";
   });
 }
 
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+function openModal(i) {
+  var p = P[i];
+  var l = lang;
+  document.getElementById("m-title").textContent = l==="nl" ? p.tnl : p.ten;
+  document.getElementById("m-price").textContent = p.price;
+  document.getElementById("m-desc").textContent = l==="nl" ? p.dnl : p.den;
+  document.getElementById("m-wood").textContent = l==="nl" ? p.wnl : p.wen;
+  document.getElementById("m-dim").textContent = p.dim || "—";
+  document.getElementById("m-finish").textContent = l==="nl" ? p.fnl : p.fen;
+  document.getElementById("m-main").src = p.img;
+  document.getElementById("m-thumbs").innerHTML =
+    "<button class=\"sel\" onclick=\"document.getElementById('m-main').src='"+p.img+"'\"><img src='"+p.img+"' alt=''></button>";
+  var subj = encodeURIComponent("Interesse: " + (l==="nl" ? p.tnl : p.ten));
+  var body = encodeURIComponent("Hallo Lucas,\n\nIk heb interesse in: " + (l==="nl" ? p.tnl : p.ten) + " (" + (l==="nl" ? p.wnl : p.wen) + ").\n\nKan je me meer informatie geven?\n\nMet vriendelijke groet,");
+  document.getElementById("m-interest").href = "mailto:aaronartdesigns@gmail.com?subject="+subj+"&body="+body;
+  var url = window.location.href.split("?")[0] + "?p=" + i;
+  window._shareUrl = url;
+  document.getElementById("m-wa").href = "https://wa.me/?text=" + encodeURIComponent((l==="nl" ? p.tnl : p.ten) + " — Aäron Art & Design\n" + url);
+  document.getElementById("overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
 
-// Initialiseer
-setLang(lang);
+function closeModal() {
+  document.getElementById("overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
 
-// Open product via URL parameter
-(function(){
-  var p = new URLSearchParams(window.location.search).get('p');
-  if(p !== null && PRODUCTS[parseInt(p)]) setTimeout(function(){ openModal(parseInt(p)); }, 400);
-})();
+function doCopy() {
+  var btn = document.getElementById("m-copy");
+  navigator.clipboard.writeText(window._shareUrl || window.location.href).then(function(){
+    btn.textContent = "✓ Gekopieerd!";
+    setTimeout(function(){ btn.textContent = "Kopieer link"; }, 2000);
+  });
+}
+
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModal(); });
+
+// init taal
+var savedLang = localStorage.getItem("lang") || "nl";
+document.getElementById("btn-"+savedLang).classList.add("active");
+if(savedLang === "en") setLang("en");
 </script>
 </body>
 </html>
