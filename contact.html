@@ -188,18 +188,118 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
 </nav>
-<section style="padding:9vh 6vw;border-bottom:1px solid var(--rule);max-width:700px">
-  <span class="eyebrow">Opdrachten &amp; vragen</span>
-  <h1 style="margin:14px 0;font-size:clamp(2rem,3.5vw,3rem)">Heb je een boom met een eigen verhaal?</h1>
-  <p style="opacity:.82;margin-bottom:30px;max-width:54ch">Een schaal van oma's appelboom, of borden van de eik die in de storm omging — ik draai regelmatig stukken van hout dat klanten zelf meebrengen. Stuur een bericht en we kijken samen wat jouw hout wil worden.</p>
-  <a class="btn btn-solid" href="mailto:laoomen1998@gmail.com">laoomen1998@gmail.com</a>
+<section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
+  <span class="eyebrow">Opdracht aanvragen</span>
+  <h2 style="margin:14px 0 10px">Vertel me over jouw hout</h2>
+  <p style="opacity:.82;max-width:54ch;margin-bottom:36px">Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</p>
+
+  <form id="commission-form"
+        action="https://formspree.io/f/JOUW_FORMSPREE_ID"
+        method="POST"
+        style="max-width:620px;display:flex;flex-direction:column;gap:20px">
+
+    <!-- naam -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name">Naam *</label>
+      <input id="cf-name" name="naam" type="text" placeholder="Je naam" required
+        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
+        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    </div>
+
+    <!-- email -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email">E-mailadres *</label>
+      <input id="cf-email" name="email" type="email" placeholder="jouw@email.nl" required
+        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
+        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    </div>
+
+    <!-- telefoon -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone">Telefoonnummer <span style="opacity:.5">(optioneel)</span></label>
+      <input id="cf-phone" name="telefoon" type="tel" placeholder="+31 6 ..."
+        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
+        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    </div>
+
+    <!-- onderwerp -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject">Onderwerp *</label>
+      <select id="cf-subject" name="onderwerp" required
+        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
+        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+        <option value="" disabled selected>Kies een onderwerp</option>
+        <option value="Opdracht — eigen hout">Opdracht met eigen hout</option>
+        <option value="Opdracht — specifiek stuk">Specifiek stuk bestellen</option>
+        <option value="Vraag over een product">Vraag over een product</option>
+        <option value="Vraag over onderhoud">Vraag over onderhoud</option>
+        <option value="Overig">Overig</option>
+      </select>
+    </div>
+
+    <!-- omschrijving -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message">Omschrijving *</label>
+      <textarea id="cf-message" name="omschrijving" rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." required
+        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;resize:vertical;line-height:1.6"
+        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'"></textarea>
+    </div>
+
+    <!-- hidden fields voor Formspree -->
+    <input type="hidden" name="_subject" value="Nieuwe opdracht via aaronartdesign.nl">
+    <input type="hidden" name="_language" value="nl">
+    <input type="text" name="_gotcha" style="display:none"> <!-- spam-filter -->
+
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <button type="submit" class="btn btn-solid" style="cursor:pointer" id="cf-btn">Verstuur opdracht</button>
+      <p id="cf-status" style="font-size:.85rem;opacity:.75;display:none"></p>
+    </div>
+  </form>
 </section>
+
+<script>
+document.getElementById('commission-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('cf-btn');
+  const status = document.getElementById('cf-status');
+  btn.disabled = true;
+  btn.textContent = 'Versturen...';
+  status.style.display = 'none';
+
+  try {
+    const data = new FormData(this);
+    const resp = await fetch(this.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (resp.ok) {
+      this.innerHTML = `<div style="padding:28px;border:1px solid var(--rule)">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:10px">Bedankt! Je bericht is verstuurd. 🌿</p>
+        <p style="opacity:.75">Ik neem binnen twee dagen contact op via je e-mailadres.</p>
+      </div>`;
+    } else {
+      const json = await resp.json();
+      status.textContent = json.errors ? json.errors.map(e=>e.message).join(', ') : 'Er ging iets mis — probeer het opnieuw.';
+      status.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Verstuur opdracht';
+    }
+  } catch(err) {
+    status.textContent = 'Verbindingsfout — probeer het opnieuw of mail naar aaronartdesigns@gmail.com';
+    status.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Verstuur opdracht';
+  }
+});
+</script>
 <div class="contact-grid">
   <div class="contact-block">
     <span class="eyebrow">Direct mailen</span>
     <h2 style="font-size:1.6rem">Stuur een bericht</h2>
     <p>Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.</p>
-    <a class="mail" href="mailto:laoomen1998@gmail.com">laoomen1998@gmail.com</a>
+    <a class="mail" href="mailto:aaronartdesigns@gmail.com">aaronartdesigns@gmail.com</a>
   </div>
   <div class="contact-block">
     <span class="eyebrow">Instagram</span>
@@ -211,7 +311,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px">Handgedraaid in Nederland · laoomen1998@gmail.com</p>
+    <p style="margin-top:8px">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
