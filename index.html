@@ -197,6 +197,47 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
 </nav>
+<!-- TENTOONSTELLING BANNER -->
+<div id="exhibition-banner" style="background:#1a1a0e;border-bottom:1px solid rgba(180,160,80,.3);position:relative;overflow:hidden">
+  <!-- achtergrond foto subtiel -->
+  <div style="position:absolute;inset:0;background:url(images/exhibition-banner.jpg) center 30%/cover no-repeat;opacity:.18"></div>
+  <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 5vw">
+    <!-- links: label + titel -->
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#c8b84a;border:1px solid #c8b84a;padding:4px 10px;white-space:nowrap">
+        <span data-nl>Nu te zien</span><span data-en>Now showing</span>
+      </span>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:500;color:#efe6d8;line-height:1.2">
+          <span data-nl>Ode aan een bijzondere boom — De Treur-es van de Oase van Rust</span>
+          <span data-en>Ode to a Special Tree — The Weeping Ash of Oase van Rust</span>
+        </p>
+        <p style="font-size:.76rem;opacity:.7;margin-top:3px;color:#efe6d8">
+          <span data-nl>Atelier de Trog, Heiloo &nbsp;·&nbsp; 18 mei – 28 juni 2026 &nbsp;·&nbsp; vr–zo 11:00–16:00</span>
+          <span data-en>Atelier de Trog, Heiloo &nbsp;·&nbsp; 18 May – 28 June 2026 &nbsp;·&nbsp; Fri–Sun 11am–4pm</span>
+        </p>
+      </div>
+    </div>
+    <!-- rechts: knoppen -->
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+      <a href="https://maps.google.com/?q=Atelier+de+Trog,+Heiloo" target="_blank" rel="noopener"
+        style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(200,184,74,.5);color:#c8b84a;padding:8px 14px;white-space:nowrap;transition:.2s"
+        onmouseover="this.style.background='rgba(200,184,74,.15)'" onmouseout="this.style.background='transparent'">
+        📍 <span data-nl>Route</span><span data-en>Directions</span>
+      </a>
+      <a href="images/exhibition-poster.jpg" target="_blank"
+        style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(239,230,216,.3);color:#efe6d8;padding:8px 14px;white-space:nowrap;transition:.2s"
+        onmouseover="this.style.borderColor='rgba(239,230,216,.7)'" onmouseout="this.style.borderColor='rgba(239,230,216,.3)'">
+        <span data-nl>Poster</span><span data-en>Poster</span> ↗
+      </a>
+      <button onclick="document.getElementById('exhibition-banner').style.display='none'"
+        style="font-size:1.1rem;opacity:.45;padding:4px 8px;color:#efe6d8;border:none;background:none;cursor:pointer;line-height:1"
+        title="Sluiten">×</button>
+    </div>
+  </div>
+</div>
+<!-- EINDE BANNER -->
+
 <section style="display:grid;grid-template-columns:1.05fr .95fr;min-height:74vh;border-bottom:1px solid var(--rule)">
   <div style="padding:8vh 6vw;display:flex;flex-direction:column;justify-content:center;gap:24px;position:relative">
     <span class="eyebrow"><span data-nl>Houtdraaien · Handgemaakt in Heiloo</span><span data-en>Woodturning · Handmade in Heiloo</span></span>
