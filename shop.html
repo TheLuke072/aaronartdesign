@@ -227,7 +227,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
         <dt>Afmetingen</dt><dd id="m-dim"></dd>
         <dt>Afwerking</dt><dd id="m-finish"></dd>
       </dl>
-      <div class="buy-slot" id="m-buy"></div>
+      <div class="buy-slot" id="m-buy" style="min-height:56px;margin-top:10px"></div>
+      <p class="buy-note" id="m-buy-note" style="font-size:.78rem;opacity:.55;margin-top:6px"></p>
     </div>
   </div>
 </div>
@@ -245,37 +246,139 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </footer>
 <script>
 const PRODUCTS = [
- {cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/eiken-pot-met-noten-deksel",
+ {shopifyId:"15626754883932", cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/eiken-pot-met-noten-deksel",
   img:"images/oak-walnut-pot.jpg",imgs:["images/oak-walnut-pot.jpg"],price:"€ 40",dim:"",
   nl:{wood:"Eiken · Walnoot · Padoek",title:"Dekselpot in eiken en walnoot",desc:"Royale pot gedraaid uit eikenhout met een passend deksel van donker walnoot, bekroond met een knop van padoek. Drie houtsoorten in één stuk.",finish:"Voedselveilige olie"},
   en:{wood:"Oak · Walnut · Padauk",title:"Lidded pot in oak and walnut",desc:"Generous pot turned from oak with a fitted dark walnut lid, crowned with a padauk knob.",finish:"Food-safe oil"}},
- {cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/essen-potje-met-taxus-deksel",
+ {shopifyId:"15626783949148", cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/essen-potje-met-taxus-deksel",
   img:"images/lidded-yew.jpg",imgs:["images/lidded-yew.jpg"],price:"€ 40",dim:"",
   nl:{wood:"Essen · Taxus",title:"Essen potje met taxus deksel",desc:"Klein potje van essenhout met een deksel van taxus, met het kenmerkende contrast tussen licht spinthout en warm kernhout, en een gedraaide knop.",finish:"Voedselveilige olie"},
   en:{wood:"Ash · Yew",title:"Ash pot with yew lid",desc:"Small ash pot with a yew lid showing its signature contrast of pale sapwood and warm heartwood.",finish:"Food-safe oil"}},
- {cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/olijfhouten-schaal-met-bast",
+ {shopifyId:"15626779754844", cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/olijfhouten-schaal-met-bast",
   img:"images/olive-bowl.jpg",imgs:["images/olive-bowl.jpg"],price:"€ 50",dim:"Ø 18 cm × 9 cm",
   nl:{wood:"Olijf",title:"Olijfhouten schaal met bast",desc:"Gedraaid uit olijfhout met behoud van de natuurlijke bastrand. De wervelende nerf van olijf maakt elk stuk volstrekt uniek.",finish:"Voedselveilige olie"},
   en:{wood:"Olive",title:"Olive wood bowl with bark",desc:"Turned from olive wood keeping its natural bark edge.",finish:"Food-safe oil"}},
- {cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/kersen-schaal",
+ {shopifyId:"15626784407900", cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/kersen-schaal",
   img:"images/elm-platter.jpg",imgs:["images/elm-platter.jpg"],price:"€ 40",dim:"Ø 24 cm × 4 cm",
   nl:{wood:"Kersen",title:"Kersenhouten schaal",desc:"Brede, ondiepe schaal van kersenhout met prachtig gevlamde nerftekening. Ideaal als fruitschaal of middelpunt op tafel.",finish:"Voedselveilige olie"},
   en:{wood:"Cherry",title:"Cherry wood platter",desc:"Wide shallow cherry platter with beautifully figured grain.",finish:"Food-safe oil"}},
- {cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/essen-potje-met-noten-deksel",
+ {shopifyId:"15626781229404", cat:"potten", shopUrl:"https://fyqjyy-tc.myshopify.com/products/essen-potje-met-noten-deksel",
   img:"images/walnut-box.jpg",imgs:["images/walnut-box.jpg"],price:"€ 34",dim:"Ø 9 cm × 7 cm",
   nl:{wood:"Essen · Walnoot",title:"Essen potje met notenhouten deksel",desc:"Potje in twee houtsoorten: licht essenhout met een donker deksel van walnoot. Perfect voor ringen of kleine schatten.",finish:"Wax"},
   en:{wood:"Ash · Walnut",title:"Ash pot with walnut lid",desc:"Small pot in two woods: pale ash with a dark walnut lid.",finish:"Wax"}},
- {cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/berken-schaal-met-schors",
+ {shopifyId:"15626782081372", cat:"schalen", shopUrl:"https://fyqjyy-tc.myshopify.com/products/berken-schaal-met-schors",
   img:"images/birch-winged.jpg",imgs:["images/birch-winged.jpg"],price:"€ 40",dim:"Ø 16 cm × 12 cm",
   nl:{wood:"Berk",title:"Berkenschaal met schors",desc:"Sculpturale schaal waarvan de vorm de natuurlijke kromming van de tak volgt, met intacte bast op beide vleugels.",finish:"Voedselveilige olie"},
   en:{wood:"Birch",title:"Birch bowl with bark",desc:"Sculptural bowl following the natural curve of the branch, with bark intact.",finish:"Food-safe oil"}},
- {cat:"sets", shopUrl:"https://fyqjyy-tc.myshopify.com/products/drie-essen-schalen",
+ {shopifyId:"15626783064412", cat:"sets", shopUrl:"https://fyqjyy-tc.myshopify.com/products/drie-essen-schalen",
   img:"images/ash-trio.jpg",imgs:["images/ash-trio.jpg"],price:"€ 120",dim:"Ø 14–20 cm",
   nl:{wood:"Es",title:"Drie essen schalen",desc:"Drie bij elkaar passende schalen in licht essenhout, gedraaid uit dezelfde stam. Als set of los te gebruiken.",finish:"Voedselveilige olie"},
   en:{wood:"Ash",title:"Three ash bowls",desc:"Three matching bowls in pale ash, turned from the same log.",finish:"Food-safe oil"}},
 ];
 let lang = 'nl';
 let currentCat = 'alles';
+
+/* ---- Shopify Buy Button ---- */
+const SHOPIFY_DOMAIN = 'fyqjyy-tc.myshopify.com';
+const SHOPIFY_TOKEN  = '07fe0a5990c071d81d99e92a069cdc5d';
+let shopifyUIInstance = null;
+let buyComponent = null;
+
+function loadShopifySDK(){
+  return new Promise(function(resolve){
+    if(window.ShopifyBuy && window.ShopifyBuy.UI) return resolve();
+    if(document.getElementById('shopify-sdk')) return resolve();
+    var s = document.createElement('script');
+    s.id = 'shopify-sdk';
+    s.async = true;
+    s.src = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+}
+
+async function renderBuyButton(p){
+  var slot = document.getElementById('m-buy');
+  var note = document.getElementById('m-buy-note');
+  if(slot) slot.innerHTML = '<p style="opacity:.5;font-size:.85rem">Laden...</p>';
+  if(note) note.textContent = '';
+
+  if(!p.shopifyId){
+    if(slot) slot.innerHTML = '';
+    if(note) note.textContent = lang==='nl'
+      ? 'Binnenkort online te bestellen — stuur een bericht voor interesse.'
+      : 'Online ordering coming soon — send a message if interested.';
+    return;
+  }
+
+  await loadShopifySDK();
+  var client = ShopifyBuy.buildClient({
+    domain: SHOPIFY_DOMAIN,
+    storefrontAccessToken: SHOPIFY_TOKEN
+  });
+  var ui = await ShopifyBuy.UI.onReady(client);
+  if(buyComponent){ try{ buyComponent.destroy(); }catch(e){} buyComponent = null; }
+  if(slot) slot.innerHTML = '';
+
+  buyComponent = ui.createComponent('product', {
+    id: p.shopifyId,
+    node: slot,
+    moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
+    options: {
+      product: {
+        contents: { img:false, title:false, price:false, button:true },
+        styles: {
+          product: { margin:'0', 'max-width':'100%' },
+          button: {
+            'font-family':'Outfit, sans-serif',
+            'font-weight':'500',
+            'font-size':'13px',
+            'letter-spacing':'.22em',
+            'text-transform':'uppercase',
+            'background-color':'#efe6d8',
+            'color':'#2b211b',
+            'border-radius':'0px',
+            'padding':'14px 28px',
+            'width':'100%',
+            ':hover':{'background-color':'#dccfba','color':'#2b211b'},
+            ':focus':{'background-color':'#dccfba'}
+          }
+        },
+        text: { button: lang==='nl' ? 'In mandje' : 'Add to basket' }
+      },
+      cart: {
+        styles: {
+          button: {
+            'background-color':'#2b211b',
+            'border-radius':'0px',
+            ':hover':{'background-color':'#3a2d24'},
+            ':focus':{'background-color':'#3a2d24'}
+          }
+        },
+        text: lang==='nl' ? {
+          title:'Mandje', total:'Subtotaal', button:'Afrekenen',
+          empty:'Je mandje is leeg',
+          notice:'Verzendkosten worden bij het afrekenen berekend.'
+        } : {
+          title:'Basket', total:'Subtotal', button:'Checkout',
+          empty:'Your basket is empty',
+          notice:'Shipping calculated at checkout.'
+        },
+        popup: false
+      },
+      toggle: {
+        styles: {
+          toggle: {
+            'background-color':'#2b211b',
+            ':hover':{'background-color':'#3a2d24'}
+          },
+          count: { color:'#efe6d8' }
+        }
+      }
+    }
+  });
+}
+
 function openModal(i){
   const p = PRODUCTS[i];
   document.getElementById('m-title').textContent = p[lang].title;
@@ -294,6 +397,7 @@ function openModal(i){
   a.href=p.shopUrl;a.target='_blank';a.rel='noopener';
   a.textContent=lang==='nl'?'Bestellen':'Order now';
   slot.appendChild(a);
+  renderBuyButton(p);
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
