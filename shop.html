@@ -42,6 +42,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 .card .frame:hover .more{opacity:1}
 .card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.3rem}
 .card .meta{display:flex;justify-content:space-between;font-size:.8rem;opacity:.7}
+.sold-badge{position:absolute;top:12px;left:12px;background:rgba(43,33,27,.88);color:var(--bone);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:5px 10px;pointer-events:none;border:1px solid var(--rule)}
 .wood{text-transform:uppercase;letter-spacing:.22em;font-size:.66rem;color:var(--amber)}
 .cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
 .cat-tabs button{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border:1px solid var(--line);opacity:.7;transition:.2s}
@@ -201,7 +202,16 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:14px;flex-wrap:wrap">
     <h2><span data-nl>Collectie</span><span data-en>Collection</span></h2>
   </div>
-  <p style="font-size:.85rem;opacity:.6;margin-bottom:20px"><span data-nl>Klik op een stuk voor meer foto's, afmetingen en details.</span><span data-en>Click any piece for more photos, dimensions and details.</span></p>
+  <p style="font-size:.85rem;opacity:.6;margin-bottom:20px"><span data-nl>Klik op een stuk voor meer foto's, afmetingen en details. Geef interesse aan via de knop.</span><span data-en>Click any piece for more photos, dimensions and details. Express interest via the button.</span></p>
+    <div style="background:var(--walnut-soft);border:1px solid var(--line);padding:16px 22px;margin-bottom:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <span style="font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)">
+      <span data-nl>Showcase</span><span data-en>Showcase</span>
+    </span>
+    <p style="font-size:.85rem;opacity:.82;flex:1;min-width:200px">
+      <span data-nl>Deze stukken zijn momenteel niet direct te koop — maar laat je interesse weten en ik neem contact op over beschikbaarheid en prijs.</span>
+      <span data-en>These pieces are not currently for direct sale — but express your interest and I'll be in touch about availability and pricing.</span>
+    </p>
+  </div>
   <div class="cat-tabs">
     <button class="active" onclick="setCat('alles',this)"><span data-nl>Alles</span><span data-en>All</span></button>
     <button onclick="setCat('schalen',this)"><span data-nl>Schalen</span><span data-en>Bowls</span></button>
@@ -227,8 +237,39 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
         <dt>Afmetingen</dt><dd id="m-dim"></dd>
         <dt>Afwerking</dt><dd id="m-finish"></dd>
       </dl>
-      <div class="buy-slot" id="m-buy" style="min-height:56px;margin-top:10px"></div>
-      <p class="buy-note" id="m-buy-note" style="font-size:.78rem;opacity:.55;margin-top:6px"></p>
+      <div id="m-buy" style="min-height:56px;margin-top:10px"></div>
+      <p id="m-buy-note" style="font-size:.78rem;opacity:.55;margin-top:6px"></p>
+
+      <!-- Interesse knop -->
+      <div id="m-interest" style="margin-top:4px;display:none">
+        <a id="m-interest-link" href="#" target="_blank" rel="noopener"
+          class="btn btn-ghost" style="display:block;text-align:center;font-size:.75rem">
+          <span data-nl>✉ Ik heb interesse in dit stuk</span>
+          <span data-en>✉ I'm interested in this piece</span>
+        </a>
+        <p style="font-size:.75rem;opacity:.6;margin-top:8px;text-align:center">
+          <span data-nl>Stuur me een bericht — ik laat je weten wat mogelijk is qua beschikbaarheid.</span>
+          <span data-en>Send me a message — I'll let you know what's possible regarding availability.</span>
+        </p>
+      </div>
+
+      <!-- Deel knop -->
+      <div style="display:flex;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)">
+        <span style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55;align-self:center">
+          <span data-nl>Delen</span><span data-en>Share</span>:
+        </span>
+        <a id="m-share-wa" href="#" target="_blank" rel="noopener"
+          style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 12px;transition:.2s;white-space:nowrap"
+          onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'">
+          WhatsApp
+        </a>
+        <button onclick="copyProductLink()"
+          style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 12px;transition:.2s;cursor:pointer;background:none;color:var(--bone)"
+          onmouseover="this.style.borderColor='var(--rule)'" onmouseout="this.style.borderColor='var(--line)'"
+          id="m-copy-btn">
+          <span data-nl>Kopieer link</span><span data-en>Copy link</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -300,84 +341,11 @@ function loadShopifySDK(){
 async function renderBuyButton(p){
   var slot = document.getElementById('m-buy');
   var note = document.getElementById('m-buy-note');
-  if(slot) slot.innerHTML = '<p style="opacity:.5;font-size:.85rem">Laden...</p>';
-  if(note) note.textContent = '';
-
-  if(!p.shopifyId){
-    if(slot) slot.innerHTML = '';
-    if(note) note.textContent = lang==='nl'
-      ? 'Binnenkort online te bestellen — stuur een bericht voor interesse.'
-      : 'Online ordering coming soon — send a message if interested.';
-    return;
-  }
-
-  await loadShopifySDK();
-  var client = ShopifyBuy.buildClient({
-    domain: SHOPIFY_DOMAIN,
-    storefrontAccessToken: SHOPIFY_TOKEN
-  });
-  var ui = await ShopifyBuy.UI.onReady(client);
-  if(buyComponent){ try{ buyComponent.destroy(); }catch(e){} buyComponent = null; }
   if(slot) slot.innerHTML = '';
-
-  buyComponent = ui.createComponent('product', {
-    id: p.shopifyId,
-    node: slot,
-    moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
-    options: {
-      product: {
-        contents: { img:false, title:false, price:false, button:true },
-        styles: {
-          product: { margin:'0', 'max-width':'100%' },
-          button: {
-            'font-family':'Outfit, sans-serif',
-            'font-weight':'500',
-            'font-size':'13px',
-            'letter-spacing':'.22em',
-            'text-transform':'uppercase',
-            'background-color':'#efe6d8',
-            'color':'#2b211b',
-            'border-radius':'0px',
-            'padding':'14px 28px',
-            'width':'100%',
-            ':hover':{'background-color':'#dccfba','color':'#2b211b'},
-            ':focus':{'background-color':'#dccfba'}
-          }
-        },
-        text: { button: lang==='nl' ? 'In mandje' : 'Add to basket' }
-      },
-      cart: {
-        styles: {
-          button: {
-            'background-color':'#2b211b',
-            'border-radius':'0px',
-            ':hover':{'background-color':'#3a2d24'},
-            ':focus':{'background-color':'#3a2d24'}
-          }
-        },
-        text: lang==='nl' ? {
-          title:'Mandje', total:'Subtotaal', button:'Afrekenen',
-          empty:'Je mandje is leeg',
-          notice:'Verzendkosten worden bij het afrekenen berekend.'
-        } : {
-          title:'Basket', total:'Subtotal', button:'Checkout',
-          empty:'Your basket is empty',
-          notice:'Shipping calculated at checkout.'
-        },
-        popup: false
-      },
-      toggle: {
-        styles: {
-          toggle: {
-            'background-color':'#2b211b',
-            ':hover':{'background-color':'#3a2d24'}
-          },
-          count: { color:'#efe6d8' }
-        }
-      }
-    }
-  });
+  if(note) note.textContent = '';
+  // Showcase modus: geen koopknop, altijd interesse-knop
 }
+
 
 function openModal(i){
   const p = PRODUCTS[i];
@@ -398,6 +366,46 @@ function openModal(i){
   a.textContent=lang==='nl'?'Bestellen':'Order now';
   slot.appendChild(a);
   renderBuyButton(p);
+
+  // Showcase modus: altijd interesse-knop tonen
+  (function(){
+    const interest = document.getElementById('m-interest');
+    const buySlot = document.getElementById('m-buy');
+    if(buySlot) buySlot.style.display='none';
+    if(interest){
+      interest.style.display='block';
+      const subj = encodeURIComponent((lang==='nl'?'Interesse: ':'Interest: ') + p[lang].title);
+      const body = encodeURIComponent(
+        (lang==='nl'
+          ? 'Hallo Lucas,
+
+Ik heb interesse in: ' + p[lang].title + ' (' + p[lang].wood + ').
+
+Kan je me meer informatie geven over beschikbaarheid en prijs?
+
+Met vriendelijke groet,'
+          : 'Hello Lucas,
+
+I am interested in: ' + p[lang].title + ' (' + p[lang].wood + ').
+
+Could you give me more information about availability and price?
+
+Kind regards,')
+      );
+      document.getElementById('m-interest-link').href = 'mailto:aaronartdesigns@gmail.com?subject='+subj+'&body='+body;
+    }
+    window.setLang && setLang(lang);
+  })();
+
+
+  // Deel-knoppen
+  const shareTitle = p[lang].title + ' — Aäron Art & Design';
+  const shareUrl = window.location.href.split('?')[0] + '?product=' + i;
+  document.getElementById('m-share-wa').href =
+    'https://wa.me/?text=' + encodeURIComponent(shareTitle + '\n' + shareUrl);
+  window._currentShareUrl = shareUrl;
+  window._currentShareTitle = shareTitle;
+  document.getElementById('m-copy-btn').textContent = lang==='nl' ? 'Kopieer link' : 'Copy link';
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -414,6 +422,52 @@ function setCat(c,btn){
   if(btn)btn.classList.add('active');
   renderGrid();
 }
+
+/* ===== SOLD OUT CHECK ===== */
+const _soldOut = {};
+async function checkStock(shopifyId){
+  if(!shopifyId || _soldOut[shopifyId] !== undefined) return _soldOut[shopifyId]||false;
+  try{
+    const resp = await fetch('https://fyqjyy-tc.myshopify.com/api/2024-01/graphql.json',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':'07fe0a5990c071d81d99e92a069cdc5d'},
+      body:JSON.stringify({query:`{product(id:"gid://shopify/Product/${shopifyId}"){availableForSale variants(first:1){edges{node{quantityAvailable}}}}}`})
+    });
+    const d = await resp.json();
+    const avail = d?.data?.product?.availableForSale;
+    const qty = d?.data?.product?.variants?.edges?.[0]?.node?.quantityAvailable;
+    _soldOut[shopifyId] = !avail || qty===0;
+    return _soldOut[shopifyId];
+  }catch(e){ return false; }
+}
+
+async function renderGridWithStock(){
+  renderGrid();
+  // check voorraad per product asynchroon
+  PRODUCTS.forEach(async function(p,i){
+    if(!p.shopifyId) return;
+    const sold = await checkStock(p.shopifyId);
+    const frames = document.querySelectorAll('.card .frame');
+    if(frames[i]){
+      // verwijder oude badge
+      const old = frames[i].querySelector('.sold-badge');
+      if(old) old.remove();
+      if(sold){
+        const badge = document.createElement('span');
+        badge.className = 'sold-badge';
+        badge.setAttribute('data-nl','');
+        badge.setAttribute('data-en','');
+        badge.innerHTML = '<span data-nl>Verkocht</span><span data-en>Sold</span>';
+        frames[i].appendChild(badge);
+        frames[i].style.opacity = '.6';
+        frames[i].onclick = null;
+        frames[i].style.cursor = 'default';
+        applyLang && applyLang(lang);
+      }
+    }
+  });
+}
+
 function renderGrid(){
   const g=document.getElementById('grid');
   if(!g)return;
@@ -430,6 +484,26 @@ function renderGrid(){
     </div>`).join('');
 }
 renderGrid();
+
+function copyProductLink(){
+  const btn = document.getElementById('m-copy-btn');
+  navigator.clipboard.writeText(window._currentShareUrl||window.location.href).then(function(){
+    btn.textContent = lang==='nl' ? '✓ Gekopieerd!' : '✓ Copied!';
+    setTimeout(function(){ btn.textContent = lang==='nl' ? 'Kopieer link' : 'Copy link'; }, 2000);
+  }).catch(function(){
+    btn.textContent = window._currentShareUrl||window.location.href;
+  });
+}
+
+// Open product via URL parameter
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const pid = params.get('product');
+  if(pid !== null && PRODUCTS[parseInt(pid)]) {
+    setTimeout(function(){ openModal(parseInt(pid)); }, 400);
+  }
+})();
+
 </script>
 
 <script>
