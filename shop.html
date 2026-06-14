@@ -94,6 +94,82 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 }
 @media(max-width:560px){.grid{grid-template-columns:1fr}.account-btn{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ===== MOBILE FIXES ===== */
+@media(max-width:600px){
+  /* Nav */
+  nav{padding:12px 4vw;gap:8px}
+  .brand img{height:34px}
+  .wordmark{font-size:.95rem;letter-spacing:.1em}
+  .basket{padding:6px 10px;font-size:.68rem}
+
+  /* Hero: stack fully, text first */
+  section[style*="grid-template-columns:1.05fr"]{
+    display:flex!important;flex-direction:column!important;min-height:unset!important
+  }
+  section[style*="grid-template-columns:1.05fr"] > div:first-child{
+    padding:7vw 5vw!important;order:2;gap:16px!important
+  }
+  section[style*="grid-template-columns:1.05fr"] figure{
+    order:1;height:55vw;border-left:none!important;border-bottom:1px solid var(--rule)
+  }
+  h1{font-size:2rem!important}
+  .cta-row{flex-direction:column!important;gap:10px!important}
+  .cta-row .btn{text-align:center;padding:14px 20px}
+
+  /* 3-tile grid op homepage: 1 kolom */
+  section[style*="repeat(3,1fr)"]{
+    grid-template-columns:1fr!important;gap:1px!important;
+    border-bottom:1px solid var(--rule)
+  }
+  section[style*="repeat(3,1fr)"] > a{
+    border:none!important;border-bottom:1px solid var(--line)!important;
+    padding:24px 5vw!important
+  }
+
+  /* Interesse-formulier: 1 kolom */
+  section[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;gap:30px!important;padding:8vw 5vw!important
+  }
+
+  /* About hero */
+  .about-hero{grid-template-columns:1fr!important}
+  .about-hero .img-side{max-height:55vw;overflow:hidden}
+  .about-hero .img-side img{object-position:top}
+  .about-hero .text-side{padding:7vw 5vw!important;gap:14px!important}
+
+  /* Contact grid */
+  .contact-grid{grid-template-columns:1fr!important}
+  .contact-block:first-child{border-right:none!important;border-bottom:1px solid var(--rule)!important}
+  .contact-block{padding:7vw 5vw!important}
+
+  /* Shop grid */
+  .grid{grid-template-columns:1fr 1fr!important;gap:16px!important}
+
+  /* Modal */
+  .modal{grid-template-columns:1fr!important;max-height:95vh}
+  .gallery{border-right:none!important;padding:14px!important}
+  .gallery .main{aspect-ratio:1/1!important}
+  .detail{padding:20px 16px!important;gap:10px!important}
+  .detail h3{font-size:1.4rem!important}
+
+  /* Footer */
+  footer{flex-direction:column;gap:16px;padding:7vw 5vw}
+  footer ul{gap:16px;flex-wrap:wrap}
+
+  /* Insta bar */
+  .insta-bar{padding:7vw 5vw!important;flex-direction:column;align-items:flex-start}
+
+  /* About hout/afwerking grid */
+  section[style*="grid-template-columns:1fr 1fr"][style*="border-bottom"]{
+    grid-template-columns:1fr!important
+  }
+}
+
+@media(max-width:400px){
+  .wordmark{display:none}
+  .grid{grid-template-columns:1fr!important}
+}
+
 </style>
 </head><body>
 <nav>
