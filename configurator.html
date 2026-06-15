@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Configurator (beta) — Aäron Art &amp; Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{--walnut:#2b211b;--walnut-soft:#3a2d24;--bone:#efe6d8;--amber:#c98a3d;--bark:#8a7460;--line:rgba(239,230,216,.22);--rule:rgba(239,230,216,.45)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--walnut);color:var(--bone);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.65}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 5vw;border-bottom:1px solid var(--rule);position:sticky;top:0;background:rgba(43,33,27,.96);backdrop-filter:blur(8px);z-index:10}
+.brand{display:flex;align-items:center;gap:14px}.brand img{height:44px;width:auto}
+.wordmark{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.16em;font-weight:600;white-space:nowrap}
+nav ul{display:flex;gap:30px;list-style:none;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase}
+nav ul a{opacity:.65;transition:opacity .2s}nav ul a:hover,nav ul a.active{opacity:1}
+.nav-right{display:flex;align-items:center;gap:10px}
+.basket,.account-btn{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--rule);padding:8px 14px;transition:.2s;white-space:nowrap}
+.basket:hover,.account-btn:hover{background:var(--bone);color:var(--walnut)}
+.menu-btn{display:none;font-size:1.5rem;line-height:1;padding:4px 10px;border:1px solid var(--rule)}
+
+.eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--amber)}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500}
+h1{font-size:clamp(2.4rem,4.5vw,4rem);line-height:1.08}h1 em{font-style:italic;color:var(--amber)}
+h2{font-size:clamp(1.7rem,2.8vw,2.5rem)}
+.btn{display:inline-block;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;padding:14px 28px;transition:.2s;border:1px solid var(--rule)}
+.btn-solid{background:var(--bone);color:var(--walnut);font-weight:500;border-color:var(--bone)}.btn-solid:hover{background:transparent;color:var(--bone)}
+.btn-ghost:hover{border-color:var(--bone)}
+.grain{display:block;width:100%;height:46px;color:var(--bark);opacity:.5}
+footer{padding:6vh 6vw 5vh;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-end;font-size:.82rem;opacity:.78;border-top:1px solid var(--rule)}
+footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transform:uppercase;font-size:.7rem}
+
+/* product cards met hover-zoom */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.card{display:flex;flex-direction:column;gap:12px;text-align:left}
+.card .frame{overflow:hidden;aspect-ratio:4/5;background:var(--walnut-soft);position:relative;border:1px solid var(--line);cursor:pointer}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.card .frame:hover img{transform:scale(1.12)}
+.card .more{position:absolute;right:12px;bottom:12px;background:var(--bone);color:var(--walnut);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:7px 12px;opacity:0;transition:.25s;pointer-events:none}
+.card .frame:hover .more{opacity:1}
+.card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.3rem}
+.card .meta{display:flex;justify-content:space-between;font-size:.8rem;opacity:.7}
+.wood{text-transform:uppercase;letter-spacing:.22em;font-size:.66rem;color:var(--amber)}
+.cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.cat-tabs button{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border:1px solid var(--line);opacity:.7;transition:.2s}
+.cat-tabs button:hover{opacity:1;border-color:var(--rule)}.cat-tabs button.active{background:var(--bone);color:var(--walnut);border-color:var(--bone);opacity:1;font-weight:500}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(20,14,10,.78);backdrop-filter:blur(4px);z-index:50;display:none;align-items:center;justify-content:center;padding:4vw}
+.overlay.open{display:flex}
+.modal{background:#241b15;border:1px solid var(--rule);max-width:980px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1.1fr .9fr}
+.gallery{padding:22px;border-right:1px solid var(--line)}.gallery .main{overflow:hidden;aspect-ratio:4/5;background:var(--walnut-soft);border:1px solid var(--line)}.gallery .main img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:10px;margin-top:12px}.thumbs button{width:64px;height:64px;overflow:hidden;border:2px solid transparent;padding:0;flex:none}.thumbs button.sel{border-color:var(--bone)}.thumbs img{width:100%;height:100%;object-fit:cover}
+.detail{padding:34px 30px 30px;display:flex;flex-direction:column;gap:14px}
+.detail h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.9rem;line-height:1.15}
+.detail .price{font-size:1.3rem;color:var(--amber)}.detail p{opacity:.82;font-size:.95rem}
+.specs{border-top:1px solid var(--line);margin-top:6px;padding-top:14px;display:grid;grid-template-columns:auto 1fr;gap:7px 22px;font-size:.88rem}
+.specs dt{opacity:.55;text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;padding-top:3px}
+.close{position:sticky;top:0;margin-left:auto;font-size:1.6rem;line-height:1;padding:14px 18px;opacity:.7;z-index:2;float:right}.close:hover{opacity:1}
+.one-of{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)}
+.buy-slot{margin-top:10px;min-height:52px}.buy-note{font-size:.78rem;opacity:.55}
+
+/* about page */
+.about-hero{display:grid;grid-template-columns:1fr 1fr;min-height:60vh;border-bottom:1px solid var(--rule)}
+.about-hero .img-side img{width:100%;height:100%;object-fit:cover;min-height:400px}
+.about-hero .text-side{padding:9vh 6vw;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.about-hero p{max-width:52ch;opacity:.82}
+.insta-bar{padding:7vh 6vw;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.insta-bar a{display:flex;align-items:center;gap:12px;border:1px solid var(--rule);padding:14px 24px;transition:.2s}
+.insta-bar a:hover{border-color:var(--amber);color:var(--amber)}
+.insta-icon{font-size:1.6rem;line-height:1}
+
+/* contact page */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--rule)}
+.contact-block{padding:9vh 6vw;display:flex;flex-direction:column;gap:18px}
+.contact-block:first-child{border-right:1px solid var(--rule)}
+.contact-block p{max-width:52ch;opacity:.82}
+.contact-block a.mail{font-family:'Cormorant Garamond',serif;font-size:1.4rem;opacity:.9;border-bottom:1px solid var(--rule);padding-bottom:6px;display:inline-block}
+
+/* login/account strip */
+.account-strip{background:var(--walnut-soft);border:1px solid var(--line);padding:22px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:40px}
+.account-strip p{opacity:.82;flex:1;min-width:200px}
+
+@media(max-width:860px){
+  .menu-btn{display:block}
+  nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(43,33,27,.98);flex-direction:column;gap:0;padding:10px 5vw;border-bottom:1px solid var(--rule)}
+  nav ul.open{display:flex}nav ul li{padding:12px 0;border-bottom:1px solid var(--line)}nav ul li:last-child{border-bottom:none}
+  .grid{grid-template-columns:1fr 1fr}
+  .about-hero{grid-template-columns:1fr}.about-hero .img-side{order:-1;max-height:50vh}
+  .contact-grid{grid-template-columns:1fr}.contact-block:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+  .modal{grid-template-columns:1fr}.gallery{border-right:none}
+}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.account-btn{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ===== MOBILE FIXES ===== */
+@media(max-width:600px){
+  /* Nav */
+  nav{padding:12px 4vw;gap:8px}
+  .brand img{height:34px}
+  .wordmark{font-size:.95rem;letter-spacing:.1em}
+  .basket{padding:6px 10px;font-size:.68rem}
+
+  /* Hero: stack fully, text first */
+  section[style*="grid-template-columns:1.05fr"]{
+    display:flex!important;flex-direction:column!important;min-height:unset!important
+  }
+  section[style*="grid-template-columns:1.05fr"] > div:first-child{
+    padding:7vw 5vw!important;order:2;gap:16px!important
+  }
+  section[style*="grid-template-columns:1.05fr"] figure{
+    order:1;height:55vw;border-left:none!important;border-bottom:1px solid var(--rule)
+  }
+  h1{font-size:2rem!important}
+  .cta-row{flex-direction:column!important;gap:10px!important}
+  .cta-row .btn{text-align:center;padding:14px 20px}
+
+  /* 3-tile grid op homepage: 1 kolom */
+  section[style*="repeat(3,1fr)"]{
+    grid-template-columns:1fr!important;gap:1px!important;
+    border-bottom:1px solid var(--rule)
+  }
+  section[style*="repeat(3,1fr)"] > a{
+    border:none!important;border-bottom:1px solid var(--line)!important;
+    padding:24px 5vw!important
+  }
+
+  /* Interesse-formulier: 1 kolom */
+  section[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;gap:30px!important;padding:8vw 5vw!important
+  }
+
+  /* About hero */
+  .about-hero{grid-template-columns:1fr!important}
+  .about-hero .img-side{max-height:75vw;overflow:hidden}
+  .about-hero .img-side img{object-position:center 30%}
+  .about-hero .text-side{padding:7vw 5vw!important;gap:14px!important}
+
+  /* Contact grid */
+  .contact-grid{grid-template-columns:1fr!important}
+  .contact-block:first-child{border-right:none!important;border-bottom:1px solid var(--rule)!important}
+  .contact-block{padding:7vw 5vw!important}
+
+  /* Shop grid */
+  .grid{grid-template-columns:1fr 1fr!important;gap:16px!important}
+
+  /* Modal */
+  .modal{grid-template-columns:1fr!important;max-height:95vh}
+  .gallery{border-right:none!important;padding:14px!important}
+  .gallery .main{aspect-ratio:1/1!important}
+  .detail{padding:20px 16px!important;gap:10px!important}
+  .detail h3{font-size:1.4rem!important}
+
+  /* Footer */
+  footer{flex-direction:column;gap:16px;padding:7vw 5vw}
+  footer ul{gap:16px;flex-wrap:wrap}
+
+  /* Insta bar */
+  .insta-bar{padding:7vw 5vw!important;flex-direction:column;align-items:flex-start}
+
+  /* About hout/afwerking grid */
+  section[style*="grid-template-columns:1fr 1fr"][style*="border-bottom"]{
+    grid-template-columns:1fr!important
+  }
+}
+
+@media(max-width:400px){
+  .wordmark{display:none}
+  .grid{grid-template-columns:1fr!important}
+}
+
+.lang-toggle{display:flex;border:1px solid var(--rule);overflow:hidden;font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+[data-nl],[data-en]{transition:opacity .15s}
+
+
+
+.lang-toggle{display:flex;border:1px solid var(--rule);font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+.beta-badge{display:inline-block;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--amber);color:var(--amber);vertical-align:middle;margin-left:8px}
+
+/* Configurator layout */
+.cfg-wrap{padding:8vh 5vw;border-bottom:1px solid var(--rule)}
+.cfg-intro{margin-bottom:36px}
+.cfg-intro h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:12px}
+.cfg-intro p{opacity:.78;max-width:56ch;font-size:.97rem}
+.cfg{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+.col-l{display:flex;flex-direction:column;gap:10px}
+.grp{background:var(--walnut-soft);border:1px solid var(--line);padding:14px 16px}
+.gt{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.srow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.srow:last-child{margin-bottom:0}
+.rn{font-size:.8rem;min-width:86px;opacity:.85}
+.rv{font-size:.8rem;font-weight:500;min-width:44px;text-align:right}
+.srow input[type=range]{flex:1;accent-color:var(--amber)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sb{border:1px solid var(--line);background:var(--walnut);cursor:pointer;padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
+.sb:hover{border-color:var(--rule)}
+.sb.active{border-color:var(--amber);background:rgba(201,138,61,.08)}
+.sb span{font-size:.62rem;color:var(--bark);letter-spacing:.06em;text-align:center;line-height:1.3}
+.sb.active span{color:var(--amber)}
+.pc{background:var(--walnut-soft);border:1px solid var(--line);padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.pv{font-size:1.5rem;font-weight:500;font-family:'Cormorant Garamond',serif}
+.pl{font-size:.72rem;opacity:.6;text-transform:uppercase;letter-spacing:.16em;margin-bottom:4px}
+.ofbtn{padding:13px;border:1px solid var(--bone);background:none;cursor:pointer;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone);width:100%;transition:.2s}
+.ofbtn:hover{background:var(--bone);color:var(--walnut)}
+.col-r{display:flex;flex-direction:column;align-items:center;gap:12px;position:sticky;top:80px}
+.col-r canvas{width:100%;height:auto;max-width:380px}
+.dl{display:flex;gap:16px;font-size:.78rem;opacity:.7;flex-wrap:wrap;justify-content:center}
+.legend{display:flex;gap:14px;font-size:.72rem;opacity:.65;flex-wrap:wrap;justify-content:center}
+.leg{display:flex;align-items:center;gap:5px}
+.legc{width:14px;height:7px}
+.cfg-note{padding:6vh 5vw;font-size:.85rem;opacity:.65;line-height:1.7;border-bottom:1px solid var(--rule)}
+
+@media(max-width:760px){
+  .cfg{grid-template-columns:1fr}
+  .col-r{position:static;order:-1}
+  .col-r canvas{max-width:100%}
+  .sg{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:400px){
+  .sg{grid-template-columns:repeat(2,1fr)}
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">
+    <img src="images/logo-nav.png" alt="AÄD monogram">
+    <span class="wordmark">AÄRON ART &amp; DESIGN</span>
+  </a>
+  <ul id="navlist">
+    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
+    <li><a href="shop.html" ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="about.html" ><span data-nl>Over</span><span data-en>About</span></a></li>
+    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Taal">
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
+  </div>
+  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
+</nav>
+
+<div class="cfg-wrap">
+  <div class="cfg-intro">
+    <h1>Schaalconfigurator <span class="beta-badge">Beta</span></h1>
+    <p>Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan. De definitieve prijs wordt vastgesteld na overleg — elk stuk is uniek en hangt af van het beschikbare hout.</p>
+  </div>
+
+  <div class="cfg">
+    <div class="col-l">
+
+      <div class="grp">
+        <div class="gt">Basisvorm</div>
+        <div class="sg" id="sg"></div>
+      </div>
+
+      <div class="grp">
+        <div class="gt">Afmetingen</div>
+        <div class="srow"><span class="rn">Diameter</span><input type="range" id="s-diam" min="80" max="380" step="10" value="220"><span class="rv" id="o-diam">220 mm</span></div>
+        <div class="srow"><span class="rn">Hoogte</span><input type="range" id="s-h" min="30" max="180" step="5" value="75"><span class="rv" id="o-h">75 mm</span></div>
+        <div class="srow"><span class="rn">Wanddikte</span><input type="range" id="s-wall" min="4" max="28" step="1" value="10"><span class="rv" id="o-wall">10 mm</span></div>
+        <div class="srow"><span class="rn">Bodemdikte</span><input type="range" id="s-bot" min="5" max="30" step="1" value="14"><span class="rv" id="o-bot">14 mm</span></div>
+        <div class="srow"><span class="rn">Voetbreedte</span><input type="range" id="s-foot" min="10" max="100" step="5" value="45"><span class="rv" id="o-foot">45 mm</span></div>
+        <div class="srow"><span class="rn">Curve</span><input type="range" id="s-curve" min="0" max="100" step="5" value="50"><span class="rv" id="o-curve">50%</span></div>
+      </div>
+
+      <div class="pc">
+        <div>
+          <div class="pl">Indicatieve prijs</div>
+          <div class="pv" id="price">€ 60</div>
+        </div>
+        <div style="font-size:.68rem;opacity:.55;max-width:80px;text-align:right;line-height:1.5">Na overleg definitief</div>
+      </div>
+      <button class="ofbtn" onclick="doSend()">Vraag offerte aan ↗</button>
+
+    </div>
+
+    <div class="col-r">
+      <canvas id="main" width="380" height="340"></canvas>
+      <div class="dl">
+        <span>Ø <b id="dd">220</b> mm</span>
+        <span>H <b id="dh">75</b> mm</span>
+        <span>Wand <b id="dw">10</b> mm</span>
+      </div>
+      <div class="legend">
+        <div class="leg"><div class="legc" style="background:#c8a050;border:1px solid #7a5010"></div><span>Hout (doorsnede)</span></div>
+        <div class="leg"><div class="legc" style="background:#d8f0d8;border:1px solid #5a9a5a"></div><span>Holte</span></div>
+        <div class="leg"><div class="legc" style="background:none;border:1px dashed #8a7460"></div><span>Middenas</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cfg-note">
+  De configurator geeft een visuele indicatie van de doorsnede en een richtprijs. Wanddiktes, voetafmetingen en de uiteindelijke vorm worden in overleg bepaald op basis van het beschikbare hout. Elk stuk is uniek — de nerf en kleur van het hout bepalen mede de uiteindelijke schoonheid van het stuk.
+</div>
+
+<footer>
+  <div>
+    <div class="wordmark">AÄRON ART &amp; DESIGN</div>
+    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
+  </div>
+  <ul>
+    <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
+    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+  </ul>
+  <p>© 2026 Aäron Art &amp; Design</p>
+</footer>
+
+<script>
+var S={diam:220,h:75,wall:10,bot:14,foot:45,curve:50,shape:'klassiek'};
+
+var SHAPES={
+  klassiek:{label:'Klassiek',defCurve:55,build:function(R,H,c,fR){
+    var out=c/100*R*0.18;
+    return bez([R,0],[R+out,H*0.25],[fR+(R-fR)*0.25,H*0.72],[fR,H]);
+  }},
+  ondiep:{label:'Ondiep',defCurve:35,build:function(R,H,c,fR){
+    var out=c/100*R*0.06;
+    return bez([R,0],[R+out,H*0.08],[fR+(R-fR)*0.5,H*0.55],[fR,H]);
+  }},
+  diep:{label:'Diep',defCurve:70,build:function(R,H,c,fR){
+    var out=c/100*R*0.08;
+    return bez([R,0],[R+out,H*0.5],[fR+(R-fR)*0.15,H*0.85],[fR,H]);
+  }},
+  recht:{label:'Recht',defCurve:15,build:function(R,H,c,fR){
+    var taper=(1-c/100)*(R-fR);
+    return bez([R,0],[R-taper*0.1,H*0.33],[R-taper*0.5,H*0.66],[fR,H]);
+  }},
+  bol:{label:'Bol',defCurve:80,build:function(R,H,c,fR){
+    var out=c/100*R*0.32;
+    return bez([R,0],[R+out,H*0.3],[fR+(R-fR)*0.1,H*0.78],[fR,H]);
+  }},
+  uitlopend:{label:'Uitlopend',defCurve:45,build:function(R,H,c,fR){
+    var narrow=R*0.88,mid=R*(1+c/100*0.1);
+    var b1=bez([narrow,0],[narrow,H*0.2],[mid,H*0.3],[mid,H*0.45],30);
+    var b2=bez([mid,H*0.45],[mid,H*0.55],[fR+(mid-fR)*0.3,H*0.82],[fR,H],30);
+    return b1.concat(b2.slice(1));
+  }}
+};
+
+function bez(p0,p1,p2,p3,N){
+  N=N||60;var pts=[];
+  for(var i=0;i<=N;i++){
+    var t=i/N,mt=1-t;
+    pts.push({
+      r:mt*mt*mt*p0[0]+3*mt*mt*t*p1[0]+3*mt*t*t*p2[0]+t*t*t*p3[0],
+      y:mt*mt*mt*p0[1]+3*mt*mt*t*p1[1]+3*mt*t*t*p2[1]+t*t*t*p3[1]
+    });
+  }
+  return pts;
+}
+
+var sg=document.getElementById('sg');
+Object.keys(SHAPES).forEach(function(key,idx){
+  var btn=document.createElement('button');
+  btn.className='sb'+(key==='klassiek'?' active':'');
+  btn.dataset.shape=key;
+  var cv=document.createElement('canvas');cv.width=44;cv.height=30;
+  var lbl=document.createElement('span');lbl.textContent=SHAPES[key].label;
+  btn.appendChild(cv);btn.appendChild(lbl);sg.appendChild(btn);
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#sg .sb').forEach(function(x){x.classList.remove('active');});
+    this.classList.add('active');S.shape=this.dataset.shape;
+    S.curve=SHAPES[S.shape].defCurve;
+    document.getElementById('s-curve').value=S.curve;
+    document.getElementById('o-curve').textContent=S.curve+'%';
+    draw();calcP();
+  });
+  setTimeout((function(k,c){return function(){
+    var ctx=c.getContext('2d'),W=c.width,H=c.height,pad=4;
+    ctx.clearRect(0,0,W,H);
+    var R=W/2-pad,BH=H-pad*2,fR=R*0.22;
+    var savedH=S.h,savedFoot=S.foot,savedCurve=S.curve;
+    S.h=BH;S.foot=fR*2;S.curve=SHAPES[k].defCurve;
+    var pts=SHAPES[k].build(R,BH,S.curve,fR);
+    S.h=savedH;S.foot=savedFoot;S.curve=savedCurve;
+    var cx=W/2,ty=pad;
+    ctx.beginPath();
+    ctx.moveTo(cx-pts[0].r,ty+pts[0].y);
+    for(var i=1;i<pts.length;i++)ctx.lineTo(cx-pts[i].r,ty+pts[i].y);
+    ctx.lineTo(cx-fR,ty+BH+3);ctx.lineTo(cx+fR,ty+BH+3);
+    for(var i=pts.length-1;i>=0;i--)ctx.lineTo(cx+pts[i].r,ty+pts[i].y);
+    ctx.closePath();
+    ctx.strokeStyle='#c8a050';ctx.lineWidth=1;ctx.stroke();
+  };})(key,cv),10+idx*8);
+});
+
+function sl(id,key,suf){
+  document.getElementById(id).addEventListener('input',function(){
+    S[key]=parseFloat(this.value);
+    document.getElementById(id.replace('s-','o-')).textContent=this.value+(suf||'');
+    draw();calcP();
+    document.getElementById('dd').textContent=S.diam;
+    document.getElementById('dh').textContent=S.h;
+    document.getElementById('dw').textContent=S.wall;
+  });
+}
+sl('s-diam','diam',' mm');sl('s-h','h',' mm');sl('s-wall','wall',' mm');
+sl('s-bot','bot',' mm');sl('s-foot','foot',' mm');sl('s-curve','curve','%');
+
+function draw(){
+  var cv=document.getElementById('main');
+  var W=cv.width,H=cv.height;
+  var ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  var R=S.diam/2,fR=S.foot/2;
+  var outer=SHAPES[S.shape].build(R,S.h,S.curve,fR);
+  var N=outer.length-1;
+  var maxR=0;
+  for(var i=0;i<=N;i++)maxR=Math.max(maxR,outer[i].r);
+  var fh=Math.max(4,S.h*0.08);
+  var scale=Math.min((W-90)/(maxR*2),(H-65)/(S.h+fh));
+  scale=Math.min(scale,2.0);
+  var cx=W/2,topY=30;
+  var FR=fR*scale;
+  var inner=[];
+  for(var i=0;i<=N;i++){
+    var t=i/N;
+    var wt=t<0.82?S.wall:S.wall+(S.bot-S.wall)*((t-0.82)/0.18);
+    inner.push({r:Math.max(0,outer[i].r-wt),y:outer[i].y});
+  }
+  function sy(y){return topY+y*scale;}
+  var botY=sy(S.h);
+  var c1='#e0c898',c2='#c8a050',c3='#7a5010';
+  function wG(lx,rx){
+    var g=ctx.createLinearGradient(lx,topY,rx,botY);
+    g.addColorStop(0,c1);g.addColorStop(0.25,c2);g.addColorStop(0.48,c1);
+    g.addColorStop(0.68,'#a07830');g.addColorStop(0.88,c1);g.addColorStop(1,c3);
+    return g;
+  }
+  function half(sgn){
+    ctx.beginPath();
+    ctx.moveTo(cx+sgn*outer[0].r*scale,sy(outer[0].y));
+    for(var i=1;i<=N;i++)ctx.lineTo(cx+sgn*outer[i].r*scale,sy(outer[i].y));
+    ctx.lineTo(cx+sgn*outer[N].r*scale,botY+fh);
+    ctx.lineTo(cx+sgn*FR,botY+fh);ctx.lineTo(cx+sgn*FR,botY);
+    for(var i=N;i>=0;i--)ctx.lineTo(cx+sgn*inner[i].r*scale,sy(inner[i].y));
+    ctx.closePath();
+    ctx.fillStyle=wG(sgn>0?cx:cx-maxR*scale,sgn>0?cx+maxR*scale:cx);
+    ctx.fill();ctx.strokeStyle=c3;ctx.lineWidth=0.7;ctx.stroke();
+  }
+  half(1);half(-1);
+  ctx.save();ctx.globalAlpha=0.13;
+  var ng=Math.max(3,Math.round(S.h/9));
+  for(var g=1;g<ng;g++){
+    var idx=Math.round(g/ng*N);
+    var ro=outer[idx].r*scale,ri=inner[idx].r*scale,gy=sy(outer[idx].y);
+    for(var sgn=-1;sgn<=1;sgn+=2){
+      ctx.beginPath();ctx.moveTo(cx+sgn*ri,gy);ctx.lineTo(cx+sgn*ro,gy);
+      ctx.strokeStyle=c3;ctx.lineWidth=0.7;ctx.stroke();
+    }
+  }
+  ctx.restore();
+  ctx.beginPath();
+  ctx.moveTo(cx+inner[0].r*scale,sy(inner[0].y));
+  for(var i=1;i<=N;i++)ctx.lineTo(cx+inner[i].r*scale,sy(inner[i].y));
+  ctx.lineTo(cx,botY+1);
+  for(var i=N;i>=0;i--)ctx.lineTo(cx-inner[i].r*scale,sy(inner[i].y));
+  ctx.closePath();
+  var cg=ctx.createLinearGradient(cx,topY,cx,botY);
+  cg.addColorStop(0,'rgba(224,248,224,0.96)');cg.addColorStop(1,'rgba(174,218,174,0.72)');
+  ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(65,125,65,0.28)';ctx.lineWidth=0.7;ctx.stroke();
+  for(var sgn=-1;sgn<=1;sgn+=2){
+    ctx.beginPath();
+    ctx.moveTo(cx+sgn*outer[0].r*scale,sy(outer[0].y));
+    for(var i=1;i<=N;i++)ctx.lineTo(cx+sgn*outer[i].r*scale,sy(outer[i].y));
+    ctx.strokeStyle=c3;ctx.lineWidth=2.2;ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx+sgn*inner[0].r*scale,sy(inner[0].y));
+    for(var i=1;i<=N;i++)ctx.lineTo(cx+sgn*inner[i].r*scale,sy(inner[i].y));
+    ctx.strokeStyle='rgba(55,105,55,0.5)';ctx.lineWidth=1;ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.moveTo(cx-outer[0].r*scale,sy(0));ctx.lineTo(cx+outer[0].r*scale,sy(0));
+  ctx.strokeStyle=c3;ctx.lineWidth=2.2;ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx-FR,botY);ctx.lineTo(cx-FR,botY+fh);
+  ctx.lineTo(cx+FR,botY+fh);ctx.lineTo(cx+FR,botY);
+  ctx.fillStyle='#b08030';ctx.fill();ctx.strokeStyle=c3;ctx.lineWidth=1.5;ctx.stroke();
+  ctx.save();
+  ctx.fillStyle='rgba(230,214,192,0.88)';ctx.strokeStyle='rgba(150,120,60,0.4)';ctx.lineWidth=0.8;
+  ctx.font='10px Outfit,sans-serif';
+  var ay=topY-15,lx=cx-outer[0].r*scale,rx=cx+outer[0].r*scale;
+  ctx.beginPath();ctx.moveTo(lx,ay);ctx.lineTo(rx,ay);ctx.stroke();
+  [[lx,1],[rx,-1]].forEach(function(v){ctx.beginPath();ctx.moveTo(v[0],ay-3);ctx.lineTo(v[0]+v[1]*5,ay);ctx.lineTo(v[0],ay+3);ctx.fill();});
+  ctx.textAlign='center';ctx.fillText('Ø '+S.diam+' mm',cx,ay-4);
+  var hx=cx+maxR*scale+17;
+  ctx.beginPath();ctx.moveTo(hx,topY);ctx.lineTo(hx,botY);ctx.stroke();
+  [[topY,-5],[botY,5]].forEach(function(v){ctx.beginPath();ctx.moveTo(hx-3,v[0]);ctx.lineTo(hx,v[0]+v[1]);ctx.lineTo(hx+3,v[0]);ctx.fill();});
+  ctx.save();ctx.translate(hx+12,(topY+botY)/2);ctx.rotate(Math.PI/2);ctx.fillText(S.h+' mm',0,0);ctx.restore();
+  var midI=Math.round(N*0.22);
+  var roW=cx+outer[midI].r*scale,riW=cx+inner[midI].r*scale,wy=sy(outer[midI].y);
+  ctx.strokeStyle='rgba(201,138,61,0.7)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(riW,wy);ctx.lineTo(roW,wy);ctx.stroke();
+  [riW,roW].forEach(function(x){ctx.beginPath();ctx.arc(x,wy,2.2,0,Math.PI*2);ctx.fillStyle='rgba(180,110,30,0.9)';ctx.fill();});
+  ctx.font='9px Outfit,sans-serif';ctx.textAlign='left';ctx.fillStyle='rgba(201,138,61,0.9)';
+  ctx.fillText(S.wall+' mm',roW+3,wy-2);
+  ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(138,116,96,0.35)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(cx,topY-18);ctx.lineTo(cx,botY+fh+8);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.font='9px Outfit,sans-serif';ctx.textAlign='center';ctx.fillStyle='rgba(230,214,192,0.6)';
+  ctx.fillText('voet Ø '+S.foot+' mm',cx,botY+fh+14);
+  ctx.restore();
+}
+
+function calcP(){
+  var vol=(S.diam/100)*(S.h/100);
+  document.getElementById('price').textContent='€ '+Math.round((18+vol*85)/5)*5;
+}
+
+function doSend(){
+  var msg='Offerte aanvraag via configurator:\n• Vorm: '+SHAPES[S.shape].label+'\n• Diameter: '+S.diam+' mm\n• Hoogte: '+S.h+' mm\n• Wanddikte: '+S.wall+' mm\n• Bodemdikte: '+S.bot+' mm\n• Voetbreedte: '+S.foot+' mm\n\nIndicatieve prijs: '+document.getElementById('price').textContent+'\n\nKan je meer vertellen over beschikbare houtsoorten?';
+  window.location.href='contact.html?msg='+encodeURIComponent(msg);
+}
+
+draw();calcP();
+</script>
+</body>
+</html>
