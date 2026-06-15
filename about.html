@@ -200,23 +200,24 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </head><body>
 <nav>
   <a class="brand" href="index.html">
-    <img src="images/logo-nav.png" alt="AÄD monogram">
+    <img src="images/logo-nav.png" alt="AÄD">
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
-  <ul id="navlist">
-    <li><a href="index.html" ><span data-nl>Home</span><span data-en>Home</span></a></li>
-    <li><a href="shop.html" ><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
-    <li><a href="about.html" class='active'><span data-nl>Over</span><span data-en>About</span></a></li>
-    <li><a href="contact.html" ><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Winkel</a></li>
+    <li><a href="about.html"' class="active"'>Over</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="configurator.html" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
-    <div class="lang-toggle" role="group" aria-label="Taal">
-      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+    <div class="lang-toggle">
+      <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
   </div>
-  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
+  <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
 <section class="about-hero">
   <div class="img-side"><img src="images/lucas-maker.jpg" alt="Lucas Aäron Oomen, houtdraaier"></div>
@@ -252,14 +253,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px;font-size:.82rem;opacity:.7" id="footer-line">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
-    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+    <li><a href="shop.html" id="footer-shop">Winkel</a></li>
+    <li><a href="contact.html" id="footer-contact">Contact</a></li>
   </ul>
-  <p>© 2026 Aäron Art &amp; Design</p>
+  <p style="font-size:.78rem;opacity:.55">© 2026 Aäron Art &amp; Design</p>
 </footer>
 
 <script>

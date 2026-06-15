@@ -212,14 +212,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </a>
   <ul>
     <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html" class="active">Winkel</a></li>
+    <li><a href="shop.html"' class="active"'>Winkel</a></li>
     <li><a href="about.html">Over</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="configurator.html">Configurator <span style="font-size:.6rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;vertical-align:middle">BETA</span></a></li>
+    <li><a href="configurator.html" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-toggle">
-      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+      <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
     <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
@@ -333,14 +333,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
-    <p style="margin-top:8px"><span data-nl>Handgedraaid in Nederland</span><span data-en>Hand-turned in the Netherlands</span> · aaronartdesigns@gmail.com</p>
+    <p style="margin-top:8px;font-size:.82rem;opacity:.7" id="footer-line">Handgedraaid in Nederland · aaronartdesigns@gmail.com</p>
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html"><span data-nl>Winkel</span><span data-en>Shop</span></a></li>
-    <li><a href="contact.html"><span data-nl>Contact</span><span data-en>Contact</span></a></li>
+    <li><a href="shop.html" id="footer-shop">Winkel</a></li>
+    <li><a href="contact.html" id="footer-contact">Contact</a></li>
   </ul>
-  <p>© 2026 Aäron Art &amp; Design</p>
+  <p style="font-size:.78rem;opacity:.55">© 2026 Aäron Art &amp; Design</p>
 </footer>
 <script>var P = [{"img": "images/oak-walnut-pot.jpg", "cat": "potten", "price": "€ 40", "dim": "", "wnl": "Eiken · Walnoot · Padoek", "tnl": "Dekselpot in eiken en walnoot", "dnl": "Royale pot gedraaid uit eikenhout met een passend deksel van donker walnoot, bekroond met een knop van padoek.", "fnl": "Voedselveilige olie", "wen": "Oak · Walnut · Padauk", "ten": "Lidded pot in oak and walnut", "den": "Generous pot turned from oak with a fitted dark walnut lid, crowned with a padauk knob.", "fen": "Food-safe oil"}, {"img": "images/lidded-yew.jpg", "cat": "potten", "price": "€ 40", "dim": "", "wnl": "Essen · Taxus", "tnl": "Essen potje met taxus deksel", "dnl": "Klein potje van essenhout met een deksel van taxus, met het kenmerkende contrast tussen licht spinthout en warm kernhout.", "fnl": "Voedselveilige olie", "wen": "Ash · Yew", "ten": "Ash pot with yew lid", "den": "Small ash pot with a yew lid showing its signature contrast of pale sapwood and warm heartwood.", "fen": "Food-safe oil"}, {"img": "images/olive-bowl.jpg", "cat": "schalen", "price": "€ 50", "dim": "Ø 18 cm", "wnl": "Olijf", "tnl": "Olijfhouten schaal met bast", "dnl": "Gedraaid uit olijfhout met behoud van de natuurlijke bastrand. De wervelende nerf van olijf maakt elk stuk volstrekt uniek.", "fnl": "Voedselveilige olie", "wen": "Olive", "ten": "Olive wood bowl with bark", "den": "Turned from olive wood keeping its natural bark edge.", "fen": "Food-safe oil"}, {"img": "images/elm-platter.jpg", "cat": "schalen", "price": "€ 40", "dim": "Ø 24 cm", "wnl": "Kersen", "tnl": "Kersenhouten schaal", "dnl": "Brede, ondiepe schaal van kersenhout met prachtig gevlamde nerftekening.", "fnl": "Voedselveilige olie", "wen": "Cherry", "ten": "Cherry wood platter", "den": "Wide shallow cherry platter with beautifully figured grain.", "fen": "Food-safe oil"}, {"img": "images/walnut-box.jpg", "cat": "potten", "price": "€ 34", "dim": "Ø 9 cm", "wnl": "Essen · Walnoot", "tnl": "Essen potje met notenhouten deksel", "dnl": "Potje in twee houtsoorten: licht essenhout met een donker deksel van walnoot.", "fnl": "Wax", "wen": "Ash · Walnut", "ten": "Ash pot with walnut lid", "den": "Small pot in two woods: pale ash with a dark walnut lid.", "fen": "Wax"}, {"img": "images/birch-winged.jpg", "cat": "schalen", "price": "€ 40", "dim": "Ø 16 cm", "wnl": "Berk", "tnl": "Berkenschaal met schors", "dnl": "Sculpturale schaal waarvan de vorm de natuurlijke kromming van de tak volgt, met intacte bast op beide vleugels.", "fnl": "Voedselveilige olie", "wen": "Birch", "ten": "Birch bowl with bark", "den": "Sculptural bowl following the natural curve of the branch, with bark intact.", "fen": "Food-safe oil"}, {"img": "images/ash-trio.jpg", "cat": "sets", "price": "€ 120", "dim": "Ø 14–20 cm", "wnl": "Es", "tnl": "Drie essen schalen", "dnl": "Drie bij elkaar passende schalen in licht essenhout, gedraaid uit dezelfde stam.", "fnl": "Voedselveilige olie", "wen": "Ash", "ten": "Three ash bowls", "den": "Three matching bowls in pale ash, turned from the same log.", "fen": "Food-safe oil"}];
 var lang = "nl";
