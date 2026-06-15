@@ -190,14 +190,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 .cfg-intro{margin-bottom:36px}
 .cfg-intro h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:12px}
 .cfg-intro p{opacity:.78;max-width:56ch;font-size:.97rem}
-.cfg{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+.cfg{display:grid;grid-template-columns:265px 1fr;gap:24px;align-items:start}
 .col-l{display:flex;flex-direction:column;gap:10px}
-.grp{background:var(--walnut-soft);border:1px solid var(--line);padding:14px 16px}
+.grp{background:var(--walnut-soft);border:1px solid var(--line);padding:14px 16px;overflow:hidden}
 .gt{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
-.srow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.srow{display:flex;align-items:center;gap:6px;margin-bottom:7px}
 .srow:last-child{margin-bottom:0}
-.rn{font-size:.8rem;min-width:86px;opacity:.85}
-.rv{font-size:.8rem;font-weight:500;min-width:44px;text-align:right}
+.rn{font-size:.78rem;min-width:80px;opacity:.85;flex-shrink:0}
+.rv{font-size:.78rem;font-weight:500;width:48px;text-align:right;color:var(--amber);flex-shrink:0;word-break:break-word}
 .srow input[type=range]{flex:1;accent-color:var(--amber)}
 .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .sb{border:1px solid var(--line);background:var(--walnut);cursor:pointer;padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
@@ -290,15 +290,17 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <div class="col-r">
       <canvas id="main" width="380" height="340"></canvas>
-      <div class="dl">
-        <span>Ø <b id="dd">220</b> mm</span>
-        <span>H <b id="dh">75</b> mm</span>
-        <span>Wand <b id="dw">10</b> mm</span>
-      </div>
-      <div class="legend">
-        <div class="leg"><div class="legc" style="background:#c8a050;border:1px solid #7a5010"></div><span>Hout (doorsnede)</span></div>
-        <div class="leg"><div class="legc" style="background:#d8f0d8;border:1px solid #5a9a5a"></div><span>Holte</span></div>
-        <div class="leg"><div class="legc" style="background:none;border:1px dashed #8a7460"></div><span>Middenas</span></div>
+      <div style="background:var(--walnut-soft);border:1px solid var(--line);padding:12px 18px;width:100%;max-width:380px">
+        <div class="dl" style="margin-bottom:8px">
+          <span>Ø <b id="dd">220</b> mm</span>
+          <span>H <b id="dh">75</b> mm</span>
+          <span>Wand <b id="dw">10</b> mm</span>
+        </div>
+        <div class="legend">
+          <div class="leg"><div class="legc" style="background:#c8a050;border:1px solid #7a5010"></div><span>Hout (doorsnede)</span></div>
+          <div class="leg"><div class="legc" style="background:#d8f0d8;border:1px solid #5a9a5a"></div><span>Holte</span></div>
+          <div class="leg"><div class="legc" style="background:none;border:1px dashed #8a7460"></div><span>Middenas</span></div>
+        </div>
       </div>
     </div>
   </div>
