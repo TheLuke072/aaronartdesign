@@ -336,37 +336,29 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
       b.classList.toggle('active', b.id === 'btn-'+l);
     });
+    // Contact form vertalingen
+    var isNL = l === 'nl';
+    var el;
+    el = document.getElementById('cf-subject-placeholder');
+    if(el) el.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
+    el = document.getElementById('cf-name-ph');
+    if(el) el.placeholder = isNL ? 'Je naam' : 'Your name';
+    el = document.getElementById('cf-email-ph');
+    if(el) el.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
+    el = document.getElementById('cf-msg-ph');
+    if(el) el.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
+    el = document.getElementById('cf-submit-txt');
+    if(el) el.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
+    var optNL = ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'];
+    var optEN = ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'];
+    for(var i=1;i<=5;i++){
+      el = document.getElementById('opt-'+i);
+      if(el) el.textContent = isNL ? optNL[i-1] : optEN[i-1];
+    }
   }
   window.setLang = applyLang;
 
-// Update contact form teksten per taal
-var _origApplyLang = applyLang;
-applyLang = function(l) {
-  _origApplyLang(l);
-  var isNL = l === 'nl';
-  // Dropdown placeholder
-  var ph = document.getElementById('cf-subject-placeholder');
-  if (ph) ph.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
-  // Input placeholders
-  var namePh = document.getElementById('cf-name-ph');
-  if (namePh) namePh.placeholder = isNL ? 'Je naam' : 'Your name';
-  var emailPh = document.getElementById('cf-email-ph');
-  if (emailPh) emailPh.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
-  var msgPh = document.getElementById('cf-msg-ph');
-  if (msgPh) msgPh.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
-  // Submit knop
-  var submitTxt = document.getElementById('cf-submit-txt');
-  if (submitTxt) submitTxt.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
-  // Dropdown opties
-  var optTexts = {
-    nl: ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'],
-    en: ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other']
-  };
-  ['1','2','3','4','5'].forEach(function(id,i){
-    var el = document.getElementById('opt-'+id);
-    if (el) el.textContent = isNL ? optTexts.nl[i] : optTexts.en[i];
-  });
-};
+
   document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
 })();
 </script>
