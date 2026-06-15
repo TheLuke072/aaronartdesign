@@ -235,7 +235,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <button id="cat-potten" onclick="filterCat('potten',this)">Potten &amp; dozen</button>
     <button id="cat-sets" onclick="filterCat('sets',this)">Sets</button>
   </div>
-  <div class="grid"><div class="card" id="card-0" data-cat="potten">
+  <div class="grid" id="grid"><div class="card" id="card-0" data-cat="potten">
       <div class="frame" onclick="openModal(0)">
         <img src="images/oak-walnut-pot.jpg" alt="Dekselpot in eiken en walnoot" loading="lazy">
         <span class="more">Bekijk details</span>
@@ -297,7 +297,44 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <span class="wood" id="wood-6">Es</span>
       <h3 id="title-6">Drie essen schalen</h3>
       <div class="meta"><span>Ø 14–20 cm</span><span>€ 120</span></div>
-    </div></div>
+    </div>
+<div class="card" id="card-7" data-cat="potten">
+      <div class="frame" onclick="openModal(7)">
+        <img src="images/products/kastanje-eiken-deksel.jpg" alt="Kastanje dekselpot met eiken deksel" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-7">Kastanje · Eiken</span>
+      <h3 id="title-7">Kastanje dekselpot met eiken deksel</h3>
+      <div class="meta"><span>Ø 18 cm</span><span>€ 65</span></div>
+    </div>
+<div class="card" id="card-8" data-cat="potten">
+      <div class="frame" onclick="openModal(8)">
+        <img src="images/products/eiken-noten-deksel-1.jpg" alt="Eiken schaal met noten deksel" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-8">Eiken · Noten</span>
+      <h3 id="title-8">Eiken schaal met noten deksel</h3>
+      <div class="meta"><span>Ø 22 cm</span><span>€ 75</span></div>
+    </div>
+<div class="card" id="card-9" data-cat="potten">
+      <div class="frame" onclick="openModal(9)">
+        <img src="images/products/essen-waxinehouder.jpg" alt="Bolronde theelichthouder in essen" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-9">Essen</span>
+      <h3 id="title-9">Bolronde theelichthouder in essen</h3>
+      <div class="meta"><span>Ø 10 cm</span><span>€ 45</span></div>
+    </div>
+<div class="card" id="card-10" data-cat="potten">
+      <div class="frame" onclick="openModal(10)">
+        <img src="images/products/essen-meranti-deksel.jpg" alt="Kelkvormige essen pot met meranti deksel" loading="lazy">
+        <span class="more">Bekijk details</span>
+      </div>
+      <span class="wood" id="wood-10">Essen · Meranti</span>
+      <h3 id="title-10">Kelkvormige essen pot met meranti deksel</h3>
+      <div class="meta"><span>Ø 14 cm</span><span>€ 70</span></div>
+    </div>
+</div>
 </section>
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" role="dialog">
