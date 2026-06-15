@@ -236,7 +236,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <!-- naam -->
     <div style="display:flex;flex-direction:column;gap:6px">
       <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name"><span data-nl>Naam</span><span data-en>Name</span> *</label>
-      <input id="cf-name" name="naam" data-fs-field type="text" placeholder="Je naam" required
+      <input id="cf-name" name="naam" data-fs-field type="text" placeholder="Je naam" id="cf-name-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
     </div>
@@ -244,7 +244,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <!-- email -->
     <div style="display:flex;flex-direction:column;gap:6px">
       <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email"><span data-nl>E-mailadres</span><span data-en>Email address</span> *</label>
-      <input id="cf-email" name="email" data-fs-field type="email" placeholder="jouw@email.nl" required
+      <input id="cf-email" name="email" data-fs-field type="email" placeholder="jouw@email.nl" id="cf-email-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
     </div>
@@ -264,18 +264,18 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
         <option value="" disabled selected id="cf-subject-placeholder">Kies een onderwerp</option>
-        <option value="Opdracht — eigen hout">Opdracht met eigen hout</option>
-        <option value="Opdracht — specifiek stuk">Specifiek stuk bestellen</option>
-        <option value="Vraag over een product">Vraag over een product</option>
-        <option value="Vraag over onderhoud">Vraag over onderhoud</option>
-        <option value="Overig">Overig</option>
+        <option value="Opdracht — eigen hout" id="opt-1">Opdracht met eigen hout</option>
+        <option value="Opdracht — specifiek stuk" id="opt-2">Specifiek stuk bestellen</option>
+        <option value="Vraag over een product" id="opt-3">Vraag over een product</option>
+        <option value="Vraag over onderhoud" id="opt-4">Vraag over onderhoud</option>
+        <option value="Overig" id="opt-5">Overig</option>
       </select>
     </div>
 
     <!-- omschrijving -->
     <div style="display:flex;flex-direction:column;gap:6px">
       <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message"><span data-nl>Omschrijving</span><span data-en>Description</span> *</label>
-      <textarea id="cf-message" name="omschrijving" data-fs-field rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." required
+      <textarea id="cf-message" name="omschrijving" data-fs-field rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." id="cf-msg-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;resize:vertical;line-height:1.6"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'"></textarea>
     </div>
@@ -339,15 +339,33 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   }
   window.setLang = applyLang;
 
-// Update contact form dropdown placeholder per taal
+// Update contact form teksten per taal
 var _origApplyLang = applyLang;
 applyLang = function(l) {
   _origApplyLang(l);
+  var isNL = l === 'nl';
+  // Dropdown placeholder
   var ph = document.getElementById('cf-subject-placeholder');
-  if (ph) ph.textContent = l === 'nl' ? 'Kies een onderwerp' : 'Choose a subject';
-  // Update label teksten in het formulier
-  var lbl = document.getElementById('lbl-naam');
-  if (lbl) lbl.textContent = l === 'nl' ? 'Naam' : 'Name';
+  if (ph) ph.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
+  // Input placeholders
+  var namePh = document.getElementById('cf-name-ph');
+  if (namePh) namePh.placeholder = isNL ? 'Je naam' : 'Your name';
+  var emailPh = document.getElementById('cf-email-ph');
+  if (emailPh) emailPh.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
+  var msgPh = document.getElementById('cf-msg-ph');
+  if (msgPh) msgPh.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
+  // Submit knop
+  var submitTxt = document.getElementById('cf-submit-txt');
+  if (submitTxt) submitTxt.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
+  // Dropdown opties
+  var optTexts = {
+    nl: ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'],
+    en: ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other']
+  };
+  ['1','2','3','4','5'].forEach(function(id,i){
+    var el = document.getElementById('opt-'+id);
+    if (el) el.textContent = isNL ? optTexts.nl[i] : optTexts.en[i];
+  });
 };
   document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
 })();
