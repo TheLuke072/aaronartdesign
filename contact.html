@@ -263,7 +263,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <select id="cf-subject" name="onderwerp" data-fs-field required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
-        <option value="" disabled selected><span data-nl>Kies een onderwerp</span><span data-en>Choose a subject</span></option>
+        <option value="" disabled selected id="cf-subject-placeholder">Kies een onderwerp</option>
         <option value="Opdracht — eigen hout">Opdracht met eigen hout</option>
         <option value="Opdracht — specifiek stuk">Specifiek stuk bestellen</option>
         <option value="Vraag over een product">Vraag over een product</option>
@@ -338,6 +338,17 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     });
   }
   window.setLang = applyLang;
+
+// Update contact form dropdown placeholder per taal
+var _origApplyLang = applyLang;
+applyLang = function(l) {
+  _origApplyLang(l);
+  var ph = document.getElementById('cf-subject-placeholder');
+  if (ph) ph.textContent = l === 'nl' ? 'Kies een onderwerp' : 'Choose a subject';
+  // Update label teksten in het formulier
+  var lbl = document.getElementById('lbl-naam');
+  if (lbl) lbl.textContent = l === 'nl' ? 'Naam' : 'Name';
+};
   document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
 })();
 </script>
