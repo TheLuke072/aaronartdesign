@@ -235,7 +235,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- naam -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name"><span data-nl>Naam</span><span data-en>Name</span> *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name" id="lbl-cf-name"><span data-nl>Naam</span><span data-en>Name</span> *</label>
       <input id="cf-name" name="naam" data-fs-field type="text" placeholder="Je naam" id="cf-name-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -243,7 +243,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- email -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email"><span data-nl>E-mailadres</span><span data-en>Email address</span> *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email" id="lbl-cf-email"><span data-nl>E-mailadres</span><span data-en>Email address</span> *</label>
       <input id="cf-email" name="email" data-fs-field type="email" placeholder="jouw@email.nl" id="cf-email-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -251,7 +251,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- telefoon -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone"><span data-nl>Telefoonnummer</span><span data-en>Phone number</span> <span style="opacity:.5"><span data-nl>(optioneel)</span><span data-en>(optional)</span></span></label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone" id="lbl-cf-phone"><span data-nl>Telefoonnummer</span><span data-en>Phone number</span> <span style="opacity:.5"><span data-nl>(optioneel)</span><span data-en>(optional)</span></span></label>
       <input id="cf-phone" name="telefoon" data-fs-field type="tel" placeholder="+31 6 ..."
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -259,7 +259,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- onderwerp -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject"><span data-nl>Onderwerp</span><span data-en>Subject</span> *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject" id="lbl-cf-subject"><span data-nl>Onderwerp</span><span data-en>Subject</span> *</label>
       <select id="cf-subject" name="onderwerp" data-fs-field required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -274,7 +274,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
     <!-- omschrijving -->
     <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message"><span data-nl>Omschrijving</span><span data-en>Description</span> *</label>
+      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message" id="lbl-cf-message"><span data-nl>Omschrijving</span><span data-en>Description</span> *</label>
       <textarea id="cf-message" name="omschrijving" data-fs-field rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." id="cf-msg-ph" required
         style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;resize:vertical;line-height:1.6"
         onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'"></textarea>
@@ -339,21 +339,23 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     // Contact form vertalingen
     var isNL = l === 'nl';
     var el;
-    el = document.getElementById('cf-subject-placeholder');
-    if(el) el.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
-    el = document.getElementById('cf-name-ph');
-    if(el) el.placeholder = isNL ? 'Je naam' : 'Your name';
-    el = document.getElementById('cf-email-ph');
-    if(el) el.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
-    el = document.getElementById('cf-msg-ph');
-    if(el) el.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
-    el = document.getElementById('cf-submit-txt');
-    if(el) el.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
-    var optNL = ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'];
-    var optEN = ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'];
-    for(var i=1;i<=5;i++){
-      el = document.getElementById('opt-'+i);
-      if(el) el.textContent = isNL ? optNL[i-1] : optEN[i-1];
+    // Labels
+    el=document.getElementById('lbl-cf-name'); if(el) el.firstChild.textContent = isNL ? 'Naam' : 'Name';
+    el=document.getElementById('lbl-cf-email'); if(el) el.firstChild.textContent = isNL ? 'E-mailadres' : 'Email address';
+    el=document.getElementById('lbl-cf-phone'); if(el) el.firstChild.textContent = isNL ? 'Telefoonnummer' : 'Phone number';
+    el=document.getElementById('lbl-cf-subject'); if(el) el.firstChild.textContent = isNL ? 'Onderwerp' : 'Subject';
+    el=document.getElementById('lbl-cf-message'); if(el) el.firstChild.textContent = isNL ? 'Omschrijving' : 'Description';
+    // Placeholders
+    el=document.getElementById('cf-subject-placeholder'); if(el) el.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
+    el=document.getElementById('cf-name-ph'); if(el) el.placeholder = isNL ? 'Je naam' : 'Your name';
+    el=document.getElementById('cf-email-ph'); if(el) el.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
+    el=document.getElementById('cf-msg-ph'); if(el) el.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
+    // Submit knop
+    el=document.getElementById('cf-submit-txt'); if(el) el.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
+    // Dropdown opties
+    var optNL=['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'];
+    var optEN=['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'];
+    for(var i=1;i<=5;i++){el=document.getElementById('opt-'+i);if(el)el.textContent=isNL?optNL[i-1]:optEN[i-1];}
     }
   }
   window.setLang = applyLang;
