@@ -2,6 +2,10 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="favicon-48.png">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configurator (beta) — Aäron Art &amp; Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -346,12 +350,6 @@ var SHAPES={
   bol:{label:'Bol',defCurve:80,build:function(R,H,c,fR){
     var out=c/100*R*0.32;
     return bez([R,0],[R+out,H*0.3],[fR+(R-fR)*0.1,H*0.78],[fR,H]);
-  }},
-  uitlopend:{label:'Uitlopend',defCurve:45,build:function(R,H,c,fR){
-    var narrow=R*0.88,mid=R*(1+c/100*0.1);
-    var b1=bez([narrow,0],[narrow,H*0.2],[mid,H*0.3],[mid,H*0.45],30);
-    var b2=bez([mid,H*0.45],[mid,H*0.55],[fR+(mid-fR)*0.3,H*0.82],[fR,H],30);
-    return b1.concat(b2.slice(1));
   }}
 };
 
