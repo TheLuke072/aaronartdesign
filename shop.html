@@ -233,6 +233,12 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
   <h2 style="margin-bottom:10px">Collectie</h2>
   <p style="font-size:.85rem;opacity:.6;margin-bottom:26px">Klik op een stuk voor meer foto's en details.</p>
+  <div style="border:1px solid var(--line);padding:18px 22px;margin-bottom:28px;display:flex;gap:16px;align-items:flex-start">
+    <span style="font-size:1.2rem;line-height:1;flex-shrink:0">🌿</span>
+    <div>
+      <p id="ref-txt" style="font-size:.88rem;line-height:1.7;opacity:.85"></p>
+    </div>
+  </div>
   <div class="cat-tabs" style="margin-bottom:34px">
     <button id="cat-alles" class="active" onclick="filterCat('alles',this)">Alles</button>
     <button id="cat-schalen" onclick="filterCat('schalen',this)">Schalen</button>
@@ -350,7 +356,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <div class="detail">
       <span class="one-of">Uniek stuk · 1 van 1</span>
       <h3 id="m-title"></h3>
-      <span class="price" id="m-price"></span>
+      <!-- prijs verborgen -->
       <p id="m-desc"></p>
       <dl class="specs">
         <dt>Houtsoort</dt><dd id="m-wood"></dd>
@@ -460,6 +466,8 @@ document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModa
 
 // init taal
 var savedLang = localStorage.getItem("lang") || "nl";
+var refEl = document.getElementById('ref-txt');
+if(refEl) refEl.textContent = savedLang==='nl' ? 'De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!' : 'The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!';
 document.getElementById("btn-"+savedLang).classList.add("active");
 if(savedLang === "en") setLang("en");
 </script>
