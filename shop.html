@@ -356,7 +356,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <div class="detail">
       <span class="one-of">Uniek stuk · 1 van 1</span>
       <h3 id="m-title"></h3>
-      <!-- prijs verborgen -->
+      <span id="m-price" style="display:none"></span>
       <p id="m-desc"></p>
       <dl class="specs">
         <dt>Houtsoort</dt><dd id="m-wood"></dd>
@@ -423,7 +423,7 @@ function openModal(i) {
   var p = P[i];
   var l = lang;
   document.getElementById("m-title").textContent = l==="nl" ? p.tnl : p.ten;
-  document.getElementById("m-price").textContent = p.price;
+  // prijs verborgen
   document.getElementById("m-desc").textContent = l==="nl" ? p.dnl : p.den;
   document.getElementById("m-wood").textContent = l==="nl" ? p.wnl : p.wen;
   document.getElementById("m-dim").textContent = p.dim || "—";
