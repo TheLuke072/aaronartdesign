@@ -1,35 +1,15 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head><meta charset="UTF-8">
+<head>
+<meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-<link rel="apple-touch-icon" href="favicon-48.png">
-<meta name="description" content="Vraag een opdracht aan bij Aäron Art & Design. Laat een unieke houten schaal draaien van jouw eigen hout — van oma's appelboom tot een gevallen eik.">
-<meta name="keywords" content="houten schaal op maat, houtdraaien opdracht, eigen hout laten draaien, houten kunst bestellen, Heiloo Noord-Holland">
-<meta name="author" content="Lucas Aäron Oomen — Aäron Art & Design">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.aaronartdesign.nl/contact.html">
-
-<!-- Open Graph (social media preview) -->
-<meta property="og:title" content="Contact & Opdrachten — Aäron Art & Design | Houten schalen op maat">
-<meta property="og:description" content="Vraag een opdracht aan bij Aäron Art & Design. Laat een unieke houten schaal draaien van jouw eigen hout — van oma's appelboom tot een gevallen eik.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.aaronartdesign.nl/contact.html">
-<meta property="og:image" content="https://www.aaronartdesign.nl/images/hero-bowls.jpg">
-<meta property="og:locale" content="nl_NL">
-<meta property="og:locale:alternate" content="en_GB">
-<meta property="og:site_name" content="Aäron Art & Design">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact & Opdrachten — Aäron Art & Design | Houten schalen op maat">
-<meta name="twitter:description" content="Vraag een opdracht aan bij Aäron Art & Design. Laat een unieke houten schaal draaien van jouw eigen hout — van oma's appelboom tot een gevallen eik.">
-<meta name="twitter:image" content="https://www.aaronartdesign.nl/images/hero-bowls.jpg"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Contact & Opdrachten — Aäron Art & Design | Houten schalen op maat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Aäron Art &amp; Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
 :root{--walnut:#2b211b;--walnut-soft:#3a2d24;--bone:#efe6d8;--amber:#c98a3d;--bark:#8a7460;--line:rgba(239,230,216,.22);--rule:rgba(239,230,216,.45)}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:var(--walnut);color:var(--bone);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.65}
@@ -158,8 +138,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 
   /* About hero */
   .about-hero{grid-template-columns:1fr!important}
-  .about-hero .img-side{max-height:55vw;overflow:hidden}
-  .about-hero .img-side img{object-position:top}
+  .about-hero .img-side{max-height:75vw;overflow:hidden}
+  .about-hero .img-side img{object-position:center 30%}
   .about-hero .text-side{padding:7vw 5vw!important;gap:14px!important}
 
   /* Contact grid */
@@ -200,8 +180,20 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 .lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
 [data-nl],[data-en]{transition:opacity .15s}
 
+
+.lang-toggle{display:flex;border:1px solid var(--rule);font-size:.74rem;letter-spacing:.14em}
+.lang-toggle button{padding:7px 12px;opacity:.55;transition:.2s;background:none;border:none;color:var(--bone);cursor:pointer;font:inherit}
+.lang-toggle button.active{background:var(--bone);color:var(--walnut);opacity:1;font-weight:500}
+.form-wrap{max-width:620px;display:flex;flex-direction:column;gap:20px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7}
+.field input,.field select,.field textarea{background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;transition:border-color .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--bone)}
+.field select{appearance:none;-webkit-appearance:none;cursor:pointer}
+.field textarea{resize:vertical;line-height:1.6}
 </style>
-</head><body>
+</head>
+<body>
 <nav>
   <a class="brand" href="index.html">
     <img src="images/logo-nav.png" alt="AÄD">
@@ -210,8 +202,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="shop.html">Winkel</a></li>
-    <li><a href="about.html">Over</a></li>
-    <li><a href="contact.html"' class="active"'>Contact</a></li>
+    <li><a href="about.html"' class="active"'>Over</a></li>
+    <li><a href="contact.html" class='active'>Contact</a></li>
     <li><a href="configurator.html" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
@@ -223,51 +215,35 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
+
 <section style="padding:9vh 6vw;border-bottom:1px solid var(--rule)">
-  <span class="eyebrow">Opdracht aanvragen</span>
-  <h2 style="margin:14px 0 10px">Vertel me over jouw hout</h2>
-  <p style="opacity:.82;max-width:54ch;margin-bottom:36px"><span data-nl>Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</span><span data-en>Have a tree with a story, or a specific piece in mind? Fill in the form and I'll be in touch within two days.</span></p>
+  <span class="eyebrow" id="ct-eyebrow">Opdracht aanvragen</span>
+  <h2 style="margin:14px 0" id="ct-title">Vertel me over jouw hout</h2>
+  <p style="opacity:.82;max-width:54ch;margin-bottom:36px" id="ct-desc">Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</p>
 
-  <div data-fs-success style="display:none;padding:28px;border:1px solid var(--rule);max-width:620px">
-    <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:10px">Bedankt! Je bericht is verstuurd. 🌿</p>
-    <p style="opacity:.75">Ik neem binnen twee dagen contact op via je e-mailadres.</p>
-  </div>
-  <div data-fs-error style="color:#e07070;font-size:.85rem;margin-bottom:10px;display:none"></div>
+  <form id="commission-form" class="form-wrap"
+        action="https://formspree.io/f/xzdqygab"
+        method="POST">
 
-  <form id="commission-form"
-        style="max-width:620px;display:flex;flex-direction:column;gap:20px">
-
-    <!-- naam -->
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-name" id="lbl-cf-name"><span data-nl>Naam</span><span data-en>Name</span> *</label>
-      <input id="cf-name" name="naam" data-fs-field type="text" placeholder="Je naam" id="cf-name-ph" required
-        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
-        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    <div class="field">
+      <label for="cf-name" id="lbl-name">Naam *</label>
+      <input id="cf-name" name="naam" type="text" required placeholder="Je naam">
     </div>
 
-    <!-- email -->
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-email" id="lbl-cf-email"><span data-nl>E-mailadres</span><span data-en>Email address</span> *</label>
-      <input id="cf-email" name="email" data-fs-field type="email" placeholder="jouw@email.nl" id="cf-email-ph" required
-        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
-        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    <div class="field">
+      <label for="cf-email" id="lbl-email">E-mailadres *</label>
+      <input id="cf-email" name="email" type="email" required placeholder="jouw@email.nl">
     </div>
 
-    <!-- telefoon -->
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-phone" id="lbl-cf-phone"><span data-nl>Telefoonnummer</span><span data-en>Phone number</span> <span style="opacity:.5"><span data-nl>(optioneel)</span><span data-en>(optional)</span></span></label>
-      <input id="cf-phone" name="telefoon" data-fs-field type="tel" placeholder="+31 6 ..."
-        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
-        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
+    <div class="field">
+      <label for="cf-phone" id="lbl-phone">Telefoonnummer <span id="lbl-optional" style="opacity:.5">(optioneel)</span></label>
+      <input id="cf-phone" name="telefoon" type="tel" placeholder="+31 6 ...">
     </div>
 
-    <!-- onderwerp -->
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-subject" id="lbl-cf-subject"><span data-nl>Onderwerp</span><span data-en>Subject</span> *</label>
-      <select id="cf-subject" name="onderwerp" data-fs-field required
-        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer"
-        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
-        <option value="" disabled selected id="cf-subject-placeholder">Kies een onderwerp</option>
+    <div class="field">
+      <label for="cf-subject" id="lbl-subject">Onderwerp *</label>
+      <select id="cf-subject" name="onderwerp" required>
+        <option value="" disabled selected id="opt-0">Kies een onderwerp</option>
         <option value="Opdracht — eigen hout" id="opt-1">Opdracht met eigen hout</option>
         <option value="Opdracht — specifiek stuk" id="opt-2">Specifiek stuk bestellen</option>
         <option value="Vraag over een product" id="opt-3">Vraag over een product</option>
@@ -276,41 +252,37 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       </select>
     </div>
 
-    <!-- omschrijving -->
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="cf-message" id="lbl-cf-message"><span data-nl>Omschrijving</span><span data-en>Description</span> *</label>
-      <textarea id="cf-message" name="omschrijving" data-fs-field rows="6" placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..." id="cf-msg-ph" required
-        style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%;resize:vertical;line-height:1.6"
-        onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'"></textarea>
+    <div class="field">
+      <label for="cf-message" id="lbl-message">Omschrijving *</label>
+      <textarea id="cf-message" name="omschrijving" rows="6" required
+        placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..."></textarea>
     </div>
+
+    <input type="hidden" name="_subject" value="Nieuwe aanvraag via aaronartdesign.nl">
+    <input type="text" name="_gotcha" style="display:none">
 
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <button type="submit" data-fs-submit-btn class="btn btn-solid" style="cursor:pointer"><span data-nl>Verstuur opdracht</span><span data-en>Send message</span></button>
-      <span data-fs-error style="font-size:.85rem;color:#e07070;display:none"></span>
+      <button type="submit" class="btn btn-solid" style="cursor:pointer" id="cf-submit">Verstuur opdracht</button>
+      <p id="cf-status" style="font-size:.85rem;opacity:.75;display:none"></p>
     </div>
   </form>
-
-  <script>
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#commission-form', formId: 'xzdqygab' });
-  </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </section>
 
 <div class="contact-grid">
   <div class="contact-block">
-    <span class="eyebrow"><span data-nl>Direct mailen</span><span data-en>Send an email</span></span>
-    <h2 style="font-size:1.6rem"><span data-nl>Stuur een bericht</span><span data-en>Send a message</span></h2>
-    <p><span data-nl>Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.</span><span data-en>For questions about existing pieces, commissions, or just to share about the wood you have lying around.</span></p>
-    <a class="mail" href="mailto:aaronartdesigns@gmail.com">aaronartdesigns@gmail.com</a>
+    <span class="eyebrow" id="cb1-eyebrow">Direct mailen</span>
+    <h2 style="font-size:1.6rem;margin:12px 0" id="cb1-title">Stuur een bericht</h2>
+    <p id="cb1-desc">Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.</p>
+    <a href="mailto:aaronartdesigns@gmail.com" class="mail">aaronartdesigns@gmail.com</a>
   </div>
   <div class="contact-block">
     <span class="eyebrow">Instagram</span>
-    <h2 style="font-size:1.6rem"><span data-nl>Volg het werk</span><span data-en>Follow the work</span></h2>
-    <p><span data-nl>Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.</span><span data-en>See the whole process from fresh wood to finished piece. DM's welcome too — I usually reply within a day.</span></p>
-    <a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;margin-top:6px">@aaronartanddesign</a>
+    <h2 style="font-size:1.6rem;margin:12px 0" id="cb2-title">Volg het werk</h2>
+    <p id="cb2-desc">Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.</p>
+    <a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener" class="btn btn-ghost" id="cb2-btn">Volg op Instagram</a>
   </div>
 </div>
+
 <footer>
   <div>
     <div class="wordmark">AÄRON ART &amp; DESIGN</div>
@@ -325,48 +297,118 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 </footer>
 
 <script>
-(function(){
-  var lang = localStorage.getItem('lang') || 'nl';
-  function applyLang(l){
-    lang = l;
-    localStorage.setItem('lang', l);
-    document.documentElement.lang = l;
-    document.querySelectorAll('[data-nl]').forEach(function(el){
-      el.style.display = l==='nl' ? '' : 'none';
-    });
-    document.querySelectorAll('[data-en]').forEach(function(el){
-      el.style.display = l==='en' ? '' : 'none';
-    });
-    document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
-      b.classList.toggle('active', b.id === 'btn-'+l);
-    });
-    // Contact form vertalingen
-    var isNL = l === 'nl';
-    var el;
-    // Labels
-    el=document.getElementById('lbl-cf-name'); if(el) el.firstChild.textContent = isNL ? 'Naam' : 'Name';
-    el=document.getElementById('lbl-cf-email'); if(el) el.firstChild.textContent = isNL ? 'E-mailadres' : 'Email address';
-    el=document.getElementById('lbl-cf-phone'); if(el) el.firstChild.textContent = isNL ? 'Telefoonnummer' : 'Phone number';
-    el=document.getElementById('lbl-cf-subject'); if(el) el.firstChild.textContent = isNL ? 'Onderwerp' : 'Subject';
-    el=document.getElementById('lbl-cf-message'); if(el) el.firstChild.textContent = isNL ? 'Omschrijving' : 'Description';
-    // Placeholders
-    el=document.getElementById('cf-subject-placeholder'); if(el) el.textContent = isNL ? 'Kies een onderwerp' : 'Choose a subject';
-    el=document.getElementById('cf-name-ph'); if(el) el.placeholder = isNL ? 'Je naam' : 'Your name';
-    el=document.getElementById('cf-email-ph'); if(el) el.placeholder = isNL ? 'jouw@email.nl' : 'your@email.com';
-    el=document.getElementById('cf-msg-ph'); if(el) el.placeholder = isNL ? 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...' : 'Tell me about the wood, the desired shape, dimensions, what it will be used for...';
-    // Submit knop
-    el=document.getElementById('cf-submit-txt'); if(el) el.textContent = isNL ? 'Verstuur opdracht' : 'Send message';
-    // Dropdown opties
-    var optNL=['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'];
-    var optEN=['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'];
-    for(var i=1;i<=5;i++){el=document.getElementById('opt-'+i);if(el)el.textContent=isNL?optNL[i-1]:optEN[i-1];}
-    }
+var lang = localStorage.getItem('lang') || 'nl';
+
+var TX = {
+  nl: {
+    eyebrow: 'Opdracht aanvragen',
+    title: 'Vertel me over jouw hout',
+    desc: 'Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.',
+    lbl_name: 'Naam *', lbl_email: 'E-mailadres *', lbl_phone: 'Telefoonnummer',
+    lbl_optional: '(optioneel)', lbl_subject: 'Onderwerp *', lbl_message: 'Omschrijving *',
+    ph_name: 'Je naam', ph_email: 'jouw@email.nl', ph_msg: 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...',
+    opt0: 'Kies een onderwerp',
+    opts: ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'],
+    submit: 'Verstuur opdracht',
+    cb1_eyebrow: 'Direct mailen', cb1_title: 'Stuur een bericht',
+    cb1_desc: 'Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.',
+    cb2_title: 'Volg het werk',
+    cb2_desc: "Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.",
+    cb2_btn: 'Volg op Instagram',
+    footer_line: 'Handgedraaid in Nederland · aaronartdesigns@gmail.com',
+    basket: 'Mandje'
+  },
+  en: {
+    eyebrow: 'Commission a piece',
+    title: 'Tell me about your wood',
+    desc: 'Have a tree with a story, or a specific piece in mind? Fill in the form and I'll be in touch within two days.',
+    lbl_name: 'Name *', lbl_email: 'Email address *', lbl_phone: 'Phone number',
+    lbl_optional: '(optional)', lbl_subject: 'Subject *', lbl_message: 'Description *',
+    ph_name: 'Your name', ph_email: 'your@email.com', ph_msg: 'Tell me about the wood, the desired shape, dimensions, what it will be used for...',
+    opt0: 'Choose a subject',
+    opts: ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'],
+    submit: 'Send message',
+    cb1_eyebrow: 'Send an email', cb1_title: 'Send a message',
+    cb1_desc: 'For questions about existing pieces, commissions, or just to share about the wood you have.',
+    cb2_title: 'Follow the work',
+    cb2_desc: "See the whole process from fresh wood to finished piece. DM's welcome — I usually reply within a day.",
+    cb2_btn: 'Follow on Instagram',
+    footer_line: 'Hand-turned in the Netherlands · aaronartdesigns@gmail.com',
+    basket: 'Basket'
   }
-  window.setLang = applyLang;
+};
 
+function t(k){ return TX[lang][k] || ''; }
 
-  document.addEventListener('DOMContentLoaded', function(){ applyLang(lang); });
-})();
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.documentElement.lang = l;
+  document.getElementById('btn-nl').classList.toggle('active', l==='nl');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+
+  // Pagina teksten
+  var ids = {
+    'ct-eyebrow':'eyebrow','ct-title':'title','ct-desc':'desc',
+    'lbl-name':'lbl_name','lbl-email':'lbl_email','lbl-phone':'lbl_phone',
+    'lbl-optional':'lbl_optional','lbl-subject':'lbl_subject','lbl-message':'lbl_message',
+    'cf-submit':'submit',
+    'cb1-eyebrow':'cb1_eyebrow','cb1-title':'cb1_title','cb1-desc':'cb1_desc',
+    'cb2-title':'cb2_title','cb2-desc':'cb2_desc','cb2-btn':'cb2_btn'
+  };
+  Object.keys(ids).forEach(function(id) {
+    var el = document.getElementById(id);
+    if(el) el.textContent = t(ids[id]);
+  });
+
+  // Placeholders
+  document.getElementById('cf-name').placeholder = t('ph_name');
+  document.getElementById('cf-email').placeholder = t('ph_email');
+  document.getElementById('cf-message').placeholder = t('ph_msg');
+
+  // Dropdown
+  document.getElementById('opt-0').textContent = t('opt0');
+  TX[l].opts.forEach(function(txt, i) {
+    var el = document.getElementById('opt-' + (i+1));
+    if(el) el.textContent = txt;
+  });
+
+  // Footer + nav
+  var fl = document.getElementById('footer-line');
+  if(fl) fl.textContent = t('footer_line');
+  var bk = document.querySelector('.basket');
+  if(bk) bk.textContent = t('basket');
+}
+
+// Formspree Ajax submit
+document.getElementById('commission-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('cf-submit');
+  var status = document.getElementById('cf-status');
+  btn.disabled = true;
+  btn.textContent = lang === 'nl' ? 'Versturen...' : 'Sending...';
+  try {
+    var resp = await fetch(this.action, {
+      method: 'POST', body: new FormData(this),
+      headers: {'Accept': 'application/json'}
+    });
+    if(resp.ok) {
+      this.innerHTML = '<p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;line-height:1.6">' +
+        (lang==='nl' ? 'Bedankt! Ik neem binnen twee dagen contact op.' : 'Thank you! I'll be in touch within two days.') + '</p>';
+    } else {
+      status.textContent = lang==='nl' ? 'Er ging iets mis — probeer opnieuw.' : 'Something went wrong — please try again.';
+      status.style.display='block';
+      btn.disabled=false; btn.textContent=t('submit');
+    }
+  } catch(err) {
+    status.textContent = 'aaronartdesigns@gmail.com';
+    status.style.display='block';
+    btn.disabled=false; btn.textContent=t('submit');
+  }
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
 </script>
-
-</body></html>
+</body>
+</html>
