@@ -289,6 +289,9 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
         <div style="font-size:.68rem;opacity:.55;max-width:80px;text-align:right;line-height:1.5">Na overleg definitief</div>
       </div>
       <button class="ofbtn" onclick="doSend()">Vraag offerte aan ↗</button>
+      <button class="ofbtn" onclick="exportPNG()" id="png-btn" style="margin-top:8px;border-color:var(--amber);color:var(--amber)">
+        ↓ Download als afbeelding
+      </button>
 
     </div>
 
@@ -521,6 +524,235 @@ function draw(){
 function calcP(){
   var vol=(S.diam/100)*(S.h/100);
   document.getElementById('price').textContent='€ '+Math.round((18+vol*85)/5)*5;
+}
+
+
+function exportPNG(){
+  var btn = document.getElementById('png-btn');
+  btn.textContent = 'Genereren...';
+  btn.disabled = true;
+
+  // Maak een export canvas met overzicht + 3D visualisatie
+  var W = 900, H = 640;
+  var ec = document.createElement('canvas');
+  ec.width = W; ec.height = H;
+  var ctx = ec.getContext('2d');
+
+  // Achtergrond
+  ctx.fillStyle = '#2b211b';
+  ctx.fillRect(0,0,W,H);
+
+  // Header
+  ctx.fillStyle = '#efe6d8';
+  ctx.font = '500 22px "Cormorant Garamond", serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('AÄRON ART & DESIGN', 40, 44);
+  ctx.fillStyle = '#c98a3d';
+  ctx.font = '300 13px Outfit, sans-serif';
+  ctx.letterSpacing = '0.2em';
+  ctx.fillText('SCHAALCONFIGURATOR', 40, 66);
+
+  // Scheidingslijn
+  ctx.strokeStyle = 'rgba(239,230,216,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(40,78); ctx.lineTo(W-40,78); ctx.stroke();
+
+  // ===== LINKS: Doorsnede (kopie van canvas) =====
+  var srcCanvas = document.getElementById('main');
+  ctx.drawImage(srcCanvas, 40, 95, 340, 300);
+
+  // Label
+  ctx.fillStyle = 'rgba(239,230,216,0.5)';
+  ctx.font = '300 11px Outfit, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('DOORSNEDE', 210, 412);
+
+  // ===== MIDDEN: 3D perspectief visualisatie =====
+  draw3D(ctx, 420, 95, 200, 310);
+  ctx.fillStyle = 'rgba(239,230,216,0.5)';
+  ctx.font = '300 11px Outfit, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('3D AANZICHT', 520, 412);
+
+  // ===== RECHTS: Specificaties =====
+  var sx = 660, sy = 95;
+  ctx.textAlign = 'left';
+
+  // Vorm naam
+  var shapeNames = {klassiek:'Klassiek',ondiep:'Ondiep',diep:'Diep',recht:'Rechte wand',bol:'Bol'};
+  ctx.fillStyle = '#c98a3d';
+  ctx.font = '500 14px Outfit, sans-serif';
+  ctx.fillText(shapeNames[S.shape] || S.shape, sx, sy+10);
+
+  var specs = [
+    ['Diameter', S.diam + ' mm'],
+    ['Hoogte', S.h + ' mm'],
+    ['Wanddikte', S.wall + ' mm'],
+    ['Bodemdikte', S.bot + ' mm'],
+    ['Voetbreedte', S.foot + ' mm'],
+    ['Curve', S.curve + '%'],
+  ];
+
+  var lineH = 36;
+  specs.forEach(function(spec, i){
+    var y = sy + 40 + i * lineH;
+    // lijn
+    ctx.strokeStyle = 'rgba(239,230,216,0.15)';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(sx, y-8); ctx.lineTo(W-40, y-8); ctx.stroke();
+    // label
+    ctx.fillStyle = 'rgba(239,230,216,0.55)';
+    ctx.font = '300 11px Outfit, sans-serif';
+    ctx.fillText(spec[0].toUpperCase(), sx, y+4);
+    // waarde
+    ctx.fillStyle = '#efe6d8';
+    ctx.font = '500 14px Outfit, sans-serif';
+    ctx.fillText(spec[1], sx, y+20);
+  });
+
+  // Prijs indicatie
+  var priceY = sy + 40 + specs.length * lineH + 16;
+  ctx.strokeStyle = 'rgba(201,138,61,0.4)';
+  ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(sx, priceY); ctx.lineTo(W-40, priceY); ctx.stroke();
+  ctx.fillStyle = 'rgba(239,230,216,0.55)';
+  ctx.font = '300 11px Outfit, sans-serif';
+  ctx.fillText('INDICATIEVE PRIJS', sx, priceY+18);
+  ctx.fillStyle = '#c98a3d';
+  ctx.font = '500 24px "Cormorant Garamond", serif';
+  ctx.fillText(document.getElementById('price').textContent, sx, priceY+44);
+  ctx.fillStyle = 'rgba(239,230,216,0.4)';
+  ctx.font = '300 10px Outfit, sans-serif';
+  ctx.fillText('na overleg definitief', sx, priceY+60);
+
+  // Footer
+  ctx.strokeStyle = 'rgba(239,230,216,0.2)';
+  ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(40,H-44); ctx.lineTo(W-40,H-44); ctx.stroke();
+  ctx.fillStyle = 'rgba(239,230,216,0.35)';
+  ctx.font = '300 11px Outfit, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('aaronartdesign.nl  ·  aaronartdesigns@gmail.com', 40, H-20);
+  ctx.textAlign = 'right';
+  ctx.fillText(new Date().toLocaleDateString('nl-NL', {day:'numeric',month:'long',year:'numeric'}), W-40, H-20);
+
+  // Download
+  var link = document.createElement('a');
+  link.download = 'schaal-configuratie.png';
+  link.href = ec.toDataURL('image/png');
+  link.click();
+
+  btn.textContent = '↓ Download als afbeelding';
+  btn.disabled = false;
+}
+
+function draw3D(ctx, originX, originY, bowlW, bowlH){
+  // 3D ellipse perspectief weergave van de schaal
+  var R = S.diam/2;
+  var H = S.h;
+  var fR = S.foot/2;
+  var outer = SHAPES[S.shape].build(R, H, S.curve, fR);
+  var N = outer.length-1;
+
+  var maxR=0, maxY=0;
+  for(var i=0;i<=N;i++){maxR=Math.max(maxR,outer[i].r);maxY=Math.max(maxY,outer[i].y);}
+
+  var scale = Math.min((bowlW-20)/(maxR*2),(bowlH-40)/H);
+  var cx = originX + bowlW/2;
+  var topY = originY + 10;
+  var fh = Math.max(3, H*0.08);
+  var FR = fR*scale;
+  var ryFactor = 0.28; // perspectief ellips ratio
+
+  function sx3(r){ return cx + r*scale; }
+  function sy3(y){ return topY + y*scale; }
+
+  var c1='#e0c898',c2='#c8a050',c3='#7a5010';
+
+  function woodG3(lx,rx,ty,by){
+    var g=ctx.createLinearGradient(lx,ty,rx,by);
+    g.addColorStop(0,c1);g.addColorStop(0.3,c2);g.addColorStop(0.6,c1);g.addColorStop(1,c3);
+    return g;
+  }
+
+  var topY3 = originY + 10;
+  var botY3 = sy3(H);
+
+  // Buitenwand rechts (zichtbaar in perspectief)
+  ctx.beginPath();
+  ctx.moveTo(sx3(outer[0].r), sy3(outer[0].y));
+  for(var i=1;i<=N;i++) ctx.lineTo(sx3(outer[i].r), sy3(outer[i].y));
+  ctx.lineTo(sx3(outer[N].r), botY3+fh);
+  ctx.lineTo(cx+FR, botY3+fh);
+  ctx.lineTo(cx+FR, botY3);
+  // Terug via binnenwand
+  var wall = S.wall*scale;
+  for(var i=N;i>=0;i--){
+    var ri = Math.max(0, outer[i].r - S.wall);
+    ctx.lineTo(cx+ri*scale, sy3(outer[i].y));
+  }
+  ctx.closePath();
+  ctx.fillStyle = woodG3(cx, cx+maxR*scale, topY3, botY3);
+  ctx.fill();
+  ctx.strokeStyle=c3;ctx.lineWidth=1;ctx.stroke();
+
+  // Buitenwand links (spiegelen voor 3D effect)
+  ctx.beginPath();
+  ctx.moveTo(cx-outer[0].r*scale, sy3(outer[0].y));
+  for(var i=1;i<=N;i++) ctx.lineTo(cx-outer[i].r*scale, sy3(outer[i].y));
+  ctx.lineTo(cx-outer[N].r*scale, botY3+fh);
+  ctx.lineTo(cx-FR, botY3+fh);
+  ctx.lineTo(cx-FR, botY3);
+  for(var i=N;i>=0;i--){
+    var ri2 = Math.max(0, outer[i].r - S.wall);
+    ctx.lineTo(cx-ri2*scale, sy3(outer[i].y));
+  }
+  ctx.closePath();
+  ctx.fillStyle = woodG3(cx-maxR*scale, cx, topY3, botY3);
+  ctx.fill();
+  ctx.strokeStyle=c3;ctx.lineWidth=1;ctx.stroke();
+
+  // Top ellips (rand van de schaal — perspectief)
+  var rimR = outer[0].r*scale;
+  var rimY = sy3(0);
+  ctx.beginPath();
+  ctx.ellipse(cx, rimY, rimR, rimR*ryFactor, 0, 0, Math.PI*2);
+  var eg = ctx.createRadialGradient(cx,rimY,0,cx,rimY,rimR);
+  eg.addColorStop(0,'rgba(30,20,12,0.85)'); // donkere holte
+  eg.addColorStop(0.7,c2);
+  eg.addColorStop(1,c1);
+  ctx.fillStyle=eg; ctx.fill();
+  ctx.strokeStyle=c3;ctx.lineWidth=1.5;ctx.stroke();
+
+  // Rand ring (wanddikte zichtbaar)
+  var innerR = Math.max(0, outer[0].r - S.wall)*scale;
+  ctx.beginPath();
+  ctx.ellipse(cx, rimY, innerR, innerR*ryFactor, 0, 0, Math.PI*2);
+  ctx.strokeStyle='rgba(120,80,16,0.5)';ctx.lineWidth=1;ctx.stroke();
+
+  // Voet
+  if(S.foot>0&&fh>0){
+    ctx.beginPath();
+    ctx.ellipse(cx, botY3+fh, FR, FR*ryFactor, 0, 0, Math.PI*2);
+    ctx.fillStyle=c3;ctx.fill();ctx.strokeStyle=c3;ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx-FR, botY3);
+    ctx.lineTo(cx-FR, botY3+fh);
+    ctx.ellipse(cx, botY3+fh, FR, FR*ryFactor, 0, Math.PI, 0, true);
+    ctx.lineTo(cx+FR, botY3);
+    ctx.ellipse(cx, botY3, FR, FR*ryFactor, 0, 0, Math.PI, true);
+    ctx.closePath();
+    ctx.fillStyle='#8a6030';ctx.fill();
+    ctx.strokeStyle=c3;ctx.lineWidth=1;ctx.stroke();
+  }
+
+  // Contour lijnen
+  for(var sgn=-1;sgn<=1;sgn+=2){
+    ctx.beginPath();
+    ctx.moveTo(cx+sgn*outer[0].r*scale, sy3(outer[0].y));
+    for(var i=1;i<=N;i++) ctx.lineTo(cx+sgn*outer[i].r*scale, sy3(outer[i].y));
+    ctx.strokeStyle=c3;ctx.lineWidth=2;ctx.stroke();
+  }
 }
 
 function doSend(){
