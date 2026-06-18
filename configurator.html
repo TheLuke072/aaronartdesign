@@ -260,7 +260,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
 <div class="cfg-wrap">
   <div class="cfg-intro">
     <h1 id="cfg-title">Schaalconfigurator <span class="beta-badge">Beta</span></h1>
-    <p>Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan. De definitieve prijs wordt vastgesteld na overleg — elk stuk is uniek en hangt af van het beschikbare hout.</p>
+    <p id="cfg-desc">Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan. De definitieve prijs wordt vastgesteld na overleg — elk stuk is uniek en hangt af van het beschikbare hout.</p>
   </div>
 
   <div class="cfg">
@@ -286,11 +286,11 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
           <div class="pl" id="price-label">Indicatieve prijs</div>
           <div class="pv" id="price">€ 60</div>
         </div>
-        <div style="font-size:.68rem;opacity:.55;max-width:80px;text-align:right;line-height:1.5">Na overleg definitief</div>
+        <div style="font-size:.68rem;opacity:.55;max-width:80px;text-align:right;line-height:1.5" id="price-note">Na overleg definitief</div>
       </div>
       <button class="ofbtn" onclick="doSend()" id="offer-btn">Vraag offerte aan ↗</button>
       <button class="ofbtn" onclick="exportPNG()" id="png-btn" style="margin-top:8px;border-color:var(--amber);color:var(--amber)">
-        ↓ Download als afbeelding
+        <span id="download-btn">↓ Download als afbeelding</span>
       </button>
 
     </div>
@@ -299,14 +299,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <canvas id="main" width="380" height="340"></canvas>
       <div style="background:var(--walnut-soft);border:1px solid var(--line);padding:12px 18px;width:100%;max-width:380px">
         <div class="dl" style="margin-bottom:8px">
-          <span>Ø <b id="dd">220</b> mm</span>
-          <span>H <b id="dh">75</b> mm</span>
-          <span>Wand <b id="dw">10</b> mm</span>
+          <span><span id="lbl-dia-sym">Ø</span> <b id="dd">220</b> mm</span>
+          <span><span id="lbl-h-sym">H</span> <b id="dh">75</b> mm</span>
+          <span><span id="lbl-wand">Wand</span> <b id="dw">10</b> mm</span>
         </div>
         <div class="legend">
-          <div class="leg"><div class="legc" style="background:#c8a050;border:1px solid #7a5010"></div><span>Hout (doorsnede)</span></div>
-          <div class="leg"><div class="legc" style="background:#d8f0d8;border:1px solid #5a9a5a"></div><span>Holte</span></div>
-          <div class="leg"><div class="legc" style="background:none;border:1px dashed #8a7460"></div><span>Middenas</span></div>
+          <div class="leg"><div class="legc" style="background:#c8a050;border:1px solid #7a5010"></div><span id="leg-wood">Hout (doorsnede)</span></div>
+          <div class="leg"><div class="legc" style="background:#d8f0d8;border:1px solid #5a9a5a"></div><span id="leg-cavity">Holte</span></div>
+          <div class="leg"><div class="legc" style="background:none;border:1px dashed #8a7460"></div><span id="leg-axis">Middenas</span></div>
         </div>
       </div>
     </div>
@@ -519,7 +519,7 @@ function draw(){
   ctx.beginPath();ctx.moveTo(cx,topY-18);ctx.lineTo(cx,botY+fh+8);ctx.stroke();
   ctx.setLineDash([]);
   ctx.font='9px Outfit,sans-serif';ctx.textAlign='center';ctx.fillStyle='rgba(230,214,192,0.6)';
-  ctx.fillText('voet Ø '+S.foot+' mm',cx,botY+fh+14);
+  ctx.fillText((window._lang==='en'?'foot':'ø')+' Ø '+S.foot+' mm',cx,botY+fh+14);
   ctx.restore();
 }
 
@@ -792,7 +792,7 @@ function setLang(l){
   var ct=confT[l];
   var textMap={
     'cfg-title':ct.title,'cfg-desc':ct.desc,'lbl-shape':ct.shape,
-    'lbl-dims':ct.dims,'lbl-curve':ct.curve_lbl,'price-label':ct.price_lbl,
+    'lbl-dims':ct.dims,'price-label':ct.price_lbl,
     'price-note':ct.price_note,'offer-btn':ct.offer,'download-btn':ct.download,
     'lbl-diam':ct.diam,'lbl-h':ct.h,'lbl-wall':ct.wall,
     'lbl-bot':ct.bot,'lbl-foot':ct.foot,'lbl-curve2':ct.curve,'cfg-note':ct.note
@@ -800,6 +800,15 @@ function setLang(l){
   Object.keys(textMap).forEach(function(id){
     var el=document.getElementById(id); if(el)el.textContent=textMap[id];
   });
+  // Legenda en dimensie labels
+  var legT={nl:{wood:'Hout (doorsnede)',cavity:'Holte',axis:'Middenas',wand:'Wand'},
+            en:{wood:'Wood (cross-section)',cavity:'Cavity',axis:'Centre axis',wand:'Wall'}};
+  var lw=document.getElementById('leg-wood');if(lw)lw.textContent=legT[l].wood;
+  var lc=document.getElementById('leg-cavity');if(lc)lc.textContent=legT[l].cavity;
+  var la=document.getElementById('leg-axis');if(la)la.textContent=legT[l].axis;
+  var lwd=document.getElementById('lbl-wand');if(lwd)lwd.textContent=legT[l].wand;
+  window._lang=l;
+  draw();
   document.querySelectorAll('#sg .sb').forEach(function(btn){
     var key=btn.dataset.shape;
     var sp=btn.querySelector('span');
