@@ -200,10 +200,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="about.html"' class="active"'>Over</a></li>
-    <li><a href="contact.html" class='active'>Contact</a></li>
+    <li><a href="index.html" id="nav-home">Home</a></li>
+    <li><a href="shop.html" id="nav-shop">Winkel</a></li>
+    <li><a href="about.html"' class="active"' id="nav-about">Over</a></li>
+    <li><a href="contact.html" class='active' id="nav-contact">Contact</a></li>
     <li><a href="configurator.html" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
@@ -211,7 +211,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
-    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
+    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener" id="nav-basket">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
@@ -290,8 +290,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html" id="footer-shop">Winkel</a></li>
-    <li><a href="contact.html" id="footer-contact">Contact</a></li>
+    <li><a href="shop.html" id="footer-shop" id="nav-shop">Winkel</a></li>
+    <li><a href="contact.html" id="footer-contact" id="nav-contact">Contact</a></li>
   </ul>
   <p style="font-size:.78rem;opacity:.55">© 2026 Aäron Art &amp; Design</p>
 </footer>
@@ -374,10 +374,15 @@ function setLang(l) {
   });
 
   // Footer + nav
-  var fl = document.getElementById('footer-line');
-  if(fl) fl.textContent = t('footer_line');
-  var bk = document.querySelector('.basket');
-  if(bk) bk.textContent = t('basket');
+
+  var navT={nl:{home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
+            en:{home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'}};
+  ['home','shop','about','contact'].forEach(function(k){
+    var el=document.getElementById('nav-'+k);if(el)el.textContent=navT[l][k];
+  });
+  var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
+  var fl=document.getElementById('footer-line');
+  if(fl)fl.textContent=l==='nl'?'Handgedraaid in Nederland · aaronartdesigns@gmail.com':'Hand-turned in the Netherlands · aaronartdesigns@gmail.com';
 }
 
 // Formspree Ajax submit

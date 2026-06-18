@@ -215,10 +215,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html"' class="active"'>Winkel</a></li>
-    <li><a href="about.html">Over</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html" id="nav-home">Home</a></li>
+    <li><a href="shop.html"' class="active"' id="nav-shop">Winkel</a></li>
+    <li><a href="about.html" id="nav-about">Over</a></li>
+    <li><a href="contact.html" id="nav-contact">Contact</a></li>
     <li><a href="configurator.html" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
@@ -226,7 +226,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
-    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
+    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener" id="nav-basket">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
@@ -384,8 +384,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html" id="footer-shop">Winkel</a></li>
-    <li><a href="contact.html" id="footer-contact">Contact</a></li>
+    <li><a href="shop.html" id="footer-shop" id="nav-shop">Winkel</a></li>
+    <li><a href="contact.html" id="footer-contact" id="nav-contact">Contact</a></li>
   </ul>
   <p style="font-size:.78rem;opacity:.55">© 2026 Aäron Art &amp; Design</p>
 </footer>
@@ -466,6 +466,8 @@ document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModa
 
 // init taal
 var savedLang = localStorage.getItem("lang") || "nl";
+var refEl=document.getElementById('ref-txt');
+if(refEl)refEl.textContent=savedLang==='nl'?'De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!':'The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!';
 var refEl = document.getElementById('ref-txt');
 if(refEl) refEl.textContent = savedLang==='nl' ? 'De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!' : 'The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!';
 document.getElementById("btn-"+savedLang).classList.add("active");

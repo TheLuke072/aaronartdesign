@@ -241,10 +241,10 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Winkel</a></li>
-    <li><a href="about.html">Over</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html" id="nav-home">Home</a></li>
+    <li><a href="shop.html" id="nav-shop">Winkel</a></li>
+    <li><a href="about.html" id="nav-about">Over</a></li>
+    <li><a href="contact.html" id="nav-contact">Contact</a></li>
     <li><a href="configurator.html" class="active" style="display:flex;align-items:center;gap:6px">Configurator <span style="font-size:.58rem;letter-spacing:.14em;border:1px solid var(--amber);color:var(--amber);padding:2px 5px;line-height:1">BETA</span></a></li>
   </ul>
   <div class="nav-right">
@@ -252,14 +252,14 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
       <button id="btn-nl" class="active" onclick="setLang('nl')">NL</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
-    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener">Mandje</a>
+    <a class="basket" href="https://fyqjyy-tc.myshopify.com/cart" target="_blank" rel="noopener" id="nav-basket">Mandje</a>
   </div>
   <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
 </nav>
 
 <div class="cfg-wrap">
   <div class="cfg-intro">
-    <h1>Schaalconfigurator <span class="beta-badge">Beta</span></h1>
+    <h1 id="cfg-title">Schaalconfigurator <span class="beta-badge">Beta</span></h1>
     <p>Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan. De definitieve prijs wordt vastgesteld na overleg — elk stuk is uniek en hangt af van het beschikbare hout.</p>
   </div>
 
@@ -267,28 +267,28 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <div class="col-l">
 
       <div class="grp">
-        <div class="gt">Basisvorm</div>
+        <div class="gt" id="lbl-shape">Basisvorm</div>
         <div class="sg" id="sg"></div>
       </div>
 
       <div class="grp">
-        <div class="gt">Afmetingen</div>
-        <div class="srow"><span class="rn">Diameter</span><input type="range" id="s-diam" min="80" max="380" step="10" value="220"><span class="rv" id="o-diam">220 mm</span></div>
-        <div class="srow"><span class="rn">Hoogte</span><input type="range" id="s-h" min="30" max="180" step="5" value="75"><span class="rv" id="o-h">75 mm</span></div>
-        <div class="srow"><span class="rn">Wanddikte</span><input type="range" id="s-wall" min="4" max="28" step="1" value="10"><span class="rv" id="o-wall">10 mm</span></div>
-        <div class="srow"><span class="rn">Bodemdikte</span><input type="range" id="s-bot" min="5" max="30" step="1" value="14"><span class="rv" id="o-bot">14 mm</span></div>
-        <div class="srow"><span class="rn">Voetbreedte</span><input type="range" id="s-foot" min="10" max="100" step="5" value="45"><span class="rv" id="o-foot">45 mm</span></div>
-        <div class="srow"><span class="rn">Curve</span><input type="range" id="s-curve" min="0" max="100" step="5" value="50"><span class="rv" id="o-curve">50%</span></div>
+        <div class="gt" id="lbl-dims">Afmetingen</div>
+        <div class="srow"><span class="rn" id="lbl-diam">Diameter</span><input type="range" id="s-diam" min="80" max="380" step="10" value="220"><span class="rv" id="o-diam">220 mm</span></div>
+        <div class="srow"><span class="rn" id="lbl-h">Hoogte</span><input type="range" id="s-h" min="30" max="180" step="5" value="75"><span class="rv" id="o-h">75 mm</span></div>
+        <div class="srow"><span class="rn" id="lbl-wall">Wanddikte</span><input type="range" id="s-wall" min="4" max="28" step="1" value="10"><span class="rv" id="o-wall">10 mm</span></div>
+        <div class="srow"><span class="rn" id="lbl-bot">Bodemdikte</span><input type="range" id="s-bot" min="5" max="30" step="1" value="14"><span class="rv" id="o-bot">14 mm</span></div>
+        <div class="srow"><span class="rn" id="lbl-foot">Voetbreedte</span><input type="range" id="s-foot" min="10" max="100" step="5" value="45"><span class="rv" id="o-foot">45 mm</span></div>
+        <div class="srow"><span class="rn" id="lbl-curve2">Curve</span><input type="range" id="s-curve" min="0" max="100" step="5" value="50"><span class="rv" id="o-curve">50%</span></div>
       </div>
 
       <div class="pc">
         <div>
-          <div class="pl">Indicatieve prijs</div>
+          <div class="pl" id="price-label">Indicatieve prijs</div>
           <div class="pv" id="price">€ 60</div>
         </div>
         <div style="font-size:.68rem;opacity:.55;max-width:80px;text-align:right;line-height:1.5">Na overleg definitief</div>
       </div>
-      <button class="ofbtn" onclick="doSend()">Vraag offerte aan ↗</button>
+      <button class="ofbtn" onclick="doSend()" id="offer-btn">Vraag offerte aan ↗</button>
       <button class="ofbtn" onclick="exportPNG()" id="png-btn" style="margin-top:8px;border-color:var(--amber);color:var(--amber)">
         ↓ Download als afbeelding
       </button>
@@ -313,7 +313,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
 </div>
 
-<div class="cfg-note">
+<div class="cfg-note" id="cfg-note">
   De configurator geeft een visuele indicatie van de doorsnede en een richtprijs. Wanddiktes, voetafmetingen en de uiteindelijke vorm worden in overleg bepaald op basis van het beschikbare hout. Elk stuk is uniek — de nerf en kleur van het hout bepalen mede de uiteindelijke schoonheid van het stuk.
 </div>
 
@@ -324,8 +324,8 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   </div>
   <ul>
     <li><a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="shop.html" id="footer-shop">Winkel</a></li>
-    <li><a href="contact.html" id="footer-contact">Contact</a></li>
+    <li><a href="shop.html" id="footer-shop" id="nav-shop">Winkel</a></li>
+    <li><a href="contact.html" id="footer-contact" id="nav-contact">Contact</a></li>
   </ul>
   <p style="font-size:.78rem;opacity:.55">© 2026 Aäron Art &amp; Design</p>
 </footer>
@@ -383,6 +383,7 @@ Object.keys(SHAPES).forEach(function(key,idx){
     document.getElementById('s-curve').value=S.curve;
     document.getElementById('o-curve').textContent=S.curve+'%';
     draw();calcP();
+setLang(localStorage.getItem('lang')||'nl');
   });
   setTimeout((function(k,c){return function(){
     var ctx=c.getContext('2d'),W=c.width,H=c.height,pad=4;
@@ -408,6 +409,7 @@ function sl(id,key,suf){
     S[key]=parseFloat(this.value);
     document.getElementById(id.replace('s-','o-')).textContent=this.value+(suf||'');
     draw();calcP();
+setLang(localStorage.getItem('lang')||'nl');
     document.getElementById('dd').textContent=S.diam;
     document.getElementById('dh').textContent=S.h;
     document.getElementById('dw').textContent=S.wall;
@@ -755,12 +757,61 @@ function draw3D(ctx, originX, originY, bowlW, bowlH){
   }
 }
 
+
+function setLang(l){
+  var lang_saved = l;
+  localStorage.setItem('lang', l);
+  document.documentElement.lang = l;
+  document.getElementById('btn-nl').classList.toggle('active', l==='nl');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+
+  var navT={nl:{home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
+            en:{home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'}};
+  ['home','shop','about','contact'].forEach(function(k){
+    var el=document.getElementById('nav-'+k);if(el)el.textContent=navT[l][k];
+  });
+  var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
+  var fl=document.getElementById('footer-line');
+  if(fl)fl.textContent=l==='nl'?'Handgedraaid in Nederland · aaronartdesigns@gmail.com':'Hand-turned in the Netherlands · aaronartdesigns@gmail.com';
+  // Configurator teksten
+  var confT={
+    nl:{title:'Schaalconfigurator',desc:'Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan.',
+        shape:'Basisvorm',dims:'Afmetingen',curve_lbl:'Vormcurve',price_lbl:'Indicatieve prijs',
+        price_note:'Na overleg definitief',offer:'Vraag offerte aan ↗',download:'↓ Download als afbeelding',
+        diam:'Diameter',h:'Hoogte',wall:'Wanddikte',bot:'Bodemdikte',foot:'Voetbreedte',curve:'Curve',
+        note:'De configurator geeft een visuele indicatie van de doorsnede en een richtprijs. Wanddiktes, voetafmetingen en de uiteindelijke vorm worden in overleg bepaald op basis van het beschikbare hout. Elk stuk is uniek.'},
+    en:{title:'Bowl configurator',desc:'Design the shape of your bowl and request an indicative price.',
+        shape:'Base shape',dims:'Dimensions',curve_lbl:'Shape curve',price_lbl:'Indicative price',
+        price_note:'Final price after consultation',offer:'Request a quote ↗',download:'↓ Download as image',
+        diam:'Diameter',h:'Height',wall:'Wall thickness',bot:'Base thickness',foot:'Foot width',curve:'Curve',
+        note:'The configurator gives a visual indication of the cross-section and a guide price. Wall thicknesses, foot dimensions and the final shape are determined in consultation based on available wood. Every piece is unique.'}
+  };
+  var ct=confT[l];
+  // Pagina teksten
+  var els={
+    'cfg-title':ct.title,'cfg-desc':ct.desc,
+    'lbl-shape':ct.shape,'lbl-dims':ct.dims,'lbl-curve':ct.curve_lbl,
+    'price-label':ct.price_lbl,'price-note':ct.price_note,
+    'offer-btn':ct.offer,'download-btn':ct.download,'cfg-note':ct.note,
+    'lbl-diam':ct.diam,'lbl-h':ct.h,'lbl-wall':ct.wall,'lbl-bot':ct.bot,'lbl-foot':ct.foot,'lbl-curve2':ct.curve
+  };
+  Object.keys(els).forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=els[id];});
+  // Vormen labels
+  var shapeLabels={nl:{klassiek:'Klassiek',ondiep:'Ondiep',diep:'Diep',recht:'Recht',bol:'Bol'},
+                   en:{klassiek:'Classic',ondiep:'Shallow',diep:'Deep',recht:'Straight',bol:'Round'}};
+  document.querySelectorAll('#sg .sb span').forEach(function(el){
+    var key=el.closest('[data-shape]').dataset.shape;
+    if(shapeLabels[l][key])el.textContent=shapeLabels[l][key];
+  });
+}
+
 function doSend(){
   var msg='Offerte aanvraag via configurator:\n• Vorm: '+SHAPES[S.shape].label+'\n• Diameter: '+S.diam+' mm\n• Hoogte: '+S.h+' mm\n• Wanddikte: '+S.wall+' mm\n• Bodemdikte: '+S.bot+' mm\n• Voetbreedte: '+S.foot+' mm\n\nIndicatieve prijs: '+document.getElementById('price').textContent+'\n\nKan je meer vertellen over beschikbare houtsoorten?';
   window.location.href='contact.html?msg='+encodeURIComponent(msg);
 }
 
 draw();calcP();
+setLang(localStorage.getItem('lang')||'nl');
 </script>
 </body>
 </html>
