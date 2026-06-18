@@ -240,7 +240,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
     <span class="wordmark">AÄRON ART &amp; DESIGN</span>
   </a>
   <ul>
-    <li><a href="index.html"' class="active"' id="nav-home">Home</a></li>
+    <li><a href="index.html" class="active" id="nav-home">Home</a></li>
     <li><a href="shop.html" id="nav-shop">Winkel</a></li>
     <li><a href="about.html" id="nav-about">Over</a></li>
     <li><a href="contact.html" id="nav-contact">Contact</a></li>
@@ -341,13 +341,13 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   <div>
     <form id="interest-form" onsubmit="submitInterest(event)" style="display:flex;flex-direction:column;gap:14px">
       <div style="display:flex;flex-direction:column;gap:6px">
-        <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="interest-name">Naam</label>
+        <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="interest-name" id="int-lbl-name">Naam</label>
         <input id="interest-name" type="text" placeholder="Je naam" required
           style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
           onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
       </div>
       <div style="display:flex;flex-direction:column;gap:6px">
-        <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="interest-email">E-mailadres</label>
+        <label style="font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7" for="interest-email" id="int-lbl-email">E-mailadres</label>
         <input id="interest-email" type="email" placeholder="jouw@email.nl" required
           style="background:var(--walnut-soft);border:1px solid var(--rule);color:var(--bone);padding:14px 18px;font-family:inherit;font-size:.95rem;outline:none;width:100%"
           onfocus="this.style.borderColor='var(--bone)'" onblur="this.style.borderColor='var(--rule)'">
@@ -444,6 +444,21 @@ async function submitInterest(e){
   var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
   var fl=document.getElementById('footer-line');
   if(fl)fl.textContent=l==='nl'?'Handgedraaid in Nederland · aaronartdesigns@gmail.com':'Hand-turned in the Netherlands · aaronartdesigns@gmail.com';
+    // Nav vertalingen
+    var navT={nl:{home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
+              en:{home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'}};
+    ['home','shop','about','contact'].forEach(function(k){
+      var el=document.getElementById('nav-'+k);if(el)el.textContent=navT[l][k];
+    });
+    var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
+    // Interesse formulier
+    var intT={nl:{lbl_name:'Naam',lbl_email:'E-mailadres',ph_name:'Je naam',ph_email:'jouw@email.nl',btn:'Houd mij op de hoogte'},
+              en:{lbl_name:'Name',lbl_email:'Email address',ph_name:'Your name',ph_email:'your@email.com',btn:'Keep me updated'}};
+    var ln=document.getElementById('int-lbl-name');if(ln)ln.textContent=intT[l].lbl_name;
+    var le=document.getElementById('int-lbl-email');if(le)le.textContent=intT[l].lbl_email;
+    var inp=document.getElementById('interest-name');if(inp)inp.placeholder=intT[l].ph_name;
+    var ine=document.getElementById('interest-email');if(ine)ine.placeholder=intT[l].ph_email;
+    var ibt=document.getElementById('int-btn-txt');if(ibt)ibt.textContent=intT[l].btn;
     document.querySelectorAll('#btn-nl,#btn-en').forEach(function(b){
       b.classList.toggle('active', b.id === 'btn-'+l);
     });
