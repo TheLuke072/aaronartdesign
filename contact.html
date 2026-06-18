@@ -220,26 +220,19 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   <span class="eyebrow" id="ct-eyebrow">Opdracht aanvragen</span>
   <h2 style="margin:14px 0" id="ct-title">Vertel me over jouw hout</h2>
   <p style="opacity:.82;max-width:54ch;margin-bottom:36px" id="ct-desc">Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.</p>
-
-  <form id="commission-form" class="form-wrap"
-        action="https://formspree.io/f/xzdqygab"
-        method="POST">
-
+  <form id="commission-form" class="form-wrap" action="https://formspree.io/f/xzdqygab" method="POST">
     <div class="field">
       <label for="cf-name" id="lbl-name">Naam *</label>
       <input id="cf-name" name="naam" type="text" required placeholder="Je naam">
     </div>
-
     <div class="field">
       <label for="cf-email" id="lbl-email">E-mailadres *</label>
       <input id="cf-email" name="email" type="email" required placeholder="jouw@email.nl">
     </div>
-
     <div class="field">
       <label for="cf-phone" id="lbl-phone">Telefoonnummer <span id="lbl-optional" style="opacity:.5">(optioneel)</span></label>
       <input id="cf-phone" name="telefoon" type="tel" placeholder="+31 6 ...">
     </div>
-
     <div class="field">
       <label for="cf-subject" id="lbl-subject">Onderwerp *</label>
       <select id="cf-subject" name="onderwerp" required>
@@ -251,16 +244,13 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
         <option value="Overig" id="opt-5">Overig</option>
       </select>
     </div>
-
     <div class="field">
       <label for="cf-message" id="lbl-message">Omschrijving *</label>
       <textarea id="cf-message" name="omschrijving" rows="6" required
         placeholder="Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt..."></textarea>
     </div>
-
     <input type="hidden" name="_subject" value="Nieuwe aanvraag via aaronartdesign.nl">
     <input type="text" name="_gotcha" style="display:none">
-
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
       <button type="submit" class="btn btn-solid" style="cursor:pointer" id="cf-submit">Verstuur opdracht</button>
       <p id="cf-status" style="font-size:.85rem;opacity:.75;display:none"></p>
@@ -278,7 +268,7 @@ footer ul{list-style:none;display:flex;gap:24px;letter-spacing:.16em;text-transf
   <div class="contact-block">
     <span class="eyebrow">Instagram</span>
     <h2 style="font-size:1.6rem;margin:12px 0" id="cb2-title">Volg het werk</h2>
-    <p id="cb2-desc">Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.</p>
+    <p id="cb2-desc">Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook.</p>
     <a href="https://www.instagram.com/aaronartanddesign/" target="_blank" rel="noopener" class="btn btn-ghost" id="cb2-btn">Volg op Instagram</a>
   </div>
 </div>
@@ -301,119 +291,101 @@ var lang = localStorage.getItem('lang') || 'nl';
 
 var TX = {
   nl: {
-    eyebrow: 'Opdracht aanvragen',
-    title: 'Vertel me over jouw hout',
-    desc: 'Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.',
-    lbl_name: 'Naam *', lbl_email: 'E-mailadres *', lbl_phone: 'Telefoonnummer',
-    lbl_optional: '(optioneel)', lbl_subject: 'Onderwerp *', lbl_message: 'Omschrijving *',
-    ph_name: 'Je naam', ph_email: 'jouw@email.nl', ph_msg: 'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...',
-    opt0: 'Kies een onderwerp',
-    opts: ['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'],
-    submit: 'Verstuur opdracht',
-    cb1_eyebrow: 'Direct mailen', cb1_title: 'Stuur een bericht',
-    cb1_desc: 'Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.',
-    cb2_title: 'Volg het werk',
-    cb2_desc: "Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook — ik reageer meestal binnen een dag.",
-    cb2_btn: 'Volg op Instagram',
-    footer_line: 'Handgedraaid in Nederland · aaronartdesigns@gmail.com',
-    basket: 'Mandje'
+    nav: {home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
+    footer: 'Handgedraaid in Nederland · aaronartdesigns@gmail.com',
+    eyebrow:'Opdracht aanvragen', title:'Vertel me over jouw hout',
+    desc:'Heb je een boom met een verhaal, of een specifiek stuk voor ogen? Vul het formulier in en ik neem binnen twee dagen contact op.',
+    lbl_name:'Naam *', lbl_email:'E-mailadres *', lbl_phone:'Telefoonnummer',
+    lbl_optional:'(optioneel)', lbl_subject:'Onderwerp *', lbl_message:'Omschrijving *',
+    ph_name:'Je naam', ph_email:'jouw@email.nl',
+    ph_msg:'Vertel me over het hout, de gewenste vorm, afmetingen, waarvoor het gebruikt wordt...',
+    opt0:'Kies een onderwerp',
+    opts:['Opdracht met eigen hout','Specifiek stuk bestellen','Vraag over een product','Vraag over onderhoud','Overig'],
+    submit:'Verstuur opdracht',
+    cb1_eyebrow:'Direct mailen', cb1_title:'Stuur een bericht',
+    cb1_desc:'Voor vragen over bestaande stukken, opdrachten, of gewoon om te vertellen over het hout dat je hebt liggen.',
+    cb2_title:'Volg het werk',
+    cb2_desc:"Zie het hele proces van vers hout tot afgewerkt stuk. DM'en kan ook.",
+    cb2_btn:'Volg op Instagram'
   },
   en: {
-    eyebrow: 'Commission a piece',
-    title: 'Tell me about your wood',
-    desc: 'Have a tree with a story, or a specific piece in mind? Fill in the form and I'll be in touch within two days.',
-    lbl_name: 'Name *', lbl_email: 'Email address *', lbl_phone: 'Phone number',
-    lbl_optional: '(optional)', lbl_subject: 'Subject *', lbl_message: 'Description *',
-    ph_name: 'Your name', ph_email: 'your@email.com', ph_msg: 'Tell me about the wood, the desired shape, dimensions, what it will be used for...',
-    opt0: 'Choose a subject',
-    opts: ['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'],
-    submit: 'Send message',
-    cb1_eyebrow: 'Send an email', cb1_title: 'Send a message',
-    cb1_desc: 'For questions about existing pieces, commissions, or just to share about the wood you have.',
-    cb2_title: 'Follow the work',
-    cb2_desc: "See the whole process from fresh wood to finished piece. DM's welcome — I usually reply within a day.",
-    cb2_btn: 'Follow on Instagram',
-    footer_line: 'Hand-turned in the Netherlands · aaronartdesigns@gmail.com',
-    basket: 'Basket'
+    nav: {home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'},
+    footer: 'Hand-turned in the Netherlands · aaronartdesigns@gmail.com',
+    eyebrow:'Commission a piece', title:'Tell me about your wood',
+    desc:"Have a tree with a story, or a specific piece in mind? Fill in the form and I'll be in touch within two days.",
+    lbl_name:'Name *', lbl_email:'Email address *', lbl_phone:'Phone number',
+    lbl_optional:'(optional)', lbl_subject:'Subject *', lbl_message:'Description *',
+    ph_name:'Your name', ph_email:'your@email.com',
+    ph_msg:'Tell me about the wood, the desired shape, dimensions, what it will be used for...',
+    opt0:'Choose a subject',
+    opts:['Commission with own wood','Order a specific piece','Question about a product','Question about maintenance','Other'],
+    submit:'Send message',
+    cb1_eyebrow:'Send an email', cb1_title:'Send a message',
+    cb1_desc:'For questions about existing pieces, commissions, or just to share about the wood you have.',
+    cb2_title:'Follow the work',
+    cb2_desc:"See the whole process from fresh wood to finished piece. DM's welcome.",
+    cb2_btn:'Follow on Instagram'
   }
 };
-
-function t(k){ return TX[lang][k] || ''; }
 
 function setLang(l) {
   lang = l;
   localStorage.setItem('lang', l);
   document.documentElement.lang = l;
+  var t = TX[l];
   document.getElementById('btn-nl').classList.toggle('active', l==='nl');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
-
+  // Nav
+  ['home','shop','about','contact'].forEach(function(k){
+    var el=document.getElementById('nav-'+k); if(el)el.textContent=t.nav[k];
+  });
+  var bk=document.getElementById('nav-basket'); if(bk)bk.textContent=t.nav.basket;
+  // Footer
+  var fl=document.getElementById('footer-line'); if(fl)fl.textContent=t.footer;
   // Pagina teksten
-  var ids = {
+  var map = {
     'ct-eyebrow':'eyebrow','ct-title':'title','ct-desc':'desc',
     'lbl-name':'lbl_name','lbl-email':'lbl_email','lbl-phone':'lbl_phone',
-    'lbl-optional':'lbl_optional','lbl-subject':'lbl_subject','lbl-message':'lbl_message',
-    'cf-submit':'submit',
+    'lbl-subject':'lbl_subject','lbl-message':'lbl_message','cf-submit':'submit',
     'cb1-eyebrow':'cb1_eyebrow','cb1-title':'cb1_title','cb1-desc':'cb1_desc',
     'cb2-title':'cb2_title','cb2-desc':'cb2_desc','cb2-btn':'cb2_btn'
   };
-  Object.keys(ids).forEach(function(id) {
-    var el = document.getElementById(id);
-    if(el) el.textContent = t(ids[id]);
+  Object.keys(map).forEach(function(id){
+    var el=document.getElementById(id); if(el)el.textContent=t[map[id]];
   });
-
+  // Optional label apart
+  var opt=document.getElementById('lbl-optional'); if(opt)opt.textContent=t.lbl_optional;
   // Placeholders
-  document.getElementById('cf-name').placeholder = t('ph_name');
-  document.getElementById('cf-email').placeholder = t('ph_email');
-  document.getElementById('cf-message').placeholder = t('ph_msg');
-
+  document.getElementById('cf-name').placeholder=t.ph_name;
+  document.getElementById('cf-email').placeholder=t.ph_email;
+  document.getElementById('cf-message').placeholder=t.ph_msg;
   // Dropdown
-  document.getElementById('opt-0').textContent = t('opt0');
-  TX[l].opts.forEach(function(txt, i) {
-    var el = document.getElementById('opt-' + (i+1));
-    if(el) el.textContent = txt;
+  document.getElementById('opt-0').textContent=t.opt0;
+  t.opts.forEach(function(txt,i){
+    var el=document.getElementById('opt-'+(i+1)); if(el)el.textContent=txt;
   });
-
-  // Footer + nav
-
-  var navT={nl:{home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
-            en:{home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'}};
-  ['home','shop','about','contact'].forEach(function(k){
-    var el=document.getElementById('nav-'+k);if(el)el.textContent=navT[l][k];
-  });
-  var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
-  var fl=document.getElementById('footer-line');
-  if(fl)fl.textContent=l==='nl'?'Handgedraaid in Nederland · aaronartdesigns@gmail.com':'Hand-turned in the Netherlands · aaronartdesigns@gmail.com';
 }
 
-// Formspree Ajax submit
-document.getElementById('commission-form').addEventListener('submit', async function(e) {
+document.getElementById('commission-form').addEventListener('submit', async function(e){
   e.preventDefault();
-  var btn = document.getElementById('cf-submit');
-  var status = document.getElementById('cf-status');
-  btn.disabled = true;
-  btn.textContent = lang === 'nl' ? 'Versturen...' : 'Sending...';
+  var btn=document.getElementById('cf-submit');
+  var status=document.getElementById('cf-status');
+  btn.disabled=true; btn.textContent=lang==='nl'?'Versturen...':'Sending...';
   try {
-    var resp = await fetch(this.action, {
-      method: 'POST', body: new FormData(this),
-      headers: {'Accept': 'application/json'}
-    });
-    if(resp.ok) {
-      this.innerHTML = '<p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;line-height:1.6">' +
-        (lang==='nl' ? 'Bedankt! Ik neem binnen twee dagen contact op.' : 'Thank you! I'll be in touch within two days.') + '</p>';
+    var resp=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+    if(resp.ok){
+      this.innerHTML='<p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;line-height:1.6">'+(lang==='nl'?'Bedankt! Ik neem binnen twee dagen contact op.':'Thank you! I'll be in touch within two days.')+'</p>';
     } else {
-      status.textContent = lang==='nl' ? 'Er ging iets mis — probeer opnieuw.' : 'Something went wrong — please try again.';
-      status.style.display='block';
-      btn.disabled=false; btn.textContent=t('submit');
+      status.textContent=lang==='nl'?'Er ging iets mis — probeer opnieuw.':'Something went wrong — please try again.';
+      status.style.display='block'; btn.disabled=false; btn.textContent=TX[lang].submit;
     }
-  } catch(err) {
-    status.textContent = 'aaronartdesigns@gmail.com';
-    status.style.display='block';
-    btn.disabled=false; btn.textContent=t('submit');
+  } catch(err){
+    status.textContent='aaronartdesigns@gmail.com';
+    status.style.display='block'; btn.disabled=false; btn.textContent=TX[lang].submit;
   }
 });
 
-// Init
-document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
+document.addEventListener('DOMContentLoaded', function(){ setLang(lang); });
 </script>
 </body>
 </html>

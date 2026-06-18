@@ -759,49 +759,51 @@ function draw3D(ctx, originX, originY, bowlW, bowlH){
 
 
 function setLang(l){
-  var lang_saved = l;
   localStorage.setItem('lang', l);
   document.documentElement.lang = l;
-  document.getElementById('btn-nl').classList.toggle('active', l==='nl');
-  document.getElementById('btn-en').classList.toggle('active', l==='en');
-
+  var btnNL=document.getElementById('btn-nl');
+  var btnEN=document.getElementById('btn-en');
+  if(btnNL) btnNL.classList.toggle('active', l==='nl');
+  if(btnEN) btnEN.classList.toggle('active', l==='en');
   var navT={nl:{home:'Home',shop:'Winkel',about:'Over',contact:'Contact',basket:'Mandje'},
             en:{home:'Home',shop:'Shop',about:'About',contact:'Contact',basket:'Basket'}};
   ['home','shop','about','contact'].forEach(function(k){
-    var el=document.getElementById('nav-'+k);if(el)el.textContent=navT[l][k];
+    var el=document.getElementById('nav-'+k); if(el)el.textContent=navT[l][k];
   });
-  var bk=document.getElementById('nav-basket');if(bk)bk.textContent=navT[l].basket;
+  var bk=document.getElementById('nav-basket'); if(bk)bk.textContent=navT[l].basket;
   var fl=document.getElementById('footer-line');
   if(fl)fl.textContent=l==='nl'?'Handgedraaid in Nederland · aaronartdesigns@gmail.com':'Hand-turned in the Netherlands · aaronartdesigns@gmail.com';
-  // Configurator teksten
   var confT={
-    nl:{title:'Schaalconfigurator',desc:'Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan.',
-        shape:'Basisvorm',dims:'Afmetingen',curve_lbl:'Vormcurve',price_lbl:'Indicatieve prijs',
-        price_note:'Na overleg definitief',offer:'Vraag offerte aan ↗',download:'↓ Download als afbeelding',
+    nl:{title:'Schaalconfigurator',desc:'Stel de vorm van jouw schaal in en vraag een indicatieve prijs aan. De definitieve prijs wordt vastgesteld na overleg — elk stuk is uniek en hangt af van het beschikbare hout.',
+        shape:'Basisvorm',dims:'Afmetingen',curve_lbl:'Vormcurve',
+        price_lbl:'Indicatieve prijs',price_note:'Na overleg definitief',
+        offer:'Vraag offerte aan ↗',download:'↓ Download als afbeelding',
         diam:'Diameter',h:'Hoogte',wall:'Wanddikte',bot:'Bodemdikte',foot:'Voetbreedte',curve:'Curve',
-        note:'De configurator geeft een visuele indicatie van de doorsnede en een richtprijs. Wanddiktes, voetafmetingen en de uiteindelijke vorm worden in overleg bepaald op basis van het beschikbare hout. Elk stuk is uniek.'},
-    en:{title:'Bowl configurator',desc:'Design the shape of your bowl and request an indicative price.',
-        shape:'Base shape',dims:'Dimensions',curve_lbl:'Shape curve',price_lbl:'Indicative price',
-        price_note:'Final price after consultation',offer:'Request a quote ↗',download:'↓ Download as image',
+        note:'De configurator geeft een visuele indicatie van de doorsnede en een richtprijs. Wanddiktes, voetafmetingen en de uiteindelijke vorm worden in overleg bepaald op basis van het beschikbare hout. Elk stuk is uniek — de nerf en kleur van het hout bepalen mede de uiteindelijke schoonheid van het stuk.',
+        shapes:{klassiek:'Klassiek',ondiep:'Ondiep',diep:'Diep',recht:'Recht',bol:'Bol'}},
+    en:{title:'Bowl configurator',desc:'Design the shape of your bowl and request an indicative price. The final price is set after consultation — every piece is unique and depends on available wood.',
+        shape:'Base shape',dims:'Dimensions',curve_lbl:'Shape curve',
+        price_lbl:'Indicative price',price_note:'Final price after consultation',
+        offer:'Request a quote ↗',download:'↓ Download as image',
         diam:'Diameter',h:'Height',wall:'Wall thickness',bot:'Base thickness',foot:'Foot width',curve:'Curve',
-        note:'The configurator gives a visual indication of the cross-section and a guide price. Wall thicknesses, foot dimensions and the final shape are determined in consultation based on available wood. Every piece is unique.'}
+        note:'The configurator gives a visual indication of the cross-section and a guide price. Wall thicknesses, foot dimensions and the final shape are determined in consultation based on available wood. Every piece is unique — the grain and colour of the wood determine the final beauty of the piece.',
+        shapes:{klassiek:'Classic',ondiep:'Shallow',diep:'Deep',recht:'Straight',bol:'Round'}}
   };
   var ct=confT[l];
-  // Pagina teksten
-  var els={
-    'cfg-title':ct.title,'cfg-desc':ct.desc,
-    'lbl-shape':ct.shape,'lbl-dims':ct.dims,'lbl-curve':ct.curve_lbl,
-    'price-label':ct.price_lbl,'price-note':ct.price_note,
-    'offer-btn':ct.offer,'download-btn':ct.download,'cfg-note':ct.note,
-    'lbl-diam':ct.diam,'lbl-h':ct.h,'lbl-wall':ct.wall,'lbl-bot':ct.bot,'lbl-foot':ct.foot,'lbl-curve2':ct.curve
+  var textMap={
+    'cfg-title':ct.title,'cfg-desc':ct.desc,'lbl-shape':ct.shape,
+    'lbl-dims':ct.dims,'lbl-curve':ct.curve_lbl,'price-label':ct.price_lbl,
+    'price-note':ct.price_note,'offer-btn':ct.offer,'download-btn':ct.download,
+    'lbl-diam':ct.diam,'lbl-h':ct.h,'lbl-wall':ct.wall,
+    'lbl-bot':ct.bot,'lbl-foot':ct.foot,'lbl-curve2':ct.curve,'cfg-note':ct.note
   };
-  Object.keys(els).forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=els[id];});
-  // Vormen labels
-  var shapeLabels={nl:{klassiek:'Klassiek',ondiep:'Ondiep',diep:'Diep',recht:'Recht',bol:'Bol'},
-                   en:{klassiek:'Classic',ondiep:'Shallow',diep:'Deep',recht:'Straight',bol:'Round'}};
-  document.querySelectorAll('#sg .sb span').forEach(function(el){
-    var key=el.closest('[data-shape]').dataset.shape;
-    if(shapeLabels[l][key])el.textContent=shapeLabels[l][key];
+  Object.keys(textMap).forEach(function(id){
+    var el=document.getElementById(id); if(el)el.textContent=textMap[id];
+  });
+  document.querySelectorAll('#sg .sb').forEach(function(btn){
+    var key=btn.dataset.shape;
+    var sp=btn.querySelector('span');
+    if(sp&&ct.shapes[key])sp.textContent=ct.shapes[key];
   });
 }
 

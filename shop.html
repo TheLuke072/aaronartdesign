@@ -397,18 +397,35 @@ function setLang(l) {
   localStorage.setItem("lang", l);
   document.getElementById("btn-nl").classList.toggle("active", l==="nl");
   document.getElementById("btn-en").classList.toggle("active", l==="en");
-  // update kaart teksten
-  P.forEach(function(p, i) {
-    var w = document.getElementById("wood-"+i);
-    var t = document.getElementById("title-"+i);
-    if(w) w.textContent = l==="nl" ? p.wnl : p.wen;
-    if(t) t.textContent = l==="nl" ? p.tnl : p.ten;
+  // Nav
+  var navT={nl:{home:"Home",shop:"Winkel",about:"Over",contact:"Contact",basket:"Mandje"},
+            en:{home:"Home",shop:"Shop",about:"About",contact:"Contact",basket:"Basket"}};
+  ["home","shop","about","contact"].forEach(function(k){
+    var el=document.getElementById("nav-"+k);if(el)el.textContent=navT[l][k];
   });
-  // update cat knoppen
-  document.getElementById("cat-alles").textContent = l==="nl" ? "Alles" : "All";
-  document.getElementById("cat-schalen").textContent = l==="nl" ? "Schalen" : "Bowls";
-  document.getElementById("cat-potten").textContent = l==="nl" ? "Potten & dozen" : "Lidded pieces";
-  document.getElementById("cat-sets").textContent = "Sets";
+  var bk=document.getElementById("nav-basket");if(bk)bk.textContent=navT[l].basket;
+  // Footer
+  var fl=document.getElementById("footer-line");
+  if(fl)fl.textContent=l==="nl"?"Handgedraaid in Nederland · aaronartdesigns@gmail.com":"Hand-turned in the Netherlands · aaronartdesigns@gmail.com";
+  // Categorie knoppen
+  var catT={nl:{all:"Alles",bowls:"Schalen",pots:"Potten & dozen",sets:"Sets"},
+            en:{all:"All",bowls:"Bowls",pots:"Lidded pieces",sets:"Sets"}};
+  var catAll=document.getElementById("cat-alles");if(catAll)catAll.textContent=catT[l].all;
+  var catBowls=document.getElementById("cat-schalen");if(catBowls)catBowls.textContent=catT[l].bowls;
+  var catPots=document.getElementById("cat-potten");if(catPots)catPots.textContent=catT[l].pots;
+  var catSets=document.getElementById("cat-sets");if(catSets)catSets.textContent=catT[l].sets;
+  // Referentie tekst
+  var ref=document.getElementById("ref-txt");
+  if(ref)ref.textContent=l==="nl"
+    ?"De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!"
+    :"The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!";
+  // Product kaart teksten
+  P.forEach(function(p, i) {
+    var w=document.getElementById("wood-"+i);
+    var t=document.getElementById("title-"+i);
+    if(w)w.textContent=l==="nl"?p.wnl:p.wen;
+    if(t)t.textContent=l==="nl"?p.tnl:p.ten;
+  });
 }
 
 function filterCat(cat, btn) {
@@ -465,9 +482,6 @@ function doCopy() {
 document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModal(); });
 
 // init taal
-var savedLang = localStorage.getItem("lang") || "nl";
-var refEl=document.getElementById('ref-txt');
-if(refEl)refEl.textContent=savedLang==='nl'?'De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!':'The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!';
 var refEl = document.getElementById('ref-txt');
 if(refEl) refEl.textContent = savedLang==='nl' ? 'De stukken hieronder zijn ter referentie en inspiratie — dit zijn eerdere en huidige werken. De definitieve collectie wordt binnenkort officieel gelanceerd. Laat alvast je interesse weten!' : 'The pieces below are shown for reference and inspiration — these are previous and current works. The definitive collection will be officially launched soon. Feel free to express your interest already!';
 document.getElementById("btn-"+savedLang).classList.add("active");
